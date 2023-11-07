@@ -1,0 +1,33 @@
+{
+  "name": "boyka-cli",
+  "version": "0.1.0",
+  "description": "Command line tool for Boyka framework",
+  "main": "./dist/index.js",
+  "bin": {
+    "boyka": "./dist/index.js"
+  },
+  "scripts": {
+    "dev": "tsc -w"
+  },
+  "keywords": [],
+  "author": "Wasiq Bhamla",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/BoykaFramework/boyka-cli/issues"
+  },
+  "funding": {
+    "type": "GitHub Sponsor",
+    "url": "https://github.com/sponsors/BoykaFramework"
+  },
+  "repository": {
+    "url": "https://github.com/BoykaFramework/boyka-cli"
+  },
+  "devDependencies": {
+    "@types/node": "^20.8.10",
+    "@types/yargs": "^17.0.30",
+    "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "yargs": "^17.7.2"
+  }
+}

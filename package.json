@@ -7,7 +7,8 @@
     "boyka": "./dist/index.js"
   },
   "scripts": {
-    "dev": "tsc -w"
+    "dev": "tsc -w",
+    "postinstall": "tsc"
   },
   "keywords": [],
   "author": "Wasiq Bhamla",
@@ -23,8 +24,8 @@
     "url": "https://github.com/BoykaFramework/boyka-cli"
   },
   "devDependencies": {
-    "@types/node": "^20.8.10",
-    "@types/yargs": "^17.0.30",
+    "@types/node": "^20.9.0",
+    "@types/yargs": "^17.0.31",
     "typescript": "^5.2.2"
   },
   "dependencies": {

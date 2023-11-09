@@ -1,17 +1,8 @@
 {
-  "display": "Node LTS",
-  "_version": "18.1.0",
+  "extends": "@tsconfig/node18/tsconfig.json",
   "compilerOptions": {
-    "lib": ["es2023"],
     "outDir": "dist",
-    "module": "node16",
-    "target": "es2022",
-    "strict": true,
-    "esModuleInterop": true,
-    "noUncheckedIndexedAccess": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "moduleResolution": "node16"
+    "esModuleInterop": true
   },
   "include": ["src"]
 }

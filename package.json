@@ -7,6 +7,10 @@
     "boyka": "./dist/index.js"
   },
   "scripts": {
+    "lint": "eslint 'src/**/*.ts'",
+    "lint:fix": "eslint --fix src/**/*.ts",
+    "format": "prettier --check src/**/*.ts",
+    "format:fix": "prettier --write src/**/*.ts",
     "dev": "tsc -w",
     "postinstall": "tsc"
   },
@@ -24,8 +28,16 @@
     "url": "https://github.com/BoykaFramework/boyka-cli"
   },
   "devDependencies": {
+    "@tsconfig/node18": "^18.2.2",
     "@types/node": "^20.9.0",
     "@types/yargs": "^17.0.31",
+    "@typescript-eslint/eslint-plugin": "^6.10.0",
+    "@typescript-eslint/parser": "^6.10.0",
+    "eslint": "^8.53.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-import": "^2.29.0",
+    "eslint-plugin-prettier": "^5.0.1",
+    "prettier": "^3.0.3",
     "typescript": "^5.2.2"
   },
   "dependencies": {

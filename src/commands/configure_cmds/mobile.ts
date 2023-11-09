@@ -1,31 +1,27 @@
-import { CommandModule } from "yargs";
+import { CommandModule } from 'yargs';
+import { epiLogMessage, failureMessage } from '../../utils/constants';
 
 export = {
-  command: "mobile [name]",
-  aliases: ["m"],
-  describe: "Add Mobile Boyka-Framework Config file",
+  command: 'mobile [name]',
+  aliases: ['m'],
+  describe: 'Add Mobile Boyka-Framework Config file',
   builder: (yargs) =>
     yargs
-      .positional("name", {
+      .positional('name', {
         demandOption: true,
-        describe: "Name of the Mobile config block",
-        type: "string",
+        describe: 'Name of the Mobile config block',
+        type: 'string',
       })
-      .check((argv, options) => {
+      .check((argv) => {
         if (!argv.name) {
-          throw new Error("Mobile config name should be provided!");
+          throw new Error('Mobile config name should be provided!');
         } else {
           return true;
         }
       })
-      .help("help")
-      .showHelpOnFail(
-        true,
-        "whoops, something went wrong in Mobile config! run with help"
-      )
-      .epilog(
-        "For more information, visit: https://boykaframework.github.io/boyka-framework"
-      ),
+      .help('help')
+      .showHelpOnFail(true, failureMessage('Mobile config'))
+      .epilog(epiLogMessage),
   handler: (argv) => {
     // TODO: Mobile handler
     console.log(`Handle Mobile Config ${argv.name}...`);

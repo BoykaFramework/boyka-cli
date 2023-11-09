@@ -1,31 +1,27 @@
-import { CommandModule } from "yargs";
+import { CommandModule } from 'yargs';
+import { epiLogMessage, failureMessage } from '../../utils/constants';
 
 export = {
-  command: "web [name]",
-  aliases: ["w"],
-  describe: "Add Web Boyka-Framework Config file",
+  command: 'web [name]',
+  aliases: ['w'],
+  describe: 'Add Web Boyka-Framework Config file',
   builder: (yargs) =>
     yargs
-      .positional("name", {
+      .positional('name', {
         demandOption: true,
-        describe: "Name of the Web config block",
-        type: "string",
+        describe: 'Name of the Web config block',
+        type: 'string',
       })
-      .check((argv, options) => {
+      .check((argv) => {
         if (!argv.name) {
-          throw new Error("Web config name should be provided!");
+          throw new Error('Web config name should be provided!');
         } else {
           return true;
         }
       })
-      .help("help")
-      .showHelpOnFail(
-        true,
-        "whoops, something went wrong in Web config! run with help"
-      )
-      .epilog(
-        "For more information, visit: https://boykaframework.github.io/boyka-framework"
-      ),
+      .help('help')
+      .showHelpOnFail(true, failureMessage('Web config'))
+      .epilog(epiLogMessage),
   handler: (argv) => {
     // TODO: web handler
     console.log(`Handle Web Config ${argv.name}...`);

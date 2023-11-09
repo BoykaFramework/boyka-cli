@@ -1,21 +1,17 @@
-import { CommandModule } from "yargs";
+import { CommandModule } from 'yargs';
+import { epiLogMessage, failureMessage } from '../utils/constants';
 
 export = {
-  command: "configure",
-  aliases: ["config", "conf", "c"],
-  describe: "Configure Boyka-Framework",
+  command: 'configure',
+  aliases: ['config', 'conf', 'c'],
+  describe: 'Configure Boyka-Framework',
   builder: (yargs) =>
     yargs
-      .commandDir("configure_cmds")
+      .commandDir('configure_cmds')
       .demandCommand()
       .strict()
-      .help("help")
-      .showHelpOnFail(
-        true,
-        "whoops, something went wrong in configure! run with help"
-      )
-      .epilog(
-        "For more information, visit: https://boykaframework.github.io/boyka-framework"
-      ),
-  handler: (argv) => {},
+      .help('help')
+      .showHelpOnFail(true, failureMessage('configure'))
+      .epilog(epiLogMessage),
+  handler: () => {},
 } satisfies CommandModule;

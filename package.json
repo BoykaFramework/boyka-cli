@@ -28,21 +28,24 @@
     "url": "https://github.com/BoykaFramework/boyka-cli"
   },
   "devDependencies": {
+    "@stylistic/eslint-plugin-js": "^1.2.0",
+    "@stylistic/eslint-plugin-ts": "^1.2.0",
     "@tsconfig/node18": "^18.2.2",
     "@types/node": "^20.9.0",
     "@types/yargs": "^17.0.31",
-    "@typescript-eslint/eslint-plugin": "^6.10.0",
-    "@typescript-eslint/parser": "^6.10.0",
+    "@typescript-eslint/eslint-plugin": "^6.11.0",
+    "@typescript-eslint/parser": "^6.11.0",
     "eslint": "^8.53.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-import": "^2.29.0",
     "eslint-plugin-prettier": "^5.0.1",
     "husky": "^8.0.3",
-    "lint-staged": "^15.0.2",
-    "prettier": "^3.0.3",
+    "lint-staged": "^15.1.0",
+    "prettier": "^3.1.0",
     "typescript": "^5.2.2"
   },
   "dependencies": {
+    "@inquirer/prompts": "^3.3.0",
     "yargs": "^17.7.2"
   },
   "lint-staged": {

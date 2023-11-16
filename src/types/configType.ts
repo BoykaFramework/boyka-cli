@@ -1,4 +1,4 @@
-enum Browser {
+export enum Browser {
   CHROME,
   EDGE,
   FIREFOX,
@@ -81,7 +81,7 @@ enum ApplicationType {
 export interface FrameworkSetting {
   listeners_package?: string;
   ui?: UiSetting;
-  api?: { [key: string]: ApiSetting };
+  api?: { [key: string]: ApiSetting } | undefined;
 }
 
 interface ApiSetting {
@@ -101,25 +101,12 @@ interface ApiLogSetting {
   response: boolean;
 }
 
-// const defaultApiLogSetting: ApiLogSetting = {
-//   enable: false,
-//   request: true,
-//   response: true,
-// };
-
 interface ScreenshotSetting {
   enabled: boolean;
   path: string;
   extension: string;
   prefix: string;
 }
-
-const defaultScreenshotSetting: ScreenshotSetting = {
-  enabled: true,
-  extension: 'png',
-  path: './screenshots',
-  prefix: 'SCR',
-};
 
 interface TimeoutSetting {
   implicit_wait: number;
@@ -128,14 +115,6 @@ interface TimeoutSetting {
   script_timeout: number;
   highlight_delay: number;
 }
-
-const defaultTimeoutSetting: TimeoutSetting = {
-  implicit_wait: 1,
-  explicit_wait: 10,
-  highlight_delay: 100,
-  page_load_timeout: 30,
-  script_timeout: 30,
-};
 
 interface UiSetting {
   timeout: TimeoutSetting;
@@ -151,36 +130,26 @@ interface UiLogSetting {
   exclude_logs?: string[];
 }
 
-const defaultUiLogSetting: UiLogSetting = {
-  enable: true,
-  path: './logs',
-};
-
 interface Dimension {
   width: number;
   height: number;
 }
 
-// const defaultDimension: Dimension = {
-//   width: 1920,
-//   height: 1080,
-// };
-
 interface WebSetting {
   base_url?: string;
   browser: Browser;
-  target: TargetProviders;
+  target?: TargetProviders;
   browser_options?: string[];
   user_name?: string;
   password?: string;
   resize?: WindowResizeType;
   custom_size?: Dimension;
   host?: string;
-  headless: boolean;
-  highlight: boolean;
-  platform: string;
+  headless?: boolean;
+  highlight?: boolean;
+  platform?: string;
   port?: number;
-  protocol: Protocol;
+  protocol?: Protocol;
   capabilities?: { [key: string]: string };
 }
 
@@ -191,10 +160,6 @@ interface ServerLogSetting {
   timestamp?: boolean;
 }
 
-// const defaultServerLogSetting: ServerLogSetting = {
-//   level: LogLevel.INFO,
-// };
-
 interface ServerSetting {
   allow_cors?: boolean;
   allow_insecure?: string[];
@@ -204,18 +169,18 @@ interface ServerSetting {
   callback_port?: number;
   config_path?: string;
   deny_insecure?: string[];
-  driver: AutomationType;
-  external: boolean;
+  driver?: AutomationType;
+  external?: boolean;
   external_config?: boolean;
   host?: string;
   keep_alive_timeout?: number;
-  logging: ServerLogSetting;
+  logging?: ServerLogSetting;
   node_path?: string;
   other_args?: { [key: string]: any };
   password?: string;
   plugins?: string[];
   port?: number;
-  protocol: Protocol;
+  protocol?: Protocol;
   relaxed_security?: boolean;
   session_override?: boolean;
   strict_capabilities?: boolean;
@@ -235,18 +200,9 @@ interface SwipeSetting {
   max_swipe_until_found: number;
 }
 
-// const defaultSwipeSetting: SwipeSetting = {
-//   distance: 75,
-//   max_swipe_until_found: 5,
-// };
-
 interface AndroidVideoSetting {
   bit_rate: number;
 }
-
-// const defaultAndroidVideoSetting: AndroidVideoSetting = {
-//   bit_rate: 4,
-// };
 
 interface IOSVideoSetting {
   codec: string;
@@ -254,20 +210,14 @@ interface IOSVideoSetting {
   quality: VideoQuality;
 }
 
-// const defaultIOSVideoSetting: IOSVideoSetting = {
-//   codec: 'mpeg4',
-//   fps: 10,
-//   quality: VideoQuality.MEDIUM,
-// };
-
 interface VideoSetting {
   android: AndroidVideoSetting;
-  enabled: boolean;
+  enabled?: boolean;
   ios: IOSVideoSetting;
   path: string;
-  prefix: string;
-  size: string;
-  time_limit: number;
+  prefix?: string;
+  size?: string;
+  time_limit?: number;
 }
 
 interface VirtualDeviceSetting {
@@ -277,14 +227,6 @@ interface VirtualDeviceSetting {
   name: string;
   ready_timeout: number;
 }
-
-// const defaultVirtualDeviceSetting: VirtualDeviceSetting = {
-//   connect_keyboard: true,
-//   headless: false,
-//   launch_timeout: 120,
-//   ready_timeout: 60,
-//   name: '',
-// };
 
 interface WDASetting {
   connection_timeout?: number;
@@ -299,14 +241,6 @@ interface WDASetting {
   use_prebuilt?: boolean;
 }
 
-// const defaultWDASetting: WDASetting = {
-//   local_port: 8100,
-//   connection_timeout: 60,
-//   launch_timeout: 60,
-//   startup_retries: 2,
-//   startup_retry_interval: 10,
-// };
-
 interface ApplicationSetting {
   base_url?: string;
   browser?: Browser;
@@ -319,12 +253,6 @@ interface ApplicationSetting {
   wait_activity?: string;
   wait_timeout?: number;
 }
-
-// const defaultApplicationSetting: ApplicationSetting = {
-//   type: ApplicationType.NATIVE,
-//   install_timeout: 30,
-//   wait_timeout: 30,
-// };
 
 interface DeviceSetting {
   accept_alerts?: boolean;
@@ -350,16 +278,137 @@ interface DeviceSetting {
   wda?: WDASetting;
 }
 
-export const defaultFrameworkSetting: FrameworkSetting = {
-  ui: {
-    logging: {
-      ...defaultUiLogSetting,
-    },
-    screenshot: {
-      ...defaultScreenshotSetting,
-    },
-    timeout: {
-      ...defaultTimeoutSetting,
-    },
+const defaultDimension: Dimension = {
+  width: 1920,
+  height: 1080,
+};
+
+const defaultServerLogSetting: ServerLogSetting = {
+  level: LogLevel.INFO,
+};
+
+const defaultSwipeSetting: SwipeSetting = {
+  distance: 75,
+  max_swipe_until_found: 5,
+};
+
+const defaultIOSVideoSetting: IOSVideoSetting = {
+  codec: 'mpeg4',
+  fps: 10,
+  quality: VideoQuality.MEDIUM,
+};
+
+const defaultAndroidVideoSetting: AndroidVideoSetting = {
+  bit_rate: 4,
+};
+
+const defaultApiLogSetting: ApiLogSetting = {
+  enable: false,
+  request: true,
+  response: true,
+};
+
+const defaultApplicationSetting: ApplicationSetting = {
+  type: ApplicationType.NATIVE,
+  install_timeout: 30,
+  wait_timeout: 30,
+};
+
+const defaultWDASetting: WDASetting = {
+  local_port: 8100,
+  connection_timeout: 60,
+  launch_timeout: 60,
+  startup_retries: 2,
+  startup_retry_interval: 10,
+};
+
+const defaultVideoSetting: VideoSetting = {
+  android: defaultAndroidVideoSetting,
+  enabled: false,
+  ios: defaultIOSVideoSetting,
+  path: './videos',
+  prefix: 'VID',
+};
+
+export const defaultScreenshotSetting: ScreenshotSetting = {
+  enabled: true,
+  extension: 'png',
+  path: './screenshots',
+  prefix: 'SCR',
+};
+
+export const defaultTimeoutSetting: TimeoutSetting = {
+  implicit_wait: 1,
+  explicit_wait: 10,
+  highlight_delay: 100,
+  page_load_timeout: 30,
+  script_timeout: 30,
+};
+
+export const defaultUiLogSetting: UiLogSetting = {
+  enable: true,
+  path: './logs',
+};
+
+export const defaultVirtualDeviceSetting: VirtualDeviceSetting = {
+  connect_keyboard: true,
+  headless: false,
+  launch_timeout: 120,
+  ready_timeout: 60,
+  name: '',
+};
+
+export const defaultUiSetting: UiSetting = {
+  logging: {
+    ...defaultUiLogSetting,
   },
+  screenshot: {
+    ...defaultScreenshotSetting,
+  },
+  timeout: {
+    ...defaultTimeoutSetting,
+  },
+};
+
+export const defaultApiSetting: ApiSetting = {
+  base_uri: '',
+  base_path: '',
+  connection_timeout: 5,
+  logging: defaultApiLogSetting,
+  read_timeout: 5,
+  write_timeout: 5,
+  schema_path: './scheme',
+};
+
+export const defaultWebSetting: WebSetting = {
+  protocol: Protocol.HTTP,
+  browser: Browser.NONE,
+  custom_size: defaultDimension,
+  headless: true,
+  highlight: false,
+  resize: WindowResizeType.NORMAL,
+};
+
+export const defaultServerSetting: ServerSetting = {
+  target: TargetProviders.LOCAL,
+  timeout: 30,
+  logging: defaultServerLogSetting,
+};
+
+export const defaultDeviceSetting: DeviceSetting = {
+  accept_alerts: true,
+  clear_files: true,
+  clear_logs: true,
+  os: OS.ANDROID,
+  swipe: defaultSwipeSetting,
+  type: DeviceType.VIRTUAL,
+  video: defaultVideoSetting,
+  wda: defaultWDASetting,
+  application: defaultApplicationSetting,
+  name: '',
+};
+
+export const defaultMobileSetting: MobileSetting = {
+  server: defaultServerSetting,
+  device: defaultDeviceSetting,
 };

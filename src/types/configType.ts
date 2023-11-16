@@ -1,81 +1,81 @@
 export enum Browser {
-  CHROME,
-  EDGE,
-  FIREFOX,
-  NONE,
-  REMOTE,
-  SAFARI,
+  CHROME = 'CHROME',
+  EDGE = 'EDGE',
+  FIREFOX = 'FIREFOX',
+  NONE = 'NONE',
+  REMOTE = 'REMOTE',
+  SAFARI = 'SAFARI',
 }
 
-enum TargetProviders {
-  BROWSER_STACK,
-  LAMBDA_TEST_MOBILE,
-  LAMBDA_TEST_WEB,
-  LOCAL,
+export enum TargetProviders {
+  BROWSER_STACK = 'BROWSER_STACK',
+  LAMBDA_TEST_MOBILE = 'LAMBDA_TEST_MOBILE',
+  LAMBDA_TEST_WEB = 'LAMBDA_TEST_WEB',
+  LOCAL = 'LOCAL',
 }
 
 enum WindowResizeType {
-  CUSTOM,
-  FULL_SCREEN,
-  MAXIMIZED,
-  MINIMIZED,
-  NORMAL,
+  CUSTOM = 'CUSTOM',
+  FULL_SCREEN = 'FULL_SCREEN',
+  MAXIMIZED = 'MAXIMIZED',
+  MINIMIZED = 'MINIMIZED',
+  NORMAL = 'NORMAL',
 }
 
 enum Protocol {
-  HTTP,
-  HTTPS,
+  HTTP = 'HTTP',
+  HTTPS = 'HTTPS',
 }
 
 enum AutomationType {
-  UI_AUTOMATOR,
-  XCUI,
+  UI_AUTOMATOR = 'UI_AUTOMATOR',
+  XCUI = 'XCUI',
 }
 
 enum LogLevel {
-  DEBUG,
-  DEBUG_DEBUG,
-  DEBUG_ERROR,
-  DEBUG_INFO,
-  DEBUG_WARN,
-  ERROR,
-  ERROR_DEBUG,
-  ERROR_ERROR,
-  ERROR_INFO,
-  ERROR_WARN,
-  INFO,
-  INFO_DEBUG,
-  INFO_ERROR,
-  INFO_INFO,
-  INFO_WARN,
-  WARN,
-  WARN_DEBUG,
-  WARN_ERROR,
-  WARN_INFO,
-  WARN_WARN,
+  DEBUG = 'DEBUG',
+  DEBUG_DEBUG = 'DEBUG_DEBUG',
+  DEBUG_ERROR = 'DEBUG_ERROR',
+  DEBUG_INFO = 'DEBUG_INFO',
+  DEBUG_WARN = 'DEBUG_WARN',
+  ERROR = 'ERROR',
+  ERROR_DEBUG = 'ERROR_DEBUG',
+  ERROR_ERROR = 'ERROR_ERROR',
+  ERROR_INFO = 'ERROR_INFO',
+  ERROR_WARN = 'ERROR_WARN',
+  INFO = 'INFO',
+  INFO_DEBUG = 'INFO_DEBUG',
+  INFO_ERROR = 'INFO_ERROR',
+  INFO_INFO = 'INFO_INFO',
+  INFO_WARN = 'INFO_WARN',
+  WARN = 'WARN',
+  WARN_DEBUG = 'WARN_DEBUG',
+  WARN_ERROR = 'WARN_ERROR',
+  WARN_INFO = 'WARN_INFO',
+  WARN_WARN = 'WARN_WARN',
 }
 
 enum OS {
-  ANDROID,
-  IOS,
+  ANDROID = 'ANDROID',
+  IOS = 'IOS',
 }
 
 enum DeviceType {
-  CLOUD,
-  VIRTUAL,
+  CLOUD = 'CLOUD',
+  VIRTUAL = 'VIRTUAL',
 }
 
 enum VideoQuality {
-  LOW,
-  MEDIUM,
-  HIGH,
-  PHOTO,
+  LOW = 'LOW',
+  MEDIUM = 'MEDIUM',
+  HIGH = 'HIGH',
+  PHOTO = 'PHOTO',
 }
 
 enum ApplicationType {
-  HYBRID,
-  NATIVE,
-  WEB,
+  HYBRID = 'HYBRID',
+  NATIVE = 'NATIVE',
+  WEB = 'WEB',
 }
 
 export interface FrameworkSetting {
@@ -84,7 +84,7 @@ export interface FrameworkSetting {
   api?: { [key: string]: ApiSetting } | undefined;
 }
 
-interface ApiSetting {
+export interface ApiSetting {
   base_uri: string;
   base_path?: string;
   port?: number;
@@ -135,7 +135,7 @@ interface Dimension {
   height: number;
 }
 
-interface WebSetting {
+export interface WebSetting {
   base_url?: string;
   browser: Browser;
   target?: TargetProviders;
@@ -381,7 +381,6 @@ export const defaultApiSetting: ApiSetting = {
 };
 
 export const defaultWebSetting: WebSetting = {
-  protocol: Protocol.HTTP,
   browser: Browser.NONE,
   custom_size: defaultDimension,
   headless: true,

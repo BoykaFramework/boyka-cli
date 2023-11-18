@@ -9,7 +9,7 @@ export const getBasePath = async () =>
 export const getBaseUri = async () =>
   await input({
     message: 'What is the base url for the API?',
-    validate: (message) => {
+    validate: (message: string) => {
       if (!message) {
         throw new Error('Base URL cannot be empty.');
       }

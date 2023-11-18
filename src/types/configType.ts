@@ -27,7 +27,7 @@ enum Protocol {
   HTTPS = 'HTTPS',
 }
 
-enum AutomationType {
+export enum AutomationType {
   UI_AUTOMATOR = 'UI_AUTOMATOR',
   XCUI = 'XCUI',
 }
@@ -55,12 +55,12 @@ enum LogLevel {
   WARN_WARN = 'WARN_WARN',
 }
 
-enum OS {
+export enum OS {
   ANDROID = 'ANDROID',
   IOS = 'IOS',
 }
 
-enum DeviceType {
+export enum DeviceType {
   CLOUD = 'CLOUD',
   VIRTUAL = 'VIRTUAL',
 }
@@ -72,7 +72,7 @@ enum VideoQuality {
   PHOTO = 'PHOTO',
 }
 
-enum ApplicationType {
+export enum ApplicationType {
   HYBRID = 'HYBRID',
   NATIVE = 'NATIVE',
   WEB = 'WEB',
@@ -81,7 +81,7 @@ enum ApplicationType {
 export interface FrameworkSetting {
   listeners_package?: string;
   ui?: UiSetting;
-  api?: { [key: string]: ApiSetting } | undefined;
+  api?: { [key: string]: ApiSetting };
 }
 
 export interface ApiSetting {
@@ -160,7 +160,7 @@ interface ServerLogSetting {
   timestamp?: boolean;
 }
 
-interface ServerSetting {
+export interface ServerSetting {
   allow_cors?: boolean;
   allow_insecure?: string[];
   appium_path?: string;
@@ -190,7 +190,7 @@ interface ServerSetting {
   webhook?: string;
 }
 
-interface MobileSetting {
+export interface MobileSetting {
   server: ServerSetting;
   device: DeviceSetting;
 }
@@ -211,9 +211,9 @@ interface IOSVideoSetting {
 }
 
 interface VideoSetting {
-  android: AndroidVideoSetting;
+  android?: AndroidVideoSetting;
   enabled?: boolean;
-  ios: IOSVideoSetting;
+  ios?: IOSVideoSetting;
   path: string;
   prefix?: string;
   size?: string;
@@ -221,11 +221,11 @@ interface VideoSetting {
 }
 
 interface VirtualDeviceSetting {
-  connect_keyboard: boolean;
-  headless: boolean;
-  launch_timeout: number;
+  connect_keyboard?: boolean;
+  headless?: boolean;
+  launch_timeout?: number;
   name: string;
-  ready_timeout: number;
+  ready_timeout?: number;
 }
 
 interface WDASetting {
@@ -254,7 +254,7 @@ interface ApplicationSetting {
   wait_timeout?: number;
 }
 
-interface DeviceSetting {
+export interface DeviceSetting {
   accept_alerts?: boolean;
   application: ApplicationSetting;
   capabilities?: { [key: string]: any };
@@ -292,13 +292,13 @@ const defaultSwipeSetting: SwipeSetting = {
   max_swipe_until_found: 5,
 };
 
-const defaultIOSVideoSetting: IOSVideoSetting = {
+export const defaultIOSVideoSetting: IOSVideoSetting = {
   codec: 'mpeg4',
   fps: 10,
   quality: VideoQuality.MEDIUM,
 };
 
-const defaultAndroidVideoSetting: AndroidVideoSetting = {
+export const defaultAndroidVideoSetting: AndroidVideoSetting = {
   bit_rate: 4,
 };
 
@@ -314,7 +314,7 @@ const defaultApplicationSetting: ApplicationSetting = {
   wait_timeout: 30,
 };
 
-const defaultWDASetting: WDASetting = {
+export const defaultWDASetting: WDASetting = {
   local_port: 8100,
   connection_timeout: 60,
   launch_timeout: 60,
@@ -322,10 +322,8 @@ const defaultWDASetting: WDASetting = {
   startup_retry_interval: 10,
 };
 
-const defaultVideoSetting: VideoSetting = {
-  android: defaultAndroidVideoSetting,
+export const defaultVideoSetting: VideoSetting = {
   enabled: false,
-  ios: defaultIOSVideoSetting,
   path: './videos',
   prefix: 'VID',
 };
@@ -385,11 +383,12 @@ export const defaultWebSetting: WebSetting = {
   custom_size: defaultDimension,
   headless: true,
   highlight: false,
-  resize: WindowResizeType.NORMAL,
+  resize: WindowResizeType.CUSTOM,
 };
 
 export const defaultServerSetting: ServerSetting = {
   target: TargetProviders.LOCAL,
+  session_override: true,
   timeout: 30,
   logging: defaultServerLogSetting,
 };
@@ -401,8 +400,6 @@ export const defaultDeviceSetting: DeviceSetting = {
   os: OS.ANDROID,
   swipe: defaultSwipeSetting,
   type: DeviceType.VIRTUAL,
-  video: defaultVideoSetting,
-  wda: defaultWDASetting,
   application: defaultApplicationSetting,
   name: '',
 };

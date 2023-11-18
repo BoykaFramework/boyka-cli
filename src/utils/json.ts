@@ -1,6 +1,6 @@
 import fs from 'fs';
-import { FrameworkSetting } from '../types/configType';
 import path from 'path';
+import { FrameworkSetting } from '../types/configType';
 import { configFileName } from './constants';
 
 export const createConfigFile = (filePath: string, setting: FrameworkSetting) => {

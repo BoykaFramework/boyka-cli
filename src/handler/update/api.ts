@@ -1,5 +1,5 @@
-import { getBasePath, getBaseUri } from '../questions/apiInputs';
-import { ApiSetting } from '../types/configType';
+import { getBasePath, getBaseUri } from '../../questions/apiInputs';
+import { ApiSetting } from '../../types/configType';
 
 export const updateApi = async (setting: ApiSetting) => {
   if (setting) {

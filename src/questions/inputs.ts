@@ -3,7 +3,7 @@ import { input, select } from '@inquirer/prompts';
 export const getPlatform = async () => {
   return await select({
     message: 'What kind of platform you want to automate?',
-    default: 'UI',
+    default: 'ui',
     choices: [
       {
         name: 'UI',
@@ -22,7 +22,7 @@ export const getPlatform = async () => {
 export const getPlatformType = async () => {
   return await select({
     message: 'What type of platform you want to automate?',
-    default: 'Web',
+    default: 'web',
     choices: [
       {
         name: 'Web',
@@ -49,7 +49,7 @@ export const getConfigName = async (platform: string) =>
 export const getUserName = async () =>
   await input({
     message: 'What is the environment variable for your user name?',
-    validate: (message) => {
+    validate: (message: string) => {
       if (!message) {
         throw new Error(
           'User name environment variable is required for running on Cloud platform...'
@@ -62,7 +62,7 @@ export const getUserName = async () =>
 export const getPassword = async () =>
   await input({
     message: 'What is the environment variable for your password?',
-    validate: (message) => {
+    validate: (message: string) => {
       if (!message) {
         throw new Error(
           'Password environment variable is required for running on Cloud platform...'
@@ -71,3 +71,32 @@ export const getPassword = async () =>
       return true;
     },
   });
+
+export const getTarget = async () => {
+  return await select({
+    message: 'Where do you want to run your tests?',
+    default: 'LOCAL',
+    choices: [
+      {
+        name: 'Local',
+        value: 'LOCAL',
+        description: 'Local machine',
+      },
+      {
+        name: 'BrowserStack',
+        value: 'BROWSER_STACK',
+        description: 'BrowserStack browsers / devices',
+      },
+      {
+        name: 'LambdaTest Web',
+        value: 'LAMBDA_TEST_WEB',
+        description: 'LambdaTest Web Browsers',
+      },
+      {
+        name: 'LambdaTest Mobile',
+        value: 'LAMBDA_TEST_MOBILE',
+        description: 'LambdaTest Mobile devices',
+      },
+    ],
+  });
+};

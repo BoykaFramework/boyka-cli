@@ -1,6 +1,6 @@
 import { CommandModule } from 'yargs';
 import { epiLogMessage, failureMessage } from '../../utils/constants';
-import { handleConfigInit } from '../../handler/init';
+import { handleConfigInit } from '../../handler/config/init/init';
 
 export = {
   command: 'init',
@@ -18,6 +18,11 @@ export = {
       .showHelpOnFail(true, failureMessage('Init Config'))
       .epilog(epiLogMessage),
   handler: async (argv) => {
-    await handleConfigInit(argv);
+    try {
+      await handleConfigInit(argv);
+    } catch (error: any) {
+      console.error(error.message);
+      process.exit(1);
+    }
   },
 } satisfies CommandModule;

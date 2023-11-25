@@ -1,8 +1,9 @@
 import { select } from '@inquirer/prompts';
+import questions from '../data/questions.json';
 
 export const getBrowser = async () => {
   return await select({
-    message: 'What browser you want to automate?',
+    message: questions.web.browser,
     default: 'CHROME',
     choices: [
       {

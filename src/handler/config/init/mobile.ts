@@ -19,6 +19,8 @@ export const createMobileSetting = async (platformType: string) => {
     },
   };
   const mobile = frameworkSetting.ui?.mobile;
-  if (mobile) await updateMobile(mobile[configName]);
+  if (mobile) {
+    await updateMobile(mobile[configName], platformType);
+  }
   return frameworkSetting;
 };

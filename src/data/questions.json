@@ -1,0 +1,24 @@
+{
+  "platform": "What kind of platform you want to automate?",
+  "platformType": "What type of platform you want to automate?",
+  "configName": "What name you want to give to ${platform} config?",
+  "cloudUser": "What is the environment variable for your user name?",
+  "cloudKey": "What is the environment variable for your password?",
+  "target": "Where do you want to run the tests?",
+  "api": {
+    "basePath": "What is the base path for the API?",
+    "baseUrl": "What is the base url for the API?"
+  },
+  "web": {
+    "browser": "What browser you want to automate?"
+  },
+  "mobile": {
+    "port": "On which port number you want to connect?",
+    "deviceName": "What is the name of your device?",
+    "deviceVersion": "What is OS version of the device?",
+    "avdName": "What is the Emulator name?",
+    "appPath": "What is the path of your app?",
+    "appUrl": "What is the cloud URL or custom ID of your app?",
+    "appType": "What is the type of your application?"
+  }
+}

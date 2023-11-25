@@ -37,7 +37,7 @@ const validateConfigPath = (configPath: string) => {
 const createUiSetting = async () => {
   const platformType = await getPlatformType();
   let frameworkSetting: FrameworkSetting;
-  if (platformType === 'web') {
+  if (platformType === 'Web') {
     frameworkSetting = await createWebSetting();
   } else {
     frameworkSetting = await createMobileSetting(platformType);

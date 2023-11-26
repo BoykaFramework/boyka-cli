@@ -1,6 +1,13 @@
 import { CommandModule } from 'yargs';
-import { epiLogMessage, failureMessage } from '../../utils/constants';
+import {
+  capabilitiesHelpMessage,
+  epiLogMessage,
+  failureMessage,
+  getTarget,
+  helpMessage,
+} from '../../utils/constants';
 import { handleConfigInit } from '../../handler/config/init/init';
+import { TargetProviders } from '../../types/configType';
 
 export = {
   command: 'init',
@@ -20,6 +27,10 @@ export = {
   handler: async (argv) => {
     try {
       await handleConfigInit(argv);
+      if (getTarget() !== TargetProviders.LOCAL) {
+        console.log(capabilitiesHelpMessage);
+      }
+      console.log(helpMessage);
     } catch (error: any) {
       console.error(error.message);
       process.exit(1);

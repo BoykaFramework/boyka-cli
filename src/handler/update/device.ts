@@ -39,12 +39,16 @@ export const updateDevice = async (
       ...defaultVideoSetting,
       android: defaultAndroidVideoSetting,
     };
-  } else if (target !== TargetProviders.LOCAL) {
-    device.wda = defaultWDASetting;
-    device.video = {
-      ...defaultVideoSetting,
-      ios: defaultIOSVideoSetting,
-    };
+  } else {
+    if (target === TargetProviders.LOCAL) {
+      device.wda = defaultWDASetting;
+      device.video = {
+        ...defaultVideoSetting,
+        ios: defaultIOSVideoSetting,
+      };
+    } else {
+      device.capabilities = {};
+    }
   }
   device.application.type = (await getAppType()) as ApplicationType;
   if (device.application.type === ApplicationType.WEB) {

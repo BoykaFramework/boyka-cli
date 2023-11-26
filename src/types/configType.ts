@@ -303,7 +303,7 @@ export const defaultAndroidVideoSetting: AndroidVideoSetting = {
 };
 
 const defaultApiLogSetting: ApiLogSetting = {
-  enable: false,
+  enable: true,
   request: true,
   response: true,
 };
@@ -375,14 +375,14 @@ export const defaultApiSetting: ApiSetting = {
   logging: defaultApiLogSetting,
   read_timeout: 5,
   write_timeout: 5,
-  schema_path: './scheme',
+  schema_path: './schema',
 };
 
 export const defaultWebSetting: WebSetting = {
   browser: Browser.NONE,
   custom_size: defaultDimension,
-  headless: true,
-  highlight: false,
+  headless: false,
+  highlight: true,
   resize: WindowResizeType.CUSTOM,
 };
 

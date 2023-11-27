@@ -37,7 +37,7 @@ const validateConfigPath = (configPath: string) => {
 const createUiSetting = async () => {
   const platformType = await getPlatformType();
   let frameworkSetting: FrameworkSetting;
-  if (platformType === 'web') {
+  if (platformType === 'Web') {
     frameworkSetting = await createWebSetting();
   } else {
     frameworkSetting = await createMobileSetting(platformType);
@@ -46,8 +46,9 @@ const createUiSetting = async () => {
 };
 
 const createConfigJson = async (configPath: string) => {
-  console.info(`Creating Boyka config file at ${configPath}...`);
-  validateConfigPath(configPath);
+  const path = configPath === '.' ? process.cwd() : configPath;
+  console.info(`Creating Boyka config file at ${path}...`);
+  validateConfigPath(path);
   let setting: FrameworkSetting;
   switch (await getPlatform()) {
     case 'ui':
@@ -59,6 +60,6 @@ const createConfigJson = async (configPath: string) => {
       setting = await createApiSetting();
       break;
   }
-  createConfigFile(configPath, setting);
+  createConfigFile(path, setting);
   return true;
 };

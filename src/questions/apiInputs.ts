@@ -1,14 +1,17 @@
 import { input } from '@inquirer/prompts';
+import questions from '../data/questions.json';
+
+const apiQuestions = questions.api;
 
 export const getBasePath = async () =>
   await input({
-    message: 'What is the base path for the API?',
+    message: apiQuestions.basePath,
     default: '',
   });
 
 export const getBaseUri = async () =>
   await input({
-    message: 'What is the base url for the API?',
+    message: apiQuestions.baseUrl,
     validate: (message: string) => {
       if (!message) {
         throw new Error('Base URL cannot be empty.');

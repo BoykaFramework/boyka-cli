@@ -2,13 +2,14 @@ import {
   getAVDName,
   getAppPath,
   getAppType,
+  getAppUrl,
   getDeviceName,
-  getDeviceType,
   getDeviceVersion,
-  getOS,
 } from '../../questions/mobileInput';
+import { getBrowser } from '../../questions/webInput';
 import {
   ApplicationType,
+  Browser,
   DeviceSetting,
   DeviceType,
   OS,
@@ -20,10 +21,14 @@ import {
   defaultWDASetting,
 } from '../../types/configType';
 
-export const updateDevice = async (device: DeviceSetting, target: TargetProviders) => {
+export const updateDevice = async (
+  device: DeviceSetting,
+  target: TargetProviders,
+  platformType: string
+) => {
   device.name = await getDeviceName();
-  device.type = (await getDeviceType()) as DeviceType;
-  device.os = (await getOS()) as OS;
+  device.type = target === TargetProviders.LOCAL ? DeviceType.VIRTUAL : DeviceType.CLOUD;
+  device.os = platformType.toUpperCase() as OS;
   device.version = await getDeviceVersion();
   if (device.os === OS.ANDROID) {
     if (device.type === DeviceType.VIRTUAL) {
@@ -35,14 +40,21 @@ export const updateDevice = async (device: DeviceSetting, target: TargetProvider
       android: defaultAndroidVideoSetting,
     };
   } else {
-    if (target !== TargetProviders.LOCAL) {
+    if (target === TargetProviders.LOCAL) {
       device.wda = defaultWDASetting;
       device.video = {
         ...defaultVideoSetting,
         ios: defaultIOSVideoSetting,
       };
+    } else {
+      device.capabilities = {};
     }
   }
   device.application.type = (await getAppType()) as ApplicationType;
-  device.application.path = await getAppPath();
+  if (device.application.type === ApplicationType.WEB) {
+    device.application.browser = (await getBrowser()) as Browser;
+  } else {
+    device.application.path =
+      target === TargetProviders.LOCAL ? await getAppPath() : await getAppUrl();
+  }
 };

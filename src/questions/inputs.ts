@@ -1,8 +1,9 @@
 import { input, select } from '@inquirer/prompts';
+import questions from '../data/questions.json';
 
 export const getPlatform = async () => {
   return await select({
-    message: 'What kind of platform you want to automate?',
+    message: questions.platform,
     default: 'ui',
     choices: [
       {
@@ -21,22 +22,22 @@ export const getPlatform = async () => {
 
 export const getPlatformType = async () => {
   return await select({
-    message: 'What type of platform you want to automate?',
-    default: 'web',
+    message: questions.platformType,
+    default: 'Web',
     choices: [
       {
         name: 'Web',
-        value: 'web',
+        value: 'Web',
         description: 'Web application',
       },
       {
         name: 'Android',
-        value: 'android',
+        value: 'Android',
         description: 'Android application',
       },
       {
         name: 'iOS',
-        value: 'ios',
+        value: 'iOS',
         description: 'iOS application',
       },
     ],
@@ -44,11 +45,11 @@ export const getPlatformType = async () => {
 };
 
 export const getConfigName = async (platform: string) =>
-  await input({ message: `What name you want to give to ${platform} config?` });
+  await input({ message: questions.configName.replace('${platform}', platform) });
 
 export const getUserName = async () =>
   await input({
-    message: 'What is the environment variable for your user name?',
+    message: questions.cloudUser,
     validate: (message: string) => {
       if (!message) {
         throw new Error(
@@ -61,7 +62,7 @@ export const getUserName = async () =>
 
 export const getPassword = async () =>
   await input({
-    message: 'What is the environment variable for your password?',
+    message: questions.cloudKey,
     validate: (message: string) => {
       if (!message) {
         throw new Error(
@@ -74,7 +75,7 @@ export const getPassword = async () =>
 
 export const getTarget = async () => {
   return await select({
-    message: 'Where do you want to run your tests?',
+    message: questions.target,
     default: 'LOCAL',
     choices: [
       {
@@ -88,14 +89,9 @@ export const getTarget = async () => {
         description: 'BrowserStack browsers / devices',
       },
       {
-        name: 'LambdaTest Web',
-        value: 'LAMBDA_TEST_WEB',
-        description: 'LambdaTest Web Browsers',
-      },
-      {
-        name: 'LambdaTest Mobile',
-        value: 'LAMBDA_TEST_MOBILE',
-        description: 'LambdaTest Mobile devices',
+        name: 'LambdaTest',
+        value: 'LAMBDA_TEST',
+        description: 'LambdaTest browsers / devices',
       },
     ],
   });

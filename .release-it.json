@@ -28,7 +28,6 @@
     "release": true
   },
   "git": {
-    "requireBranch": "main",
     "commitMessage": "chore: release v${version}",
     "requireCleanWorkingDir": true
   },

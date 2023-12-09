@@ -33,7 +33,7 @@ jobs:
           cache: 'pnpm'
 
       - name: NPM Setup
-        run: pnpm config set //registry.npmjs.org/:_authToken $NPM_TOKEN
+        run: npm config set //registry.npmjs.org/:_authToken $NPM_TOKEN
 
       - name: Install dependencies
         run: pnpm install

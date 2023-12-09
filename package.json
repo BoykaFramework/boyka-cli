@@ -6,6 +6,10 @@
   "bin": {
     "boyka": "./dist/index.js"
   },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  },
   "scripts": {
     "lint": "eslint 'src/**/*.ts'",
     "lint:fix": "eslint --fix src/**/*.ts",

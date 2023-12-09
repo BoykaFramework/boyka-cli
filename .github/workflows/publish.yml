@@ -7,6 +7,10 @@ jobs:
   release:
     runs-on: ubuntu-latest
 
+    env:
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      GITHUB_TOKEN: ${{ secrets.PUSH_TOKEN }}
+
     steps:
       - name: Check out Git repository
         uses: actions/checkout@v4
@@ -28,11 +32,11 @@ jobs:
           node-version: 18
           cache: 'pnpm'
 
+      - name: NPM Setup
+        run: pnpm config set //registry.npmjs.org/:_authToken $NPM_TOKEN
+
       - name: Install dependencies
         run: pnpm install
 
       - name: Publish to NPM and GitHub release
         run: pnpm release
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-          GITHUB_TOKEN: ${{ secrets.PUSH_TOKEN }}

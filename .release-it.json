@@ -29,9 +29,11 @@
   },
   "git": {
     "commitMessage": "chore: release v${version}",
-    "requireCleanWorkingDir": true
+    "requireCleanWorkingDir": true,
+    "requireBranch": "main"
   },
   "npm": {
-    "publish": true
+    "publish": true,
+    "tokenRef": "PUSH_TOKEN"
   }
 }

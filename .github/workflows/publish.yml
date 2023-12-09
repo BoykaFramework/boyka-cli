@@ -9,14 +9,14 @@ jobs:
 
     env:
       NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-      GITHUB_TOKEN: ${{ secrets.PUSH_TOKEN }}
+      PUSH_TOKEN: ${{ secrets.PUSH_TOKEN }}
 
     steps:
       - name: Check out Git repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          token: ${{ env.GITHUB_TOKEN }}
+          token: ${{ env.PUSH_TOKEN }}
 
       - name: git config
         run: |

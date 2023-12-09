@@ -28,8 +28,11 @@ jobs:
           node-version: 18
           cache: 'pnpm'
 
+      - name: Install dependencies
+        run: pnpm install
+
       - name: Publish to NPM and GitHub release
-        run: npm run release
+        run: pnpm release
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.PUSH_TOKEN }}

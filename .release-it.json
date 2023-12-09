@@ -1,0 +1,38 @@
+{
+  "plugins": {
+    "@release-it/conventional-changelog": {
+      "preset": {
+        "name": "conventionalcommits",
+        "types": [
+          { "type": "feat", "section": ":rocket: New Feature" },
+          { "type": "fix", "section": ":bug: Bug Fix" },
+          { "type": "chore", "section": ":nail_care: Polish" },
+          { "type": "docs", "section": ":memo: Documentation" },
+          { "type": "style", "section": ":nail_care: Polish" },
+          { "type": "refactor", "section": ":nail_care: Polish" },
+          { "type": "perf", "section": ":running_woman: Performance" },
+          { "type": "test", "section": ":running_woman: Performance" },
+          { "type": "ci", "section": ":house: Internal" },
+          { "type": "build", "section": ":house: Internal" },
+          { "type": "revert", "section": ":nail_care: Polish" }
+        ]
+      },
+      "infile": "CHANGELOG.md",
+      "header": "# Changelog",
+      "writerOpts": {
+        "groupBy": "scope"
+      }
+    }
+  },
+  "github": {
+    "release": true
+  },
+  "git": {
+    "requireBranch": "main",
+    "commitMessage": "chore: release v${version}",
+    "requireCleanWorkingDir": true
+  },
+  "npm": {
+    "publish": true
+  }
+}

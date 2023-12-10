@@ -37,7 +37,7 @@ jobs:
         run: npm config set //registry.npmjs.org/:_authToken $NPM_TOKEN
 
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install && pnpm build
 
       - name: Publish to NPM and GitHub release
         run: pnpm release

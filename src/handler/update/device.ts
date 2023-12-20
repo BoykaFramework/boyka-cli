@@ -5,8 +5,8 @@ import {
   getAppUrl,
   getDeviceName,
   getDeviceVersion,
-} from '../../questions/mobileInput';
-import { getBrowser } from '../../questions/webInput';
+} from '../../questions/mobileInput.js';
+import { getBrowser } from '../../questions/webInput.js';
 import {
   ApplicationType,
   Browser,
@@ -19,7 +19,7 @@ import {
   defaultVideoSetting,
   defaultVirtualDeviceSetting,
   defaultWDASetting,
-} from '../../types/configType';
+} from '../../types/configType.js';
 
 export const updateDevice = async (
   device: DeviceSetting,

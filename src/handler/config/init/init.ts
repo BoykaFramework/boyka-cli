@@ -1,15 +1,15 @@
-import yargs from 'yargs';
+import { ArgumentsCamelCase } from 'yargs';
 import fs from 'fs';
 import path from 'path';
-import { createApiSetting } from './api';
-import { createWebSetting } from './web';
-import { createMobileSetting } from './mobile';
-import { configFileName } from '../../../utils/constants';
-import { getPlatform, getPlatformType } from '../../../questions/inputs';
-import { FrameworkSetting } from '../../../types/configType';
-import { createConfigFile } from '../../../utils/json';
+import { createApiSetting } from './api.js';
+import { createWebSetting } from './web.js';
+import { createMobileSetting } from './mobile.js';
+import { configFileName } from '../../../utils/constants.js';
+import { getPlatform, getPlatformType } from '../../../questions/inputs.js';
+import { FrameworkSetting } from '../../../types/configType.js';
+import { createConfigFile } from '../../../utils/json.js';
 
-export const handleConfigInit = async (argv: yargs.ArgumentsCamelCase) => {
+export const handleConfigInit = async (argv: ArgumentsCamelCase) => {
   const configPath = argv.path as string;
   await createConfigJson(configPath);
 };

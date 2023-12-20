@@ -1,4 +1,5 @@
-import { TargetProviders } from '../types/configType';
+import { TargetProviders } from '../types/configType.js';
+import { loadJSON } from './json.js';
 
 export const epiLogMessage = `For more information, 
   visit: https://boykaframework.github.io/boyka-framework`;
@@ -27,3 +28,5 @@ export const capabilitiesHelpMessage = `
 ❗❗ Since you have selected Cloud platform to run your tests, 
 you must also add cloud specific capabilities to the empty \`capabilities\` block 
 added to the config file.`;
+
+export const questions = loadJSON('../data/questions.json');

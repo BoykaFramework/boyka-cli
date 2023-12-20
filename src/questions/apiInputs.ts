@@ -1,5 +1,5 @@
 import { input } from '@inquirer/prompts';
-import questions from '../data/questions.json';
+import { questions } from '../utils/constants';
 
 const apiQuestions = questions.api;
 

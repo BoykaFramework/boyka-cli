@@ -6,6 +6,8 @@ const warn = chalk.yellow.bold;
 const success = chalk.green.bold;
 const info = chalk.blueBright.bold;
 
+export const sleep = (ms = 2000) => new Promise((r) => setTimeout(r, ms));
+
 export const epiLogMessage = info(`For more information, 
   visit: https://boykaframework.github.io/boyka-framework`);
 
@@ -35,12 +37,14 @@ you must also add cloud specific capabilities to the empty \`capabilities\` bloc
 added to the config file.`);
 
 export const successMessage = (filePath: string) =>
-  success(`✅ Boyka config file created at [${filePath}]`);
+  success(`Boyka config file created at [${filePath}]`);
 
 export const errorMessage = (error: Error) =>
-  danger(`❌ Error occurred! ${error.message}
+  danger(`Error occurred! ${error.message}
 Caused by: ${error.cause}
 `);
+
+export const savingMessage = warn(`Creating the [boyka-config.json] file...`);
 
 export const initMessage = (path: string) => warn(`Creating Boyka config file at ${path}...`);
 

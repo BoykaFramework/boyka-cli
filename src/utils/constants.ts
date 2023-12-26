@@ -44,7 +44,7 @@ export const errorMessage = (error: Error) =>
 Caused by: ${error.cause}
 `);
 
-export const savingMessage = warn(`Creating the [boyka-config.json] file...`);
+export const savingMessage = warn('Creating the [boyka-config.json] file...');
 
 export const initMessage = (path: string) => warn(`Creating Boyka config file at ${path}...`);
 

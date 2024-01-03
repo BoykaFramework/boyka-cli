@@ -38,8 +38,8 @@
   },
   "devDependencies": {
     "@release-it/conventional-changelog": "^8.0.1",
-    "@stylistic/eslint-plugin-js": "^1.5.1",
-    "@stylistic/eslint-plugin-ts": "^1.5.1",
+    "@stylistic/eslint-plugin-js": "^1.5.3",
+    "@stylistic/eslint-plugin-ts": "^1.5.3",
     "@tsconfig/node18": "^18.2.2",
     "@types/node": "^20.10.6",
     "@types/yargs": "^17.0.32",
@@ -57,6 +57,8 @@
   },
   "dependencies": {
     "@inquirer/prompts": "^3.3.0",
+    "chalk": "^4.1.2",
+    "nanospinner": "^1.1.0",
     "yargs": "^17.7.2"
   },
   "lint-staged": {

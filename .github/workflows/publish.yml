@@ -2,6 +2,15 @@ name: Publish to NPM and GitHub
 
 on:
   workflow_dispatch:
+    inputs:
+      pre-release:
+        description: Is this a pre-release?
+        type: boolean
+        default: false
+      draft:
+        description: Is this a draft release?
+        type: boolean
+        default: false
 
 jobs:
   release:
@@ -17,6 +26,14 @@ jobs:
         with:
           fetch-depth: 0
           token: ${{ env.PUSH_TOKEN }}
+
+      - name: Import GPG key
+        uses: crazy-max/ghaction-import-gpg@v6
+        with:
+          gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
+          passphrase: ${{ secrets.GPG_PASSPHRASE }}
+          git_user_signingkey: true
+          git_commit_gpgsign: true
 
       - name: git config
         run: |
@@ -40,4 +57,4 @@ jobs:
         run: pnpm install && pnpm build
 
       - name: Publish to NPM and GitHub release
-        run: pnpm release
+        run: pnpm release --github.preRelease=${{ inputs.pre-release }} --github.draft=${{ inputs.draft }}

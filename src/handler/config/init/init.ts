@@ -1,13 +1,19 @@
 import { ArgumentsCamelCase } from 'yargs';
 import fs from 'fs';
 import path from 'path';
-import { createApiSetting } from './api.js';
-import { createWebSetting } from './web.js';
-import { createMobileSetting } from './mobile.js';
-import { configFileName } from '../../../utils/constants.js';
-import { getPlatform, getPlatformType } from '../../../questions/inputs.js';
-import { FrameworkSetting } from '../../../types/configType.js';
-import { createConfigFile } from '../../../utils/json.js';
+import { createApiSetting } from './api';
+import { createWebSetting } from './web';
+import { createMobileSetting } from './mobile';
+import {
+  configFileExists,
+  configFileName,
+  configPathNotFolder,
+  configPathNotFound,
+  initMessage,
+} from '../../../utils/constants';
+import { getPlatform, getPlatformType } from '../../../questions/inputs';
+import { FrameworkSetting } from '../../../types/configType';
+import { createConfigFile } from '../../../utils/json';
 
 export const handleConfigInit = async (argv: ArgumentsCamelCase) => {
   const configPath = argv.path as string;
@@ -16,16 +22,16 @@ export const handleConfigInit = async (argv: ArgumentsCamelCase) => {
 
 const checkConfigFile = (configPath: string) => {
   if (fs.existsSync(path.join(configPath, configFileName))) {
-    throw new Error(`Boyka config file is already available at [${configPath}]...`);
+    throw new Error(configFileExists(configPath));
   }
 };
 
 const checkConfigPath = (configPath: string) => {
   if (!fs.lstatSync(configPath).isDirectory()) {
-    throw new Error(`Config path [${configPath}] is not a folder...`);
+    throw new Error(configPathNotFolder(configPath));
   }
   if (!fs.existsSync(configPath)) {
-    throw new Error(`Boyka config path [${configPath}] does not exists...`);
+    throw new Error(configPathNotFound(configPath));
   }
 };
 
@@ -47,7 +53,7 @@ const createUiSetting = async () => {
 
 const createConfigJson = async (configPath: string) => {
   const path = configPath === '.' ? process.cwd() : configPath;
-  console.info(`Creating Boyka config file at ${path}...`);
+  console.info(initMessage(path));
   validateConfigPath(path);
   let setting: FrameworkSetting;
   switch (await getPlatform()) {

@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.4.0](https://github.com/BoykaFramework/boyka-cli/compare/0.3.0...0.4.0) (2024-01-04)
+
+
+* :lipstick: added message output highlighting ([#41](https://github.com/BoykaFramework/boyka-cli/issues/41)) ([ffb521b](https://github.com/BoykaFramework/boyka-cli/commit/ffb521ba464e3ab668f3d360c4627cc7393bc13e))
+
+
+### deps-dev
+
+* **deps-dev:** bump the minor group with 2 updates ([#43](https://github.com/BoykaFramework/boyka-cli/issues/43)) ([2e5d45f](https://github.com/BoykaFramework/boyka-cli/commit/2e5d45f4648a9b2ef4ebc27a0f88210484f26ea3))
+* **deps-dev:** bump the minor group with 2 updates ([#46](https://github.com/BoykaFramework/boyka-cli/issues/46)) ([9da4d32](https://github.com/BoykaFramework/boyka-cli/commit/9da4d32b44695c74b376d2f56d5ad16d9daaf1d0))
+* **deps-dev:** bump the minor group with 3 updates ([#38](https://github.com/BoykaFramework/boyka-cli/issues/38)) ([2864dcb](https://github.com/BoykaFramework/boyka-cli/commit/2864dcb533dc3a1f24588d56298fe981b23c7806))
+* **deps-dev:** bump the minor group with 3 updates ([#42](https://github.com/BoykaFramework/boyka-cli/issues/42)) ([632e4f1](https://github.com/BoykaFramework/boyka-cli/commit/632e4f15927c078515520c90c2db038f93876a9f))
+* **deps-dev:** bump the patch group with 1 update ([#44](https://github.com/BoykaFramework/boyka-cli/issues/44)) ([1c467c8](https://github.com/BoykaFramework/boyka-cli/commit/1c467c8d7eae6839b1dd66ce3a794fda93236aed))
+* **deps-dev:** bump the patch group with 4 updates ([#39](https://github.com/BoykaFramework/boyka-cli/issues/39)) ([f204435](https://github.com/BoykaFramework/boyka-cli/commit/f204435ad415cb6d0ec152c067678242eed088c7))
+
 ## 0.3.0 (2023-12-10)
 
 

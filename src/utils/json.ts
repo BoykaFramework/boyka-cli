@@ -18,3 +18,11 @@ export const createConfigFile = (filePath: string, setting: FrameworkSetting) =>
     }
   });
 };
+
+export const loadJSON = (path: string) => {
+  return JSON.parse(
+    fs.readFileSync(new URL(path), {
+      encoding: 'utf-8',
+    })
+  );
+};

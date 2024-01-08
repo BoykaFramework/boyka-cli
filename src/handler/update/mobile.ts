@@ -1,6 +1,6 @@
-import { MobileSetting } from '../../types/configType';
-import { updateDevice } from './device';
-import { updateServer } from './server';
+import { MobileSetting } from '../../types/configType.js';
+import { updateDevice } from './device.js';
+import { updateServer } from './server.js';
 
 export const updateMobile = async (config: MobileSetting, platformType: string) => {
   await updateServer(config.server, platformType);

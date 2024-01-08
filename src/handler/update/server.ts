@@ -1,7 +1,7 @@
-import { getPassword, getTarget, getUserName } from '../../questions/inputs';
-import { getPort } from '../../questions/mobileInput';
-import { AutomationType, ServerSetting, TargetProviders } from '../../types/configType';
-import { setTarget } from '../../utils/constants';
+import { getPassword, getTarget, getUserName } from '../../questions/inputs.js';
+import { getPort } from '../../questions/mobileInput.js';
+import { AutomationType, ServerSetting, TargetProviders } from '../../types/configType.js';
+import { setTarget } from '../../utils/constants.js';
 
 export const updateServer = async (server: ServerSetting, platformType: string) => {
   let target = await getTarget();

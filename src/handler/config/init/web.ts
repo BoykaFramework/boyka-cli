@@ -1,6 +1,10 @@
-import { getConfigName } from '../../../questions/inputs';
-import { FrameworkSetting, defaultUiSetting, defaultWebSetting } from '../../../types/configType';
-import { updateWeb } from '../../update/web';
+import { getConfigName } from '../../../questions/inputs.js';
+import {
+  FrameworkSetting,
+  defaultUiSetting,
+  defaultWebSetting,
+} from '../../../types/configType.js';
+import { updateWeb } from '../../update/web.js';
 
 export const createWebSetting = async () => {
   const configName = await getConfigName('Web');

@@ -1,10 +1,10 @@
-import { getConfigName } from '../../../questions/inputs';
+import { getConfigName } from '../../../questions/inputs.js';
 import {
   FrameworkSetting,
   defaultUiSetting,
   defaultMobileSetting,
-} from '../../../types/configType';
-import { updateMobile } from '../../update/mobile';
+} from '../../../types/configType.js';
+import { updateMobile } from '../../update/mobile.js';
 
 export const createMobileSetting = async (platformType: string) => {
   const configName = await getConfigName(platformType);

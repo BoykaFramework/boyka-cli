@@ -19,6 +19,7 @@ jobs:
     env:
       NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
       PUSH_TOKEN: ${{ secrets.PUSH_TOKEN }}
+      GITHUB_TOKEN: ${{ secrets.PUSH_TOKEN }}
 
     steps:
       - name: Check out Git repository

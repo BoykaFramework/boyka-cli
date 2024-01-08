@@ -1,4 +1,4 @@
-import yargs from 'yargs';
+import { ArgumentsCamelCase } from 'yargs';
 import fs from 'fs';
 import path from 'path';
 import { createApiSetting } from './api';
@@ -15,7 +15,7 @@ import { getPlatform, getPlatformType } from '../../../questions/inputs';
 import { FrameworkSetting } from '../../../types/configType';
 import { createConfigFile } from '../../../utils/json';
 
-export const handleConfigInit = async (argv: yargs.ArgumentsCamelCase) => {
+export const handleConfigInit = async (argv: ArgumentsCamelCase) => {
   const configPath = argv.path as string;
   await createConfigJson(configPath);
 };

@@ -1,5 +1,5 @@
 import { input, select } from '@inquirer/prompts';
-import questions from '../data/questions.json';
+import { questions } from '../utils/constants';
 
 export const getPlatform = async () => {
   return await select({

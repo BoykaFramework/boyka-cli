@@ -5,11 +5,11 @@ import {
   failureMessage,
   getTarget,
   helpMessage,
-} from '../../utils/constants';
-import { handleConfigInit } from '../../handler/config/init/init';
-import { TargetProviders } from '../../types/configType';
+} from '../../utils/constants.js';
+import { handleConfigInit } from '../../handler/config/init/init.js';
+import { TargetProviders } from '../../types/configType.js';
 
-export = {
+export const initCommand = {
   command: 'init',
   aliases: ['i'],
   describe: 'Initialize Boyka-Framework Config file',

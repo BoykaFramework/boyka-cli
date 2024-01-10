@@ -1,7 +1,7 @@
 import { input } from '@inquirer/prompts';
-import { questions } from '../utils/constants';
+import { userQuestions } from '../utils/constants.js';
 
-const apiQuestions = questions.api;
+const apiQuestions = userQuestions.api;
 
 export const getBasePath = async () =>
   await input({

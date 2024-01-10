@@ -1,7 +1,7 @@
 import { input, select } from '@inquirer/prompts';
-import { questions } from '../utils/constants';
+import { userQuestions } from '../utils/constants.js';
 
-const mobileQuestions = questions.mobile;
+const mobileQuestions = userQuestions.mobile;
 
 export const getPort = async () => await input({ message: mobileQuestions.port, default: '0' });
 

@@ -1,10 +1,13 @@
 import chalk from 'chalk';
+import questions from '../data/questions.json' assert { type: 'json' };
 import { TargetProviders } from '../types/configType.js';
 
 const danger = chalk.red.bold;
 const warn = chalk.yellow.bold;
 const success = chalk.green.bold;
 const info = chalk.blueBright.bold;
+
+export const userQuestions = questions;
 
 export const sleep = (ms = 2000) => new Promise((r) => setTimeout(r, ms));
 

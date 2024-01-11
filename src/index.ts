@@ -2,11 +2,12 @@
 
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
-import { epiLogMessage, failureMessage } from './utils/constants';
+import { epiLogMessage, failureMessage } from './utils/constants.js';
+import { configureCommand } from './commands/configure.js';
 
 yargs(hideBin(process.argv))
   .scriptName('boyka')
-  .commandDir('commands')
+  .command(configureCommand)
   .option('verbose', {
     alias: 'v',
     type: 'boolean',

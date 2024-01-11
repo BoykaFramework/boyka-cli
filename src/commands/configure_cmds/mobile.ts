@@ -1,7 +1,7 @@
 import { CommandModule } from 'yargs';
-import { epiLogMessage, failureMessage } from '../../utils/constants';
+import { epiLogMessage, failureMessage } from '../../utils/constants.js';
 
-export = {
+export const mobileCommand = {
   command: 'mobile [name]',
   aliases: ['m'],
   describe: 'Add Mobile Boyka-Framework Config file',
@@ -15,8 +15,6 @@ export = {
       .check((argv) => {
         if (!argv.name) {
           throw new Error('Mobile config name should be provided!');
-        } else {
-          return true;
         }
       })
       .help('help')

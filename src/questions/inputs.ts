@@ -1,9 +1,9 @@
 import { input, select } from '@inquirer/prompts';
-import questions from '../data/questions.json';
+import { userQuestions } from '../utils/constants.js';
 
 export const getPlatform = async () => {
   return await select({
-    message: questions.platform,
+    message: userQuestions.platform,
     default: 'ui',
     choices: [
       {
@@ -22,7 +22,7 @@ export const getPlatform = async () => {
 
 export const getPlatformType = async () => {
   return await select({
-    message: questions.platformType,
+    message: userQuestions.platformType,
     default: 'Web',
     choices: [
       {
@@ -45,11 +45,11 @@ export const getPlatformType = async () => {
 };
 
 export const getConfigName = async (platform: string) =>
-  await input({ message: questions.configName.replace('${platform}', platform) });
+  await input({ message: userQuestions.configName.replace('${platform}', platform) });
 
 export const getUserName = async () =>
   await input({
-    message: questions.cloudUser,
+    message: userQuestions.cloudUser,
     validate: (message: string) => {
       if (!message) {
         throw new Error(
@@ -62,7 +62,7 @@ export const getUserName = async () =>
 
 export const getPassword = async () =>
   await input({
-    message: questions.cloudKey,
+    message: userQuestions.cloudKey,
     validate: (message: string) => {
       if (!message) {
         throw new Error(
@@ -75,7 +75,7 @@ export const getPassword = async () =>
 
 export const getTarget = async () => {
   return await select({
-    message: questions.target,
+    message: userQuestions.target,
     default: 'LOCAL',
     choices: [
       {

@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
-import { FrameworkSetting } from '../types/configType';
-import { configFileName, errorMessage, savingMessage, sleep, successMessage } from './constants';
+import { FrameworkSetting } from '../types/configType.js';
+import { configFileName, errorMessage, savingMessage, sleep, successMessage } from './constants.js';
 import { createSpinner } from 'nanospinner';
 
 export const createConfigFile = (filePath: string, setting: FrameworkSetting) => {
@@ -17,4 +17,12 @@ export const createConfigFile = (filePath: string, setting: FrameworkSetting) =>
       spinner.success({ text: successMessage(filePath) });
     }
   });
+};
+
+export const loadJSON = (path: string) => {
+  return JSON.parse(
+    fs.readFileSync(new URL(path), {
+      encoding: 'utf-8',
+    })
+  );
 };

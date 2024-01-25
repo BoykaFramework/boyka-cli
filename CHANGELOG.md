@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.5.0](https://github.com/BoykaFramework/boyka-cli/compare/0.4.0...0.5.0) (2024-01-25)
+
+
+### deps-dev
+
+* **deps-dev:** bump the minor group with 2 updates ([#51](https://github.com/BoykaFramework/boyka-cli/issues/51)) ([3052a24](https://github.com/BoykaFramework/boyka-cli/commit/3052a24e77f822c119d43d556a9cdbd913c17e15))
+* **deps-dev:** bump the minor group with 2 updates ([#53](https://github.com/BoykaFramework/boyka-cli/issues/53)) ([b1b3460](https://github.com/BoykaFramework/boyka-cli/commit/b1b346019ebe4bee05ceff8d07a9356809523a59))
+* **deps-dev:** bump the minor group with 2 updates ([#54](https://github.com/BoykaFramework/boyka-cli/issues/54)) ([157194b](https://github.com/BoykaFramework/boyka-cli/commit/157194b8e7c1792cf93a8824a0e6a34c8178cbe1))
+* **deps-dev:** bump the patch group with 1 update ([#52](https://github.com/BoykaFramework/boyka-cli/issues/52)) ([5889261](https://github.com/BoykaFramework/boyka-cli/commit/588926141f9e67ae2750a01bfd9ecb966190a516))
+* **deps-dev:** bump the patch group with 4 updates ([#55](https://github.com/BoykaFramework/boyka-cli/issues/55)) ([6a5d50d](https://github.com/BoykaFramework/boyka-cli/commit/6a5d50d3aabe8289cbd483024d4dc71527e52a87))
+
+
+* :bug: fixed error while publishing new release ([#49](https://github.com/BoykaFramework/boyka-cli/issues/49)) ([d171290](https://github.com/BoykaFramework/boyka-cli/commit/d1712903b60ad0eac67f06ef505191ccea2674eb))
+* :sparkles: converting cjs to module in ts ([#40](https://github.com/BoykaFramework/boyka-cli/issues/40)) ([bf88b0e](https://github.com/BoykaFramework/boyka-cli/commit/bf88b0e1b95918e468023c8ad27cb5ee47f0f5d5))
+
 ## [0.4.0](https://github.com/BoykaFramework/boyka-cli/compare/0.3.0...0.4.0) (2024-01-04)
 
 

@@ -53,7 +53,7 @@ export const getUserName = async () =>
     validate: (message: string) => {
       if (!message) {
         throw new Error(
-          'User name environment variable is required for running on Cloud platform...'
+          'User name environment variable is required for running on Cloud platform...',
         );
       }
       return true;
@@ -66,7 +66,7 @@ export const getPassword = async () =>
     validate: (message: string) => {
       if (!message) {
         throw new Error(
-          'Password environment variable is required for running on Cloud platform...'
+          'Password environment variable is required for running on Cloud platform...',
         );
       }
       return true;

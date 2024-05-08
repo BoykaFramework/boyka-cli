@@ -23,6 +23,6 @@ export const loadJSON = (path: string) => {
   return JSON.parse(
     fs.readFileSync(new URL(path), {
       encoding: 'utf-8',
-    })
+    }),
   );
 };

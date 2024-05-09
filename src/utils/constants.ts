@@ -1,6 +1,6 @@
 import chalk from 'chalk';
 import questions from '../data/questions.json' assert { type: 'json' };
-import { TargetProviders } from '../types/configType.js';
+import { TargetProviders } from '../types/enum-types.js';
 
 const danger = chalk.red.bold;
 const warn = chalk.yellow.bold;

@@ -1,4 +1,4 @@
-import { MobileSetting } from '../../types/configType.js';
+import { MobileSetting } from '../../types/config-type.js';
 import { updateDevice } from './device.js';
 import { updateServer } from './server.js';
 

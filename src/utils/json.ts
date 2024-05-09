@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import { FrameworkSetting } from '../types/configType.js';
+import { FrameworkSetting } from '../types/config-type.js';
 import { configFileName, errorMessage, savingMessage, sleep, successMessage } from './constants.js';
 import { createSpinner } from 'nanospinner';
 

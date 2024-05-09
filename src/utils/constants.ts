@@ -39,15 +39,18 @@ export const capabilitiesHelpMessage = warn(`
 you must also add cloud specific capabilities to the empty \`capabilities\` block 
 added to the config file.`);
 
-export const successMessage = (filePath: string) =>
-  success(`Boyka config file created at [${filePath}]`);
+export const successMessage = (filePath: string, state: string) =>
+  success(`Boyka config file ${state} at [${filePath}]`);
 
 export const errorMessage = (error: Error) =>
   danger(`Error occurred! ${error.message}
-Caused by: ${error.cause}
+At: ${error.stack}
 `);
 
-export const savingMessage = warn('Creating the [boyka-config.json] file...');
+export const savingMessage = (state: string) => {
+  let savingState = state !== 'created' ? 'Creating' : 'Updating';
+  return warn(`${savingState} the [boyka-config.json] file...`);
+};
 
 export const initMessage = (path: string) => warn(`Creating Boyka config file at ${path}...`);
 
@@ -59,3 +62,6 @@ export const configPathNotFolder = (path: string) =>
 
 export const configFileExists = (path: string) =>
   danger(`Boyka config file is already available at [${path}]...`);
+
+export const configBlockExists = (platform: string, configName: string) =>
+  danger(`${platform} Config already exists in the Boyka Config with the name: ${configName}...`);

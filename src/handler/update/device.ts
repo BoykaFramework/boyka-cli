@@ -24,7 +24,7 @@ import {
 export const updateDevice = async (
   device: DeviceSetting,
   target: TargetProviders,
-  platformType: string
+  platformType: string,
 ) => {
   device.name = await getDeviceName();
   device.type = target === TargetProviders.LOCAL ? DeviceType.VIRTUAL : DeviceType.CLOUD;

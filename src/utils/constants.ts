@@ -48,7 +48,7 @@ At: ${error.stack}
 `);
 
 export const savingMessage = (state: string) => {
-  let savingState = state !== 'created' ? 'Creating' : 'Updating';
+  const savingState = state !== 'created' ? 'Creating' : 'Updating';
   return warn(`${savingState} the [boyka-config.json] file...`);
 };
 

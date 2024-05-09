@@ -1,6 +1,7 @@
 import { getConfigName } from '../../../questions/inputs.js';
-import { FrameworkSetting, defaultApiSetting } from '../../../types/configType.js';
+import { FrameworkSetting } from '../../../types/config-type.js';
 import { updateApi } from '../../update/api.js';
+import { defaultApiSetting } from '../../../types/default-type-values.js';
 
 export const createApiSetting = async () => {
   const configName = await getConfigName('API');

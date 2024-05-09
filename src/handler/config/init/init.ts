@@ -12,7 +12,7 @@ import {
   initMessage,
 } from '../../../utils/constants.js';
 import { getPlatform, getPlatformType } from '../../../questions/inputs.js';
-import { FrameworkSetting } from '../../../types/configType.js';
+import { FrameworkSetting } from '../../../types/config-type.js';
 import { createConfigFile } from '../../../utils/json.js';
 
 export const handleConfigInit = async (argv: ArgumentsCamelCase) => {

@@ -7,19 +7,21 @@ import {
   getDeviceVersion,
 } from '../../questions/mobileInput.js';
 import { getBrowser } from '../../questions/webInput.js';
+import { DeviceSetting } from '../../types/config-type.js';
+import {
+  defaultAndroidVideoSetting,
+  defaultIOSVideoSetting,
+  defaultVirtualDeviceSetting,
+  defaultWDASetting,
+} from '../../types/default-type-values.js';
 import {
   ApplicationType,
   Browser,
-  DeviceSetting,
   DeviceType,
   OS,
   TargetProviders,
-  defaultAndroidVideoSetting,
-  defaultIOSVideoSetting,
-  defaultVideoSetting,
-  defaultVirtualDeviceSetting,
-  defaultWDASetting,
-} from '../../types/configType.js';
+} from '../../types/enum-types.js';
+import { defaultVideoSetting } from '../../types/default-type-values.js';
 
 export const updateDevice = async (
   device: DeviceSetting,

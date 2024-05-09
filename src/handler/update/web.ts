@@ -1,6 +1,7 @@
 import { getPassword, getTarget, getUserName } from '../../questions/inputs.js';
 import { getBrowser } from '../../questions/webInput.js';
-import { Browser, TargetProviders, WebSetting } from '../../types/configType.js';
+import { WebSetting } from '../../types/config-type.js';
+import { Browser, TargetProviders } from '../../types/enum-types.js';
 import { setTarget } from '../../utils/constants.js';
 
 export const updateWeb = async (config: WebSetting) => {

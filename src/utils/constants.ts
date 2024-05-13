@@ -18,7 +18,7 @@ export const configFileName = 'boyka-config.json';
 
 export const failureMessage = (command: string = ''): string => {
   const targetCommand = command.length === 0 ? '' : ` in ${command}`;
-  return danger(`Something went wrong${targetCommand}! Run the command with '--help' option`);
+  return danger(`❌ Something went wrong${targetCommand}! Run the command with '--help' option`);
 };
 
 let targetProviders: TargetProviders;
@@ -31,23 +31,27 @@ export const helpMessage = info(`
 Check out the Boyka config documentation 👉 
 [https://boykaframework.github.io/boyka-framework/docs/guides/configuration]
 
-🗒️  You can update the generated config file to include more settings 🛠️  as per your requirement.
+🗒️ You can update the generated config file to include more settings 🛠️  as per your requirement.
 `);
 
 export const capabilitiesHelpMessage = warn(`
-❗❗ Since you have selected Cloud platform to run your tests, 
+⚠️ Since you have selected Cloud platform to run your tests, 
 you must also add cloud specific capabilities to the empty \`capabilities\` block 
 added to the config file.`);
 
-export const successMessage = (filePath: string) =>
-  success(`Boyka config file created at [${filePath}]`);
+export const successMessage = (filePath: string, state: string) =>
+  success(`Boyka config file ${state} at [${filePath}]`);
 
 export const errorMessage = (error: Error) =>
-  danger(`Error occurred! ${error.message}
-Caused by: ${error.cause}
+  danger(`
+❌ Error occurred!
+${error.message}
 `);
 
-export const savingMessage = warn('Creating the [boyka-config.json] file...');
+export const savingMessage = (state: string) => {
+  const savingState = state === 'created' ? 'Creating' : 'Updating';
+  return warn(`${savingState} the [boyka-config.json] file...`);
+};
 
 export const initMessage = (path: string) => warn(`Creating Boyka config file at ${path}...`);
 
@@ -59,3 +63,15 @@ export const configPathNotFolder = (path: string) =>
 
 export const configFileExists = (path: string) =>
   danger(`Boyka config file is already available at [${path}]...`);
+
+export const configBlockExists = (platform: string, configName: string) =>
+  danger(`
+${platform} Config already exists in the Boyka config file with the name: ${configName}...`);
+
+export const configFileNotExists = (path: string) =>
+  danger(
+    `
+Boyka config file does not exist at [${path}].
+
+Create one by running command 'boyka config init'`,
+  );

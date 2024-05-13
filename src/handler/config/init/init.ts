@@ -66,6 +66,6 @@ const createConfigJson = async (configPath: string) => {
       setting = await createApiSetting();
       break;
   }
-  createConfigFile(path, setting);
+  createConfigFile(path, setting, 'created');
   return true;
 };

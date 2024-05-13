@@ -2,6 +2,7 @@ import { CommandModule } from 'yargs';
 import {
   capabilitiesHelpMessage,
   epiLogMessage,
+  errorMessage,
   failureMessage,
   getTarget,
   helpMessage,
@@ -33,7 +34,7 @@ export const initCommand = {
       }
       console.log(helpMessage);
     } catch (error: any) {
-      console.error(error.message);
+      console.error(errorMessage(error));
       process.exit(1);
     }
   },

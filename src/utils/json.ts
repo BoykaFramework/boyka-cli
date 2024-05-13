@@ -1,7 +1,14 @@
 import fs from 'fs';
 import path from 'path';
 import { FrameworkSetting } from '../types/config-type.js';
-import { configFileName, errorMessage, savingMessage, sleep, successMessage } from './constants.js';
+import {
+  configFileName,
+  configFileNotExists,
+  errorMessage,
+  savingMessage,
+  sleep,
+  successMessage,
+} from './constants.js';
 import { createSpinner } from 'nanospinner';
 
 export const createConfigFile = (filePath: string, setting: FrameworkSetting, state: string) => {
@@ -20,6 +27,10 @@ export const createConfigFile = (filePath: string, setting: FrameworkSetting, st
 };
 
 export const loadJSON = (filePath: string) => {
+  const configPath = path.join(filePath, configFileName);
+  if (!fs.existsSync(configPath)) {
+    throw new Error(configFileNotExists(configPath));
+  }
   return JSON.parse(
     fs.readFileSync(path.join(filePath, configFileName), {
       encoding: 'utf-8',

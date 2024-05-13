@@ -18,7 +18,7 @@ export const configFileName = 'boyka-config.json';
 
 export const failureMessage = (command: string = ''): string => {
   const targetCommand = command.length === 0 ? '' : ` in ${command}`;
-  return danger(`Something went wrong${targetCommand}! Run the command with '--help' option`);
+  return danger(`❌ Something went wrong${targetCommand}! Run the command with '--help' option`);
 };
 
 let targetProviders: TargetProviders;
@@ -35,7 +35,7 @@ Check out the Boyka config documentation 👉
 `);
 
 export const capabilitiesHelpMessage = warn(`
-❗❗ Since you have selected Cloud platform to run your tests, 
+⚠️ Since you have selected Cloud platform to run your tests, 
 you must also add cloud specific capabilities to the empty \`capabilities\` block 
 added to the config file.`);
 
@@ -43,12 +43,13 @@ export const successMessage = (filePath: string, state: string) =>
   success(`Boyka config file ${state} at [${filePath}]`);
 
 export const errorMessage = (error: Error) =>
-  danger(`Error occurred! ${error.message}
-At: ${error.stack}
+  danger(`
+❌ Error occurred!
+${error.message}
 `);
 
 export const savingMessage = (state: string) => {
-  const savingState = state !== 'created' ? 'Creating' : 'Updating';
+  const savingState = state === 'created' ? 'Creating' : 'Updating';
   return warn(`${savingState} the [boyka-config.json] file...`);
 };
 
@@ -64,4 +65,13 @@ export const configFileExists = (path: string) =>
   danger(`Boyka config file is already available at [${path}]...`);
 
 export const configBlockExists = (platform: string, configName: string) =>
-  danger(`${platform} Config already exists in the Boyka Config with the name: ${configName}...`);
+  danger(`
+${platform} Config already exists in the Boyka config file with the name: ${configName}...`);
+
+export const configFileNotExists = (path: string) =>
+  danger(
+    `
+Boyka config file does not exist at [${path}].
+
+Create one by running command 'boyka config init'`,
+  );

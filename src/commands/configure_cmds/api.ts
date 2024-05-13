@@ -1,5 +1,5 @@
 import { CommandModule } from 'yargs';
-import { epiLogMessage, failureMessage, helpMessage } from '../../utils/constants.js';
+import { epiLogMessage, errorMessage, failureMessage, helpMessage } from '../../utils/constants.js';
 import { handleAddApiConfig } from '../../handler/config/init/api.js';
 
 export const apiCommand = {
@@ -33,7 +33,7 @@ export const apiCommand = {
       await handleAddApiConfig(argv);
       console.log(helpMessage);
     } catch (error: any) {
-      console.error(error.message);
+      console.error(errorMessage(error));
       process.exit(1);
     }
   },

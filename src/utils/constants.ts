@@ -31,7 +31,7 @@ export const helpMessage = info(`
 Check out the Boyka config documentation 👉 
 [https://boykaframework.github.io/boyka-framework/docs/guides/configuration]
 
-🗒️  You can update the generated config file to include more settings 🛠️  as per your requirement.
+🗒️ You can update the generated config file to include more settings 🛠️  as per your requirement.
 `);
 
 export const capabilitiesHelpMessage = warn(`

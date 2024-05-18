@@ -1,5 +1,6 @@
 import { CommandModule } from 'yargs';
-import { epiLogMessage, failureMessage } from '../../utils/constants.js';
+import { epiLogMessage, failureMessage, handleCommand } from '../../utils/constants.js';
+import { handleAddWebConfig } from '../../handler/config/init/web.js';
 
 export const webCommand = {
   command: 'web [name]',
@@ -7,6 +8,12 @@ export const webCommand = {
   describe: 'Add Web Boyka-Framework Config file',
   builder: (yargs) =>
     yargs
+      .option('p', {
+        alias: ['path'],
+        describe: 'Path to the config file',
+        default: `${process.cwd()}/src/test/resources`,
+        type: 'string',
+      })
       .positional('name', {
         demandOption: true,
         describe: 'Name of the Web config block',
@@ -16,12 +23,12 @@ export const webCommand = {
         if (!argv.name) {
           throw new Error('Web config name should be provided!');
         }
+        return true;
       })
       .help('help')
       .showHelpOnFail(true, failureMessage('Web config'))
       .epilog(epiLogMessage),
-  handler: (argv) => {
-    // TODO: web handler
-    console.log(`Handle Web Config ${argv.name}...`);
+  handler: async (argv) => {
+    await handleCommand(handleAddWebConfig(argv));
   },
 } satisfies CommandModule;

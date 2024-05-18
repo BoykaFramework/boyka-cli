@@ -13,6 +13,7 @@ export const updateWeb = async (config: WebSetting) => {
   config.target = target as TargetProviders;
   setTarget(config.target);
   if (config.target !== TargetProviders.LOCAL) {
+    config.capabilities = {};
     config.user_name = `\${env:${await getUserName()}}`;
     config.password = `\${env:${await getPassword()}}`;
   }

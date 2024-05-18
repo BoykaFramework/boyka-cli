@@ -75,3 +75,17 @@ Boyka config file does not exist at [${path}].
 
 Create one by running command 'boyka config init'`,
   );
+
+export const handleCommand = async (handler: Promise<void>) => {
+  try {
+    await handler;
+    const target = getTarget();
+    if (target && target !== TargetProviders.LOCAL) {
+      console.log(capabilitiesHelpMessage);
+    }
+    console.log(helpMessage);
+  } catch (error: any) {
+    console.error(errorMessage(error));
+    process.exit(1);
+  }
+};

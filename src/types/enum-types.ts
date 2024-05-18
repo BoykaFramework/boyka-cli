@@ -79,17 +79,17 @@ export enum ApplicationType {
 }
 
 export enum TestDataSource {
-  EXCEL,
+  EXCEL = 'EXCEL',
 }
 
 export enum PageLoadStrategy {
-  NONE,
-  EAGER,
-  NORMAL,
+  NONE = 'NONE',
+  EAGER = 'EAGER',
+  NORMAL = 'NORMAL',
 }
 
 export enum Speed {
-  FAST,
-  NORMAL,
-  SLOW,
+  FAST = 'FAST',
+  NORMAL = 'NORMAL',
+  SLOW = 'SLOW',
 }

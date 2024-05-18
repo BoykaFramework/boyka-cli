@@ -118,9 +118,6 @@ export const defaultDelaySetting: DelaySetting = {
 };
 
 export const defaultUiSetting: UiSetting = {
-  delay: {
-    ...defaultDelaySetting,
-  },
   logging: {
     ...defaultUiLogSetting,
   },
@@ -177,4 +174,27 @@ export const defaultDeviceSetting: DeviceSetting = {
 export const defaultMobileSetting: MobileSetting = {
   server: defaultServerSetting,
   device: defaultDeviceSetting,
+};
+
+export const defaultNewWebSetting = (configName: string): { [key: string]: WebSetting } => {
+  return {
+    [configName]: {
+      ...defaultWebSetting,
+    },
+  };
+};
+export const defaultNewMobileSetting = (configName: string): { [key: string]: MobileSetting } => {
+  return {
+    [configName]: {
+      ...defaultMobileSetting,
+    },
+  };
+};
+
+export const defaultNewApiSetting = (configName: string): { [key: string]: ApiSetting } => {
+  return {
+    [configName]: {
+      ...defaultApiSetting,
+    },
+  };
 };

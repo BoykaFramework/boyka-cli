@@ -63,7 +63,7 @@ export type DelaySetting = {
 
 export type UiSetting = {
   timeout: TimeoutSetting;
-  delay: DelaySetting;
+  delay?: DelaySetting;
   logging: UiLogSetting;
   screenshot: ScreenshotSetting;
   web?: { [key: string]: WebSetting };

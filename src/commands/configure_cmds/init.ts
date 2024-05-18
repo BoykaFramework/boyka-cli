@@ -1,14 +1,6 @@
 import { CommandModule } from 'yargs';
-import {
-  capabilitiesHelpMessage,
-  epiLogMessage,
-  errorMessage,
-  failureMessage,
-  getTarget,
-  helpMessage,
-} from '../../utils/constants.js';
+import { epiLogMessage, failureMessage, handleCommand } from '../../utils/constants.js';
 import { handleConfigInit } from '../../handler/config/init/init.js';
-import { TargetProviders } from '../../types/enum-types.js';
 
 export const initCommand = {
   command: 'init',
@@ -26,16 +18,6 @@ export const initCommand = {
       .showHelpOnFail(true, failureMessage('Init Config'))
       .epilog(epiLogMessage),
   handler: async (argv) => {
-    try {
-      await handleConfigInit(argv);
-      const target = getTarget();
-      if (target && target !== TargetProviders.LOCAL) {
-        console.log(capabilitiesHelpMessage);
-      }
-      console.log(helpMessage);
-    } catch (error: any) {
-      console.error(errorMessage(error));
-      process.exit(1);
-    }
+    await handleCommand(handleConfigInit(argv));
   },
 } satisfies CommandModule;

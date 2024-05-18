@@ -1,17 +1,19 @@
 import { getConfigName } from '../../../questions/inputs.js';
 import { FrameworkSetting } from '../../../types/config-type.js';
 import { updateMobile } from '../../update/mobile.js';
-import { defaultUiSetting, defaultMobileSetting } from '../../../types/default-type-values.js';
+import { defaultUiSetting, defaultNewMobileSetting } from '../../../types/default-type-values.js';
+import { defaultDelaySetting } from '../../../types/default-type-values.js';
 
 export const createMobileSetting = async (platformType: string) => {
   const configName = await getConfigName(platformType);
   const frameworkSetting: FrameworkSetting = {
     ui: {
+      delay: {
+        ...defaultDelaySetting,
+      },
       ...defaultUiSetting,
       mobile: {
-        [configName]: {
-          ...defaultMobileSetting,
-        },
+        ...defaultNewMobileSetting(configName),
       },
     },
   };

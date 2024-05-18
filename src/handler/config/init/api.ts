@@ -1,7 +1,7 @@
 import { getConfigName } from '../../../questions/inputs.js';
 import { FrameworkSetting } from '../../../types/config-type.js';
 import { updateApi } from '../../update/api.js';
-import { defaultApiSetting } from '../../../types/default-type-values.js';
+import { defaultNewApiSetting } from '../../../types/default-type-values.js';
 import { ArgumentsCamelCase } from 'yargs';
 import { createConfigFile, loadJSON } from '../../../utils/json.js';
 import { configBlockExists } from '../../../utils/constants.js';
@@ -10,9 +10,7 @@ export const createApiSetting = async () => {
   const configName = await getConfigName('API');
   const frameworkSetting: FrameworkSetting = {
     api: {
-      [configName]: {
-        ...defaultApiSetting,
-      },
+      ...defaultNewApiSetting(configName),
     },
   };
   const api = frameworkSetting.api;
@@ -30,11 +28,7 @@ export const handleAddApiConfig = async (argv: ArgumentsCamelCase) => {
   if (apiSetting[name]) {
     throw new Error(configBlockExists('API', name));
   }
-  const newApiSetting = {
-    [name]: {
-      ...defaultApiSetting,
-    },
-  };
+  const newApiSetting = defaultNewApiSetting(name);
   await updateApi(newApiSetting[name]);
   settings.api = {
     ...apiSetting,

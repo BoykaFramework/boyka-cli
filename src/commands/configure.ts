@@ -2,8 +2,9 @@ import { CommandModule } from 'yargs';
 import { epiLogMessage, failureMessage } from '../utils/constants.js';
 import { apiCommand } from './configure_cmds/api.js';
 import { initCommand } from './configure_cmds/init.js';
-import { mobileCommand } from './configure_cmds/mobile.js';
+import { androidCommand } from './configure_cmds/android.js';
 import { webCommand } from './configure_cmds/web.js';
+import { iosCommand } from './configure_cmds/ios.js';
 
 export const configureCommand = {
   command: 'configure',
@@ -13,7 +14,8 @@ export const configureCommand = {
     yargs
       .command(apiCommand)
       .command(initCommand)
-      .command(mobileCommand)
+      .command(androidCommand)
+      .command(iosCommand)
       .command(webCommand)
       .demandCommand()
       .strict()

@@ -46,7 +46,7 @@ const defaultServerLogSetting: ServerLogSetting = {
 const defaultSwipeSetting: SwipeSetting = {
   distance: 75,
   max_swipe_until_found: 5,
-  speed: Speed.FAST,
+  speed: Speed.NORMAL,
 };
 
 export const defaultIOSVideoSetting: IOSVideoSetting = {
@@ -183,6 +183,7 @@ export const defaultNewWebSetting = (configName: string): { [key: string]: WebSe
     },
   };
 };
+
 export const defaultNewMobileSetting = (configName: string): { [key: string]: MobileSetting } => {
   return {
     [configName]: {

@@ -15,7 +15,7 @@ export const updateServer = async (server: ServerSetting, platformType: string) 
   if (port > 0) {
     server.port = port;
   }
-  server.driver = platformType === 'ANDROID' ? AutomationType.UI_AUTOMATOR : AutomationType.XCUI;
+  server.driver = platformType === 'Android' ? AutomationType.UI_AUTOMATOR : AutomationType.XCUI;
   if (server.target !== TargetProviders.LOCAL) {
     server.user_name = `\${env:${await getUserName()}}`;
     server.password = `\${env:${await getPassword()}}`;

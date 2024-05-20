@@ -71,5 +71,6 @@
       "pnpm format:fix",
       "pnpm format"
     ]
-  }
+  },
+  "packageManager": "pnpm@9.1.1"
 }

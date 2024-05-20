@@ -37,7 +37,7 @@ export const handleAddMobileConfig = async (argv: ArgumentsCamelCase, platformTy
   let mobileSetting: { [key: string]: MobileSetting };
   if (uiSetting) {
     mobileSetting = uiSetting.mobile;
-    if (mobileSetting[name]) {
+    if (mobileSetting && mobileSetting[name]) {
       throw new Error(configBlockExists('Mobile', name));
     }
   } else {

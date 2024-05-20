@@ -31,7 +31,7 @@ export const handleAddWebConfig = async (argv: ArgumentsCamelCase) => {
   let webSetting: { [key: string]: WebSetting };
   if (uiSetting) {
     webSetting = uiSetting.web;
-    if (webSetting[name]) {
+    if (webSetting && webSetting[name]) {
       throw new Error(configBlockExists('Web', name));
     }
   } else {

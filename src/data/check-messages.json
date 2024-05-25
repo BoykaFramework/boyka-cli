@@ -1,0 +1,23 @@
+{
+  "intro": "👋 Boyka Assistant is checking your machine setup for Boyka Framework...",
+  "messages": {
+    "pom": {
+      "success": "'pom.xml' exists in the current folder [{0}}]",
+      "error": "'pom.xml' does not exists in the current folder [{0}]",
+      "loading": "Checking if `pom.xml` exists in the current folder [{0}]...",
+      "suggestion": "Create a Maven project to use Boyka Framework"
+    },
+    "resources": {
+      "success": "'src/test/resources' folder exists in the current folder [{0}}]",
+      "error": "'src/test/resources' folder does not exists in the current folder [{0}]",
+      "loading": "Checking if 'src/test/resources' folder exists in the current folder [{0}]...",
+      "suggestion": "Create a `resources` folder under `src/test` directory to use Boyka Framework"
+    },
+    "config": {
+      "success": "'boyka-config.json' file exists at path [{0}]",
+      "error": "'boyka-config.json' file does not exist at path [{0}]",
+      "loading": "Checking if 'boyka-config.json' file exists at path [{0}]...",
+      "suggestion": "Run command: `boyka config init` to create the Boyka config file"
+    }
+  }
+}

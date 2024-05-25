@@ -1,20 +1,22 @@
 import chalk from 'chalk';
 import questions from '../data/questions.json' assert { type: 'json' };
 import { TargetProviders } from '../types/enum-types.js';
+import { createSpinner } from 'nanospinner';
+import { Message } from '../handler/check-handler.js';
 
-const danger = chalk.red.bold;
-const warn = chalk.yellow.bold;
-const success = chalk.green.bold;
-const info = chalk.blueBright.bold;
+export const danger = chalk.red.bold;
+export const warn = chalk.yellow.bold;
+export const success = chalk.green.bold;
+export const info = chalk.blueBright.bold;
 
 export const userQuestions = questions;
+
+export const configFileName = 'boyka-config.json';
 
 export const sleep = (ms = 2000) => new Promise((r) => setTimeout(r, ms));
 
 export const epiLogMessage = info(`For more information, 
   visit: https://boykaframework.github.io/boyka-framework`);
-
-export const configFileName = 'boyka-config.json';
 
 export const failureMessage = (command: string = ''): string => {
   const targetCommand = command.length === 0 ? '' : ` in ${command}`;
@@ -87,5 +89,21 @@ export const handleCommand = async (handler: Promise<void>) => {
   } catch (error: any) {
     console.error(errorMessage(error));
     process.exit(1);
+  }
+};
+
+export const executeTask = async (task: Promise<boolean> | boolean, message: Message) => {
+  const spinner = createSpinner(message.loading).start();
+  const result = await task;
+  if (!result) {
+    spinner.error({ text: danger(message.error) });
+    console.log(
+      info(`
+👇 Suggestions to fix the above problems:`),
+    );
+    spinner.warn({ text: warn(message.suggestion) });
+    process.exit(1);
+  } else {
+    spinner.success({ text: success(message.success) });
   }
 };

@@ -2,7 +2,7 @@ import chalk from 'chalk';
 import questions from '../data/questions.json' assert { type: 'json' };
 import { TargetProviders } from '../types/enum-types.js';
 import { createSpinner } from 'nanospinner';
-import { Message } from '../handler/check-handler.js';
+import { Message } from '../types/config-type.js';
 
 export const danger = chalk.red.bold;
 export const warn = chalk.yellow.bold;
@@ -97,11 +97,13 @@ export const executeTask = async (task: Promise<boolean> | boolean, message: Mes
   const result = await task;
   if (!result) {
     spinner.error({ text: danger(message.error) });
-    console.log(
-      info(`
+    if (message.suggestion) {
+      console.log(
+        info(`
 👇 Suggestions to fix the above problems:`),
-    );
-    spinner.warn({ text: warn(message.suggestion) });
+      );
+      spinner.warn({ text: warn(message.suggestion) });
+    }
     process.exit(1);
   } else {
     spinner.success({ text: success(message.success) });

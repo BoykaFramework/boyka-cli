@@ -2,13 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import { configFileName, danger, executeTask, info, success, warn } from '../utils/constants.js';
 import check from '../data/check-messages.json' assert { type: 'json' };
-
-export type Message = {
-  success: string;
-  error: string;
-  loading: string;
-  suggestion: string;
-};
+import { Message } from '../types/config-type.js';
 
 const printIntroMessage = () => {
   console.info(info(check.intro));

@@ -18,6 +18,6 @@ export const initCommand = {
       .showHelpOnFail(true, failureMessage('Init Config'))
       .epilog(epiLogMessage),
   handler: async (argv) => {
-    await handleCommand(handleConfigInit(argv));
+    await handleCommand(handleConfigInit(argv.path as string));
   },
 } satisfies CommandModule;

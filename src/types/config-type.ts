@@ -227,3 +227,10 @@ export type DeviceSetting = {
   virtual_device?: VirtualDeviceSetting;
   wda?: WDASetting;
 };
+
+export type Message = {
+  success: string;
+  error: string;
+  loading: string;
+  suggestion?: string;
+};

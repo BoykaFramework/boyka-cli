@@ -1,5 +1,42 @@
 # Changelog
 
+## [0.6.0](https://github.com/BoykaFramework/boyka-cli/compare/0.5.0...0.6.0) (2024-05-30)
+
+
+* :bug: fixed issue in api init command ([#76](https://github.com/BoykaFramework/boyka-cli/issues/76)) ([bb5047d](https://github.com/BoykaFramework/boyka-cli/commit/bb5047dd04d7e72edcf6cd93a63134916c27e599))
+* :bug: fixed issue when adding more configs ([#82](https://github.com/BoykaFramework/boyka-cli/issues/82)) ([00bc8ad](https://github.com/BoykaFramework/boyka-cli/commit/00bc8ad190036711c0aa431959ee46cb20982ece))
+* :bug: fixed issue with new eslint version ([#74](https://github.com/BoykaFramework/boyka-cli/issues/74)) ([5c9039a](https://github.com/BoykaFramework/boyka-cli/commit/5c9039a59d0b2cb2a0bb7ede3492bbf4b1639826))
+* :memo: updated readme with details about new commands ([df57092](https://github.com/BoykaFramework/boyka-cli/commit/df57092477ff543951371041b6536e27c09f9fd0))
+* :recycle: updated pnpm lock file ([b21ba98](https://github.com/BoykaFramework/boyka-cli/commit/b21ba981a10647bc2df378c91e9b0fe1f43d5e42))
+* :sparkles: added support to add new api config to existing file ([#77](https://github.com/BoykaFramework/boyka-cli/issues/77)) ([5c74c7a](https://github.com/BoykaFramework/boyka-cli/commit/5c74c7a26d677e3697b770d08371671446cca411))
+* :sparkles: boyka machine setup check command added ([#83](https://github.com/BoykaFramework/boyka-cli/issues/83)) ([7e0c41f](https://github.com/BoykaFramework/boyka-cli/commit/7e0c41fe4e00f69493a5d5114d6214012a8fe237))
+* :sparkles: support for adding new mobile config added ([#80](https://github.com/BoykaFramework/boyka-cli/issues/80)) ([509eb68](https://github.com/BoykaFramework/boyka-cli/commit/509eb685515fd309f4a5f3014eab717f7c44b118))
+* :sparkles: support for adding new web config added ([#79](https://github.com/BoykaFramework/boyka-cli/issues/79)) ([381d928](https://github.com/BoykaFramework/boyka-cli/commit/381d9280040ec2f3ea59e5f77f0f3e21deebfec0))
+
+
+### deps-dev
+
+* **deps-dev:** bump lint-staged in the patch group ([#84](https://github.com/BoykaFramework/boyka-cli/issues/84)) ([434f7e5](https://github.com/BoykaFramework/boyka-cli/commit/434f7e5e8c47163dc4f3b983f2eeb1ac3769eba0))
+* **deps-dev:** bump the major group with 1 update ([#56](https://github.com/BoykaFramework/boyka-cli/issues/56)) ([6b11411](https://github.com/BoykaFramework/boyka-cli/commit/6b1141153f4a1bbd8bece2c926241b50926e4897))
+* **deps-dev:** bump the major group with 2 updates ([#62](https://github.com/BoykaFramework/boyka-cli/issues/62)) ([8d0ee45](https://github.com/BoykaFramework/boyka-cli/commit/8d0ee45a551e60527686fffa1ea14b3c38375da8))
+* **deps-dev:** bump the minor group with 1 update ([#63](https://github.com/BoykaFramework/boyka-cli/issues/63)) ([25e067c](https://github.com/BoykaFramework/boyka-cli/commit/25e067c7760256a345236d71284f67ffdc04095b))
+* **deps-dev:** bump the minor group with 4 updates ([#60](https://github.com/BoykaFramework/boyka-cli/issues/60)) ([a3c2189](https://github.com/BoykaFramework/boyka-cli/commit/a3c21898aa18faf7172f42dc59c099c31fe7faff))
+* **deps-dev:** bump the patch group with 1 update ([#73](https://github.com/BoykaFramework/boyka-cli/issues/73)) ([c7eb25f](https://github.com/BoykaFramework/boyka-cli/commit/c7eb25f7ea4b53499a4ddb0e645f0aa15b9e342d))
+* **deps-dev:** bump the patch group with 3 updates ([#66](https://github.com/BoykaFramework/boyka-cli/issues/66)) ([5d21f25](https://github.com/BoykaFramework/boyka-cli/commit/5d21f258e7f0f81e9e5d34990c43fd4be5bab463))
+* **deps-dev:** bump the patch group with 3 updates ([#68](https://github.com/BoykaFramework/boyka-cli/issues/68)) ([06676f9](https://github.com/BoykaFramework/boyka-cli/commit/06676f9d4e1c769463e2b71470608940c9fb7423))
+* **deps-dev:** bump the patch group with 3 updates ([#70](https://github.com/BoykaFramework/boyka-cli/issues/70)) ([80d745b](https://github.com/BoykaFramework/boyka-cli/commit/80d745b5858c0be97e41b4dd817ee6422bf5f94a))
+* **deps-dev:** bump the patch group with 4 updates ([#61](https://github.com/BoykaFramework/boyka-cli/issues/61)) ([ff4cea3](https://github.com/BoykaFramework/boyka-cli/commit/ff4cea3b5e3861fd46d55e0e6fa9771fe86d38f2))
+* **deps-dev:** bump the patch group with 4 updates ([#64](https://github.com/BoykaFramework/boyka-cli/issues/64)) ([00eb85e](https://github.com/BoykaFramework/boyka-cli/commit/00eb85e93fa6d230be033b2807fa83f265f1d874))
+
+
+### deps
+
+* **deps:** bump the major group with 1 update ([#59](https://github.com/BoykaFramework/boyka-cli/issues/59)) ([aed7d8a](https://github.com/BoykaFramework/boyka-cli/commit/aed7d8a86ce10aa1173ad0a3cbc2646a1b6ac5cb))
+* **deps:** bump the minor group with 3 updates ([#72](https://github.com/BoykaFramework/boyka-cli/issues/72)) ([a2a203c](https://github.com/BoykaFramework/boyka-cli/commit/a2a203c8ec985ed66f2ebc2f56a594f2cb3f0704))
+* **deps:** bump the minor group with 4 updates ([#67](https://github.com/BoykaFramework/boyka-cli/issues/67)) ([d856e45](https://github.com/BoykaFramework/boyka-cli/commit/d856e45c38c39a94d93c52cb98e5f6915a130f04))
+* **deps:** bump the minor group with 4 updates ([#71](https://github.com/BoykaFramework/boyka-cli/issues/71)) ([4fe0581](https://github.com/BoykaFramework/boyka-cli/commit/4fe05814781435a02730acc455b07b260419e016))
+* **deps:** bump the patch group with 5 updates ([#57](https://github.com/BoykaFramework/boyka-cli/issues/57)) ([5f3e963](https://github.com/BoykaFramework/boyka-cli/commit/5f3e963bc9bcd9b57b98076fc0231e7d4aaebb0e))
+
 ## [0.5.0](https://github.com/BoykaFramework/boyka-cli/compare/0.4.0...0.5.0) (2024-01-25)
 
 

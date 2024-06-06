@@ -3,6 +3,22 @@ import questions from '../data/questions.json' assert { type: 'json' };
 import { TargetProviders } from '../types/enum-types.js';
 import { createSpinner } from 'nanospinner';
 import { Message } from '../types/config-type.js';
+import {
+  blockExists,
+  capabilitiesHelp,
+  commandError,
+  commandFailure,
+  commandHelp,
+  commandSuccess,
+  epilog,
+  fileExists,
+  fileNotExists,
+  initConfig,
+  pathNotFolder,
+  pathNotFound,
+  saveConfig,
+  suggestions,
+} from './messages.js';
 
 export const danger = chalk.red.bold;
 export const warn = chalk.yellow.bold;
@@ -15,12 +31,11 @@ export const configFileName = 'boyka-config.json';
 
 export const sleep = (ms = 2000) => new Promise((r) => setTimeout(r, ms));
 
-export const epiLogMessage = info(`For more information, 
-  visit: https://boykaframework.github.io/boyka-framework`);
+export const epiLogMessage = info(epilog);
 
 export const failureMessage = (command: string = ''): string => {
   const targetCommand = command.length === 0 ? '' : ` in ${command}`;
-  return danger(`❌ Something went wrong${targetCommand}! Run the command with '--help' option`);
+  return danger(commandFailure(targetCommand));
 };
 
 let targetProviders: TargetProviders;
@@ -29,54 +44,32 @@ export const setTarget = (target: TargetProviders) => (targetProviders = target)
 
 export const getTarget = () => targetProviders;
 
-export const helpMessage = info(`
-Check out the Boyka config documentation 👉 
-[https://boykaframework.github.io/boyka-framework/docs/guides/configuration]
+export const helpMessage = info(commandHelp);
 
-🗒️ You can update the generated config file to include more settings 🛠️  as per your requirement.
-`);
-
-export const capabilitiesHelpMessage = warn(`
-⚠️ Since you have selected Cloud platform to run your tests, 
-you must also add cloud specific capabilities to the empty \`capabilities\` block 
-added to the config file.`);
+export const capabilitiesHelpMessage = warn(capabilitiesHelp);
 
 export const successMessage = (filePath: string, state: string) =>
-  success(`Boyka config file ${state} at [${filePath}]`);
+  success(commandSuccess(state, filePath));
 
-export const errorMessage = (error: Error) =>
-  danger(`
-❌ Error occurred!
-${error.message}
-`);
+export const errorMessage = (error: Error) => danger(commandError(error));
 
 export const savingMessage = (state: string) => {
   const savingState = state === 'created' ? 'Creating' : 'Updating';
-  return warn(`${savingState} the [boyka-config.json] file...`);
+  return warn(saveConfig(savingState));
 };
 
-export const initMessage = (path: string) => warn(`Creating Boyka config file at ${path}...`);
+export const initMessage = (path: string) => warn(initConfig(path));
 
-export const configPathNotFound = (path: string) =>
-  danger(`Boyka config path [${path}] does not exists...`);
+export const configPathNotFound = (path: string) => danger(pathNotFound(path));
 
-export const configPathNotFolder = (path: string) =>
-  danger(`Config path [${path}] is not a folder...`);
+export const configPathNotFolder = (path: string) => danger(pathNotFolder(path));
 
-export const configFileExists = (path: string) =>
-  danger(`Boyka config file is already available at [${path}]...`);
+export const configFileExists = (path: string) => danger(fileExists(path));
 
 export const configBlockExists = (platform: string, configName: string) =>
-  danger(`
-${platform} Config already exists in the Boyka config file with the name: ${configName}...`);
+  danger(blockExists(platform, configName));
 
-export const configFileNotExists = (path: string) =>
-  danger(
-    `
-Boyka config file does not exist at [${path}].
-
-Create one by running command 'boyka config init'`,
-  );
+export const configFileNotExists = (path: string) => danger(fileNotExists(path));
 
 export const handleCommand = async (handler: Promise<void>) => {
   try {
@@ -88,6 +81,9 @@ export const handleCommand = async (handler: Promise<void>) => {
     console.log(helpMessage);
   } catch (error: any) {
     console.error(errorMessage(error));
+    if (error instanceof Error) {
+      console.error(error.stack);
+    }
     process.exit(1);
   }
 };
@@ -98,10 +94,7 @@ export const executeTask = async (task: Promise<boolean> | boolean, message: Mes
   if (!result) {
     spinner.error({ text: danger(message.error) });
     if (message.suggestion) {
-      console.log(
-        info(`
-👇 Suggestions to fix the above problems:`),
-      );
+      console.log(info(suggestions));
       spinner.warn({ text: warn(message.suggestion) });
     }
     process.exit(1);

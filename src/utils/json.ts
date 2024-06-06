@@ -6,17 +6,14 @@ import {
   configFileNotExists,
   errorMessage,
   savingMessage,
-  sleep,
   successMessage,
 } from './constants.js';
 import { createSpinner } from 'nanospinner';
 
 export const createConfigFile = (filePath: string, setting: FrameworkSetting, state: string) => {
+  const spinner = createSpinner(savingMessage(state)).start();
   const content = JSON.stringify(setting, null, 2);
   fs.writeFile(path.join(filePath, configFileName), content, async (err) => {
-    const spinner = createSpinner(savingMessage(state)).start();
-    await sleep();
-
     if (err) {
       spinner.error({ text: errorMessage(err) });
       process.exit(1);

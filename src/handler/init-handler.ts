@@ -2,8 +2,8 @@ import { ArgumentsCamelCase } from 'yargs';
 import { Liquid } from 'liquidjs';
 import path from 'path';
 import fs from 'fs';
-import { getGroupId, hasSampleTests } from '../questions/initInputs.js';
-import { handleConfigInit } from './config/init/init.js';
+import { getGroupId, isSampleTest } from '../questions/initInputs.js';
+import { createConfigJson } from './config/init/init.js';
 
 interface ProjectProps {
   path: string;
@@ -21,18 +21,19 @@ const generateProject = async (
   project: ProjectProps,
   { root, extension }: TemplateProps,
 ) => {
-  const isSampleTest = await hasSampleTests();
-  if (isSampleTest) {
+  if (await isSampleTest()) {
     await createProjectFiles(engine, { root, extension }, project);
   }
 };
 
-const createProjectFolder = async ({ artifactId }: ProjectProps) => {
-  const projectPath = path.join(process.cwd(), artifactId);
-  if (fs.existsSync(projectPath)) {
-    throw new Error(`Boyka Project is already created at [${projectPath}]...`);
+const checkProjectFolderCreated = (path: string) => {
+  if (fs.existsSync(path)) {
+    throw new Error(`Boyka Project is already created at [${path}]...`);
   }
-  fs.mkdir(projectPath, (err) => {
+};
+
+const createProjectFolder = async ({ artifactId, path }: ProjectProps) => {
+  fs.mkdir(path, (err) => {
     if (err) {
       throw new Error(
         `Error encountered while creating folder Boyka project '${artifactId}': ${err.message}`,
@@ -58,7 +59,9 @@ const createProjectFiles = async (
         const filePath = path.join(project.path, fileName);
         if (!fs.existsSync(filePath)) {
           fs.writeFile(filePath, content, (err) => {
-            console.error(err);
+            if (err) {
+              console.error('Error:', err);
+            }
           });
         }
       }
@@ -68,6 +71,9 @@ const createProjectFiles = async (
 
 export const handleInit = async (argv: ArgumentsCamelCase) => {
   const projectName = argv.name as string;
+  const projectPath = path.join(process.cwd(), projectName);
+  checkProjectFolderCreated(projectPath);
+
   const templateRoot = path.join(process.cwd(), '/template');
   const templateExt = '.liquid';
 
@@ -78,7 +84,7 @@ export const handleInit = async (argv: ArgumentsCamelCase) => {
   const project = {
     groupId: await getGroupId(),
     artifactId: projectName,
-    path: path.join(process.cwd(), projectName),
+    path: projectPath,
   } satisfies ProjectProps;
 
   await createProjectFolder(project);
@@ -88,7 +94,6 @@ export const handleInit = async (argv: ArgumentsCamelCase) => {
     project,
     'pom.xml',
   );
-  await handleConfigInit(project.path);
-
+  await createConfigJson(projectPath);
   await generateProject(engine, project, { root: templateRoot, extension: templateExt });
 };

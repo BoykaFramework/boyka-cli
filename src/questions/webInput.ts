@@ -1,8 +1,8 @@
-import { select } from '@inquirer/prompts';
+import select from '@inquirer/select';
 import { userQuestions } from '../utils/constants.js';
 
-export const getBrowser = async () => {
-  return await select({
+export const getBrowser = async () =>
+  await select({
     message: userQuestions.web.browser,
     default: 'CHROME',
     choices: [
@@ -28,4 +28,3 @@ export const getBrowser = async () => {
       },
     ],
   });
-};

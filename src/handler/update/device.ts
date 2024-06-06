@@ -13,6 +13,7 @@ import {
   defaultIOSVideoSetting,
   defaultVirtualDeviceSetting,
   defaultWDASetting,
+  defaultVideoSetting,
 } from '../../types/default-type-values.js';
 import {
   ApplicationType,
@@ -21,7 +22,6 @@ import {
   OS,
   TargetProviders,
 } from '../../types/enum-types.js';
-import { defaultVideoSetting } from '../../types/default-type-values.js';
 
 export const updateDevice = async (
   device: DeviceSetting,
@@ -41,16 +41,14 @@ export const updateDevice = async (
       ...defaultVideoSetting,
       android: defaultAndroidVideoSetting,
     };
+  } else if (target === TargetProviders.LOCAL) {
+    device.wda = defaultWDASetting;
+    device.video = {
+      ...defaultVideoSetting,
+      ios: defaultIOSVideoSetting,
+    };
   } else {
-    if (target === TargetProviders.LOCAL) {
-      device.wda = defaultWDASetting;
-      device.video = {
-        ...defaultVideoSetting,
-        ios: defaultIOSVideoSetting,
-      };
-    } else {
-      device.capabilities = {};
-    }
+    device.capabilities = {};
   }
   device.application.type = (await getAppType()) as ApplicationType;
   if (device.application.type === ApplicationType.WEB) {

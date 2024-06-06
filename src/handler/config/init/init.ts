@@ -15,6 +15,7 @@ import { FrameworkSetting } from '../../../types/config-type.js';
 import { createConfigFile } from '../../../utils/json.js';
 
 export const handleConfigInit = async (configPath: string) => {
+  console.info(initMessage(configPath));
   await createConfigJson(configPath);
 };
 
@@ -49,9 +50,8 @@ const createUiSetting = async () => {
   return frameworkSetting;
 };
 
-const createConfigJson = async (configPath: string) => {
+export const createConfigJson = async (configPath: string) => {
   const path = configPath === '.' ? process.cwd() : configPath;
-  console.info(initMessage(path));
   validateConfigPath(path);
   let setting: FrameworkSetting;
   switch (await getPlatform()) {

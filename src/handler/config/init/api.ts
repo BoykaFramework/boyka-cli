@@ -25,7 +25,7 @@ export const handleAddApiConfig = async (argv: ArgumentsCamelCase) => {
 
   const settings = loadJSON(configPath) as FrameworkSetting;
   const apiSetting = settings.api;
-  if (apiSetting && apiSetting[name]) {
+  if (apiSetting?.[name]) {
     throw new Error(configBlockExists('API', name));
   }
   const newApiSetting = defaultNewApiSetting(name);

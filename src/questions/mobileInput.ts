@@ -1,4 +1,5 @@
-import { input, select } from '@inquirer/prompts';
+import input from '@inquirer/input';
+import select from '@inquirer/select';
 import { userQuestions } from '../utils/constants.js';
 
 const mobileQuestions = userQuestions.mobile;

@@ -1,4 +1,4 @@
-import { input } from '@inquirer/prompts';
+import input from '@inquirer/input';
 import { userQuestions } from '../utils/constants.js';
 
 const apiQuestions = userQuestions.api;

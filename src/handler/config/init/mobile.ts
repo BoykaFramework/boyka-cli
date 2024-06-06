@@ -1,8 +1,11 @@
 import { getConfigName } from '../../../questions/inputs.js';
 import { FrameworkSetting, MobileSetting } from '../../../types/config-type.js';
 import { updateMobile } from '../../update/mobile.js';
-import { defaultUiSetting, defaultNewMobileSetting } from '../../../types/default-type-values.js';
-import { defaultDelaySetting } from '../../../types/default-type-values.js';
+import {
+  defaultUiSetting,
+  defaultNewMobileSetting,
+  defaultDelaySetting,
+} from '../../../types/default-type-values.js';
 import { ArgumentsCamelCase } from 'yargs';
 import { createConfigFile, loadJSON } from '../../../utils/json.js';
 import { configBlockExists } from '../../../utils/constants.js';
@@ -37,7 +40,7 @@ export const handleAddMobileConfig = async (argv: ArgumentsCamelCase, platformTy
   let mobileSetting: { [key: string]: MobileSetting };
   if (uiSetting) {
     mobileSetting = uiSetting.mobile;
-    if (mobileSetting && mobileSetting[name]) {
+    if (mobileSetting?.[name]) {
       throw new Error(configBlockExists('Mobile', name));
     }
   } else {

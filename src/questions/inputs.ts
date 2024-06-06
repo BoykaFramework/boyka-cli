@@ -1,8 +1,9 @@
-import { input, select } from '@inquirer/prompts';
+import input from '@inquirer/input';
+import select from '@inquirer/select';
 import { userQuestions } from '../utils/constants.js';
 
-export const getPlatform = async () => {
-  return await select({
+export const getPlatform = async () =>
+  await select({
     message: userQuestions.platform,
     default: 'ui',
     choices: [
@@ -18,10 +19,9 @@ export const getPlatform = async () => {
       },
     ],
   });
-};
 
-export const getPlatformType = async () => {
-  return await select({
+export const getPlatformType = async () =>
+  await select({
     message: userQuestions.platformType,
     default: 'Web',
     choices: [
@@ -42,7 +42,6 @@ export const getPlatformType = async () => {
       },
     ],
   });
-};
 
 export const getConfigName = async (platform: string) =>
   await input({ message: userQuestions.configName.replace('${platform}', platform) });
@@ -73,8 +72,8 @@ export const getPassword = async () =>
     },
   });
 
-export const getTarget = async () => {
-  return await select({
+export const getTarget = async () =>
+  await select({
     message: userQuestions.target,
     default: 'LOCAL',
     choices: [
@@ -95,4 +94,3 @@ export const getTarget = async () => {
       },
     ],
   });
-};

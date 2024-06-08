@@ -1,32 +1,23 @@
 import fs from 'fs';
 import path from 'path';
-import { FrameworkSetting } from '../types/config-type.js';
-import {
-  configFileName,
-  configFileNotExists,
-  errorMessage,
-  savingMessage,
-  successMessage,
-} from './constants.js';
-import { createSpinner } from 'nanospinner';
+import { FrameworkSetting } from '../types/types.js';
+import { configFileName, configFileNotExists } from './constants.js';
+import { BoykaError } from './boyka-error.js';
 
-export const createConfigFile = (filePath: string, setting: FrameworkSetting, state: string) => {
-  const spinner = createSpinner(savingMessage(state)).start();
+export const createConfigFile = (filePath: string, setting: FrameworkSetting) => {
   const content = JSON.stringify(setting, null, 2);
-  fs.writeFile(path.join(filePath, configFileName), content, async (err) => {
-    if (err) {
-      spinner.error({ text: errorMessage(err) });
-      process.exit(1);
-    } else {
-      spinner.success({ text: successMessage(filePath, state) });
-    }
-  });
+  try {
+    fs.writeFileSync(path.join(filePath, configFileName), content);
+    return true;
+  } catch {
+    return false;
+  }
 };
 
 export const loadJSON = (filePath: string) => {
   const configPath = path.join(filePath, configFileName);
   if (!fs.existsSync(configPath)) {
-    throw new Error(configFileNotExists(configPath));
+    throw new BoykaError(configFileNotExists(configPath));
   }
   return JSON.parse(
     fs.readFileSync(path.join(filePath, configFileName), {

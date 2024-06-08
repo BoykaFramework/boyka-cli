@@ -1,8 +1,9 @@
 import select from '@inquirer/select';
 import { userQuestions } from '../utils/constants.js';
+import { Browser } from '../types/enum-types.js';
 
 export const getBrowser = async () =>
-  await select({
+  (await select({
     message: userQuestions.web.browser,
     default: 'CHROME',
     choices: [
@@ -27,4 +28,4 @@ export const getBrowser = async () =>
         description: 'Safari Browser',
       },
     ],
-  });
+  })) as Browser;

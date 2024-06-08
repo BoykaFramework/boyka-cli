@@ -1,6 +1,7 @@
 import input from '@inquirer/input';
 import select from '@inquirer/select';
 import { userQuestions } from '../utils/constants.js';
+import { ApplicationType } from '../types/enum-types.js';
 
 const mobileQuestions = userQuestions.mobile;
 
@@ -20,7 +21,7 @@ export const getAppUrl = async () =>
   });
 
 export const getAppType = async () =>
-  await select({
+  (await select({
     message: mobileQuestions.appType,
     default: 'NATIVE',
     choices: [
@@ -40,4 +41,4 @@ export const getAppType = async () =>
         description: 'Web application',
       },
     ],
-  });
+  })) as ApplicationType;

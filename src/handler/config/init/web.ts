@@ -1,23 +1,23 @@
-import { getConfigName } from '../../../questions/inputs.js';
-import { FrameworkSetting, WebSetting } from '../../../types/config-type.js';
+import { FrameworkSetting, UserInput, WebSetting } from '../../../types/types.js';
 import { updateWeb } from '../../update/web.js';
 import { defaultNewWebSetting, defaultUiSetting } from '../../../types/default-type-values.js';
 import { ArgumentsCamelCase } from 'yargs';
 import { createConfigFile, loadJSON } from '../../../utils/json.js';
-import { configBlockExists } from '../../../utils/constants.js';
+import { configBlockExists, createConfigMessages, executeTask } from '../../../utils/constants.js';
+import { BoykaError } from '../../../utils/boyka-error.js';
+import { getWebInputs } from '../../user-inputs.js';
 
-export const createWebSetting = async () => {
-  const configName = await getConfigName('Web');
+export const createWebSetting = (inputs: UserInput) => {
   const frameworkSetting: FrameworkSetting = {
     ui: {
       ...defaultUiSetting,
       web: {
-        ...defaultNewWebSetting(configName),
+        ...defaultNewWebSetting(inputs.config_name),
       },
     },
   };
   const web = frameworkSetting.ui?.web;
-  if (web) await updateWeb(web[configName]);
+  if (web) updateWeb(inputs, web[inputs.config_name]);
   return frameworkSetting;
 };
 
@@ -26,13 +26,19 @@ export const handleAddWebConfig = async (argv: ArgumentsCamelCase) => {
   const path = argv.path as string;
   const configPath = path === '.' ? process.cwd() : path;
 
+  const inputs = {
+    platform: 'ui',
+    sub_platform: 'Web',
+  } satisfies UserInput;
+  await getWebInputs(inputs);
+
   const settings = loadJSON(configPath) as FrameworkSetting;
   let uiSetting = settings.ui;
   let webSetting: { [key: string]: WebSetting };
   if (uiSetting) {
     webSetting = uiSetting.web;
     if (webSetting?.[name]) {
-      throw new Error(configBlockExists('Web', name));
+      throw new BoykaError(configBlockExists('Web', name));
     }
   } else {
     uiSetting = {
@@ -40,7 +46,7 @@ export const handleAddWebConfig = async (argv: ArgumentsCamelCase) => {
     };
   }
   const newWebSetting = defaultNewWebSetting(name);
-  await updateWeb(newWebSetting[name]);
+  updateWeb(inputs, newWebSetting[name]);
   settings.ui = {
     ...uiSetting,
     web: {
@@ -48,5 +54,8 @@ export const handleAddWebConfig = async (argv: ArgumentsCamelCase) => {
       ...newWebSetting,
     },
   };
-  createConfigFile(configPath, settings, 'updated');
+  await executeTask(
+    createConfigFile(configPath, settings),
+    createConfigMessages(configPath, 'updated'),
+  );
 };

@@ -2,7 +2,7 @@ import chalk from 'chalk';
 import questions from '../data/questions.json' assert { type: 'json' };
 import { TargetProviders } from '../types/enum-types.js';
 import { createSpinner } from 'nanospinner';
-import { Message } from '../types/config-type.js';
+import { Message } from '../types/types.js';
 import {
   blockExists,
   capabilitiesHelp,
@@ -11,6 +11,7 @@ import {
   commandHelp,
   commandSuccess,
   epilog,
+  errorSavingConfigFile,
   fileExists,
   fileNotExists,
   initConfig,
@@ -19,6 +20,7 @@ import {
   saveConfig,
   suggestions,
 } from './messages.js';
+import { BoykaError } from './boyka-error.js';
 
 export const danger = chalk.red.bold;
 export const warn = chalk.yellow.bold;
@@ -51,7 +53,7 @@ export const capabilitiesHelpMessage = warn(capabilitiesHelp);
 export const successMessage = (filePath: string, state: string) =>
   success(commandSuccess(state, filePath));
 
-export const errorMessage = (error: Error) => danger(commandError(error));
+export const errorMessage = (error: string) => danger(commandError(error));
 
 export const savingMessage = (state: string) => {
   const savingState = state === 'created' ? 'Creating' : 'Updating';
@@ -81,7 +83,7 @@ export const handleCommand = async (handler: Promise<void>) => {
     console.log(helpMessage);
   } catch (error: any) {
     console.error(errorMessage(error));
-    if (error instanceof Error) {
+    if (error instanceof BoykaError) {
       console.error(error.stack);
     }
     process.exit(1);
@@ -89,6 +91,7 @@ export const handleCommand = async (handler: Promise<void>) => {
 };
 
 export const executeTask = async (task: Promise<boolean> | boolean, message: Message) => {
+  console.log();
   const spinner = createSpinner(message.loading).start();
   const result = await task;
   if (!result) {
@@ -101,4 +104,12 @@ export const executeTask = async (task: Promise<boolean> | boolean, message: Mes
   } else {
     spinner.success({ text: success(message.success) });
   }
+};
+
+export const createConfigMessages = (path: string, state: string) => {
+  return {
+    success: successMessage(path, state),
+    loading: savingMessage(state),
+    error: errorMessage(errorSavingConfigFile),
+  };
 };

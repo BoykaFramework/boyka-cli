@@ -1,5 +1,4 @@
-import { getConfigName } from '../../../questions/inputs.js';
-import { FrameworkSetting, MobileSetting } from '../../../types/config-type.js';
+import { FrameworkSetting, MobileSetting, UserInput } from '../../../types/types.js';
 import { updateMobile } from '../../update/mobile.js';
 import {
   defaultUiSetting,
@@ -8,10 +7,11 @@ import {
 } from '../../../types/default-type-values.js';
 import { ArgumentsCamelCase } from 'yargs';
 import { createConfigFile, loadJSON } from '../../../utils/json.js';
-import { configBlockExists } from '../../../utils/constants.js';
+import { configBlockExists, createConfigMessages, executeTask } from '../../../utils/constants.js';
+import { BoykaError } from '../../../utils/boyka-error.js';
+import { getMobileInputs } from '../../user-inputs.js';
 
-export const createMobileSetting = async (platformType: string) => {
-  const configName = await getConfigName(platformType);
+export const createMobileSetting = (inputs: UserInput) => {
   const frameworkSetting: FrameworkSetting = {
     ui: {
       delay: {
@@ -19,13 +19,13 @@ export const createMobileSetting = async (platformType: string) => {
       },
       ...defaultUiSetting,
       mobile: {
-        ...defaultNewMobileSetting(configName),
+        ...defaultNewMobileSetting(inputs.config_name),
       },
     },
   };
   const mobile = frameworkSetting.ui?.mobile;
   if (mobile) {
-    await updateMobile(mobile[configName], platformType);
+    updateMobile(inputs, mobile[inputs.config_name]);
   }
   return frameworkSetting;
 };
@@ -35,13 +35,19 @@ export const handleAddMobileConfig = async (argv: ArgumentsCamelCase, platformTy
   const path = argv.path as string;
   const configPath = path === '.' ? process.cwd() : path;
 
+  const inputs = {
+    platform: 'ui',
+    sub_platform: platformType,
+  } satisfies UserInput;
+  await getMobileInputs(inputs);
+
   const settings = loadJSON(configPath) as FrameworkSetting;
   let uiSetting = settings.ui;
   let mobileSetting: { [key: string]: MobileSetting };
   if (uiSetting) {
     mobileSetting = uiSetting.mobile;
     if (mobileSetting?.[name]) {
-      throw new Error(configBlockExists('Mobile', name));
+      throw new BoykaError(configBlockExists('Mobile', name));
     }
   } else {
     uiSetting = {
@@ -49,7 +55,7 @@ export const handleAddMobileConfig = async (argv: ArgumentsCamelCase, platformTy
     };
   }
   const newMobileSetting = defaultNewMobileSetting(name);
-  await updateMobile(newMobileSetting[name], platformType);
+  updateMobile(inputs, newMobileSetting[name]);
   settings.ui = {
     ...uiSetting,
     mobile: {
@@ -57,5 +63,8 @@ export const handleAddMobileConfig = async (argv: ArgumentsCamelCase, platformTy
       ...newMobileSetting,
     },
   };
-  createConfigFile(configPath, settings, 'updated');
+  await executeTask(
+    createConfigFile(configPath, settings),
+    createConfigMessages(configPath, 'updated'),
+  );
 };

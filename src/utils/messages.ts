@@ -15,12 +15,14 @@ you must also add cloud specific capabilities to the empty 'capabilities' block
 added to the config file.`;
 const commandSuccess = (state: string, filePath: string) =>
   `Boyka config file ${state} at [${filePath}]`;
-const commandError = (error: Error) => `
+const commandError = (error: string) => `
 ❌ Error occurred!
-${error.message}
+${error}
 `;
 const saveConfig = (state: string) => `${state} the [boyka-config.json] file...`;
-const initConfig = (path: string) => `Creating Boyka config file at ${path}...`;
+const initConfig = (path: string) => `
+Creating Boyka config file at ${path}...
+`;
 const pathNotFound = (path: string) => `Boyka config path [${path}] does not exists...`;
 const pathNotFolder = (path: string) => `Config path [${path}] is not a folder...`;
 const fileExists = (path: string) => `Boyka config file is already available at [${path}]...`;
@@ -32,6 +34,9 @@ Boyka config file does not exist at [${path}].
 Create one by running command 'boyka config init'`;
 const suggestions = `
 👇 Suggestions to fix the above problems:`;
+const errorSavingConfigFile = `
+Error encountered creating Boyka config file...
+`;
 
 export {
   suggestions,
@@ -48,4 +53,5 @@ export {
   commandHelp,
   commandFailure,
   epilog,
+  errorSavingConfigFile,
 };

@@ -1,6 +1,8 @@
 import input from '@inquirer/input';
 import select from '@inquirer/select';
 import { userQuestions } from '../utils/constants.js';
+import { TargetProviders } from '../types/enum-types.js';
+import { BoykaError } from '../utils/boyka-error.js';
 
 export const getPlatform = async () =>
   await select({
@@ -51,7 +53,7 @@ export const getUserName = async () =>
     message: userQuestions.cloudUser,
     validate: (message: string) => {
       if (!message) {
-        throw new Error(
+        throw new BoykaError(
           'User name environment variable is required for running on Cloud platform...',
         );
       }
@@ -64,7 +66,7 @@ export const getPassword = async () =>
     message: userQuestions.cloudKey,
     validate: (message: string) => {
       if (!message) {
-        throw new Error(
+        throw new BoykaError(
           'Password environment variable is required for running on Cloud platform...',
         );
       }
@@ -72,8 +74,8 @@ export const getPassword = async () =>
     },
   });
 
-export const getTarget = async () =>
-  await select({
+export const getTargetProvider = async () =>
+  (await select({
     message: userQuestions.target,
     default: 'LOCAL',
     choices: [
@@ -88,9 +90,14 @@ export const getTarget = async () =>
         description: 'BrowserStack browsers / devices',
       },
       {
-        name: 'LambdaTest',
-        value: 'LAMBDA_TEST',
-        description: 'LambdaTest browsers / devices',
+        name: 'LambdaTest Browsers',
+        value: 'LAMBDA_TEST_WEB',
+        description: 'LambdaTest Browsers',
+      },
+      {
+        name: 'LambdaTest Devices',
+        value: 'LAMBDA_TEST_MOBILE',
+        description: 'LambdaTest Mobile Devices',
       },
     ],
-  });
+  })) as TargetProviders;

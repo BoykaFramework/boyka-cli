@@ -1,6 +1,7 @@
 import { CommandModule } from 'yargs';
 import { epiLogMessage, failureMessage, handleCommand } from '../utils/constants.js';
 import { handleInit } from '../handler/init-handler.js';
+import { BoykaError } from '../utils/boyka-error.js';
 
 export const initCommand = {
   command: 'init [name]',
@@ -15,7 +16,7 @@ export const initCommand = {
       })
       .check((argv) => {
         if (!argv.name) {
-          throw new Error('Boyka project name is required!');
+          throw new BoykaError('Boyka project name is required!');
         }
         return true;
       })

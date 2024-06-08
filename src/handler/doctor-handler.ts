@@ -6,7 +6,6 @@ import { Message } from '../types/types.js';
 
 const printIntroMessage = () => {
   console.info(info(check.intro));
-  console.log();
 };
 
 const pomMessage = {
@@ -42,7 +41,7 @@ const checkConfigFile = () => {
   return fs.existsSync(path.join(process.cwd(), 'src/test/resources', configFileName));
 };
 
-export const handleCheckSetup = async () => {
+export const handleDoctor = async () => {
   printIntroMessage();
   await executeTask(checkPomFile(), pomMessage);
   await executeTask(checkResourcesFolder(), resourceMessage);

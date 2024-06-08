@@ -1,13 +1,13 @@
 import { CommandModule } from 'yargs';
 import { epiLogMessage, handleCommand } from '../utils/constants.js';
-import { handleCheckSetup } from '../handler/check-handler.js';
+import { handleDoctor } from '../handler/doctor-handler.js';
 
-export const checkCommand = {
-  command: 'check',
-  aliases: ['check', 'chk', 'ch'],
-  describe: 'Check Boyka-Framework Setup on your machine',
+export const doctorCommand = {
+  command: 'doctor',
+  aliases: ['doctor', 'doc', 'dc'],
+  describe: 'Boyka-Framework doctor to check Setup on your machine',
   builder: (yargs) => yargs.strict().help('help').showHelpOnFail(false).epilog(epiLogMessage),
   handler: async () => {
-    await handleCommand(handleCheckSetup());
+    await handleCommand(handleDoctor());
   },
 } satisfies CommandModule;

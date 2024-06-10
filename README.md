@@ -49,3 +49,15 @@ This will add Mobile iOS configuration in the config file with the given name to
 This will ask a set of questions to the user and depending on their answers, it will configure the Mobile config.
 
 If the default config path is not `src/test/resources`, then you can set the config path by using the optional param of `--path <path/to/config>`.
+
+### `boyka doctor`
+
+This command will check whether your machine setup for Boyka Framework is done properly or not.
+
+If there is any problem in the setup, the assistant will accordingly suggest solution to fix the problem.
+
+### `boyka init [name]`
+
+This will create Maven project on your machine along with the config file for Boyka Framework.
+
+This will also add sample tests for API, Web, Android and iOS applications.

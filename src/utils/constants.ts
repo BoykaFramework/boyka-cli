@@ -21,6 +21,8 @@ import {
   suggestions,
 } from './messages.js';
 import { BoykaError } from './boyka-error.js';
+import gradient from 'gradient-string';
+import figlet from 'figlet';
 
 export const danger = chalk.red.bold;
 export const warn = chalk.yellow.bold;
@@ -112,4 +114,10 @@ export const createConfigMessages = (path: string, state: string) => {
     loading: savingMessage(state),
     error: errorMessage(errorSavingConfigFile),
   };
+};
+
+export const welcomeMessage = () => {
+  console.clear();
+  console.log(gradient.pastel.multiline(figlet.textSync('Boyka-Assistant')));
+  console.log();
 };

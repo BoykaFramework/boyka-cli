@@ -1,0 +1,132 @@
+package {{ groupId }}.api;
+
+import static io.github.boykaframework.enums.PlatformType.API;
+import static io.github.boykaframework.manager.ParallelSession.clearSession;
+import static io.github.boykaframework.manager.ParallelSession.createSession;
+import static io.github.boykaframework.manager.ParallelSession.getSession;
+
+import io.github.boykaframework.actions.api.ApiActions;
+import io.github.boykaframework.exception.FrameworkError;
+import {{ groupId }}.api.data.BookingRequestData;
+import {{ groupId }}.api.pojo.BookingData;
+import {{ groupId }}.api.requests.BookingRequest;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
+
+public class BookingTest {
+    private static final String BOOKING_ID = "bookingId";
+
+    private BookingData newBooking;
+
+    @BeforeClass
+    public void setupTestClass () {
+        createSession (API, "{{ apiConfigName }}");
+        this.newBooking = BookingRequestData.getBookingData ();
+    }
+
+    @AfterClass
+    public void tearDownTestClass () {
+        clearSession ();
+    }
+
+    @Test
+    public void testCreateBooking () {
+        final var request = BookingRequest.createBooking (this.newBooking);
+        final var response = ApiActions.withRequest (request)
+            .execute ();
+
+        response.verifyStatusCode ()
+            .isEqualTo (200);
+        response.verifyStatusMessage ()
+            .isEqualTo ("OK");
+        response.verifySchema ("create-booking-schema.json");
+        response.verifyTextField ("bookingid")
+            .isNotNull ();
+        response.verifyTextField ("booking.firstname")
+            .isEqualTo (this.newBooking.getFirstname ());
+        response.verifyBooleanField ("booking.depositpaid")
+            .isTrue ();
+        response.verifyHeader ("Content-Type")
+            .isEqualTo ("application/json; charset=utf-8");
+
+        final var bookingId = response.getResponseData ("bookingid");
+        getSession ().setSharedData (BOOKING_ID, bookingId);
+    }
+
+    @Test
+    public void testDeleteBooking () {
+        final var request = BookingRequest.deleteBooking (getSession ().getSharedData (BOOKING_ID));
+        final var response = ApiActions.withRequest (request)
+            .execute ();
+        response.verifyStatusCode ()
+            .isEqualTo (201);
+    }
+
+    @Test
+    public void testDeletedBooking () {
+        final var request = BookingRequest.getBooking (getSession ().getSharedData (BOOKING_ID));
+        final var response = ApiActions.withRequest (request)
+            .execute ();
+        response.verifyStatusCode ()
+            .isEqualTo (404);
+    }
+
+    @Test
+    public void testGetBooking () {
+        final var request = BookingRequest.getBooking (getSession ().getSharedData (BOOKING_ID));
+        final var response = ApiActions.withRequest (request)
+            .execute ();
+
+        response.verifyStatusCode ()
+            .isEqualTo (200);
+        response.verifyTextField ("firstname")
+            .isEqualTo (this.newBooking.getFirstname ());
+        response.verifyTextField ("lastname")
+            .isEqualTo (this.newBooking.getLastname ());
+    }
+
+    @Test (expectedExceptions = FrameworkError.class)
+    public void testJsonSchemaFileException () {
+        final var request = BookingRequest.createBooking (this.newBooking);
+        final var response = ApiActions.withRequest (request)
+            .execute ();
+
+        response.verifyStatusCode ()
+            .isEqualTo (200);
+        response.verifyStatusMessage ()
+            .isEqualTo ("OK");
+        response.verifySchema ("create-booking-scheme.json");
+    }
+
+    @Test
+    public void testUpdateBooking () {
+        final var updateBookingData = this.newBooking;
+
+        final var request = BookingRequest.updateBooking (getSession ().getSharedData (BOOKING_ID), updateBookingData);
+        final var response = ApiActions.withRequest (request)
+            .execute ();
+        response.verifyStatusCode ()
+            .isEqualTo (200);
+        response.verifyTextField ("firstname")
+            .isEqualTo (updateBookingData.getFirstname ());
+        response.verifyTextField ("lastname")
+            .isEqualTo (updateBookingData.getLastname ());
+    }
+
+    @Test
+    public void testUpdatePartialBooking () {
+        final var partialBookingData = BookingRequestData.getPartialBookingData ();
+
+        final var request = BookingRequest.updatePartialBooking (getSession ().getSharedData (BOOKING_ID),
+            partialBookingData);
+        final var response = ApiActions.withRequest (request)
+            .execute ();
+        response.verifyStatusCode ()
+            .isEqualTo (200);
+        response.verifyTextField ("firstname")
+            .isEqualTo (partialBookingData.getFirstname ());
+        response.verifyIntField ("totalprice")
+            .isEqualTo (partialBookingData.getTotalprice ());
+    }
+}

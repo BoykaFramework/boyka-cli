@@ -1,0 +1,73 @@
+package {{ groupId }}.api.requests;
+
+import static io.github.boykaframework.builders.ApiRequest.createRequest;
+import static {{ groupId }}.api.data.AuthRequestData.getTokenData;
+import static java.text.MessageFormat.format;
+
+import io.github.boykaframework.actions.api.ApiActions;
+import io.github.boykaframework.builders.ApiRequest;
+import io.github.boykaframework.enums.RequestMethod;
+import {{ groupId }}.api.pojo.BookingData;
+
+public final class BookingRequest {
+    public static ApiRequest createBooking (final BookingData requestBody) {
+        return createRequest ().method (RequestMethod.POST)
+            .header ("Accept", "application/json")
+            .path ("/booking")
+            .bodyObject (requestBody)
+            .create ();
+    }
+
+    public static ApiRequest deleteBooking (final String id) {
+        return createRequest ().method (RequestMethod.DELETE)
+            .header ("Content-Type", "application/json")
+            .header ("Cookie", format ("token={0}", generateToken ()))
+            .path ("/booking/${id}")
+            .pathParam ("id", id)
+            .create ();
+    }
+
+    public static ApiRequest getBooking (final String id) {
+        return createRequest ().method (RequestMethod.GET)
+            .header ("Accept", "application/json")
+            .path ("/booking/${id}")
+            .pathParam ("id", id)
+            .create ();
+    }
+
+    public static ApiRequest updateBooking (final String id, final BookingData requestBody) {
+        return createRequest ().method (RequestMethod.PUT)
+            .header ("Accept", "application/json")
+            .header ("Cookie", format ("token={0}", generateToken ()))
+            .path ("/booking/${id}")
+            .bodyObject (requestBody)
+            .pathParam ("id", id)
+            .create ();
+    }
+
+    public static ApiRequest updatePartialBooking (final String id, final BookingData requestBody) {
+        return createRequest ().method (RequestMethod.PATCH)
+            .header ("Accept", "application/json")
+            .header ("Cookie", format ("token={0}", generateToken ()))
+            .path ("/booking/${id}")
+            .bodyObject (requestBody)
+            .pathParam ("id", id)
+            .create ();
+    }
+
+    private static String generateToken () {
+        final var generateTokenRequest = createRequest ().header ("Accept", "application/json")
+            .method (RequestMethod.POST)
+            .path ("/auth")
+            .bodyObject (getTokenData ())
+            .create ();
+
+        final var response = ApiActions.withRequest (generateTokenRequest)
+            .execute ();
+        return response.getResponseData ("token");
+    }
+
+    private BookingRequest () {
+        // Utility Class.
+    }
+}

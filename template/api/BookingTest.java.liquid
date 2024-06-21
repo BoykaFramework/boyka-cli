@@ -5,11 +5,11 @@ import static io.github.boykaframework.manager.ParallelSession.clearSession;
 import static io.github.boykaframework.manager.ParallelSession.createSession;
 import static io.github.boykaframework.manager.ParallelSession.getSession;
 
-import io.github.boykaframework.actions.api.ApiActions;
-import io.github.boykaframework.exception.FrameworkError;
-import {{ groupId }}.api.data.BookingRequestData;
 import {{ groupId }}.api.pojo.BookingData;
 import {{ groupId }}.api.requests.BookingRequest;
+import {{ groupId }}.api.data.BookingRequestData;
+import io.github.boykaframework.actions.api.ApiActions;
+import io.github.boykaframework.exception.FrameworkError;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -19,18 +19,18 @@ public class BookingTest {
 
     private BookingData newBooking;
 
-    @BeforeClass
+    @BeforeClass (description = "Setup test class")
     public void setupTestClass () {
         createSession (API, "{{ apiConfigName }}");
         this.newBooking = BookingRequestData.getBookingData ();
     }
 
-    @AfterClass
+    @AfterClass (description = "Tear down test class")
     public void tearDownTestClass () {
         clearSession ();
     }
 
-    @Test
+    @Test (description = "Test for creating new booking with POST request")
     public void testCreateBooking () {
         final var request = BookingRequest.createBooking (this.newBooking);
         final var response = ApiActions.withRequest (request)
@@ -54,7 +54,7 @@ public class BookingTest {
         getSession ().setSharedData (BOOKING_ID, bookingId);
     }
 
-    @Test
+    @Test (description = "Test for Deleting a booking using DELETE request")
     public void testDeleteBooking () {
         final var request = BookingRequest.deleteBooking (getSession ().getSharedData (BOOKING_ID));
         final var response = ApiActions.withRequest (request)
@@ -63,7 +63,7 @@ public class BookingTest {
             .isEqualTo (201);
     }
 
-    @Test
+    @Test (description = "Test for checking deleted booking using GET request")
     public void testDeletedBooking () {
         final var request = BookingRequest.getBooking (getSession ().getSharedData (BOOKING_ID));
         final var response = ApiActions.withRequest (request)
@@ -72,7 +72,7 @@ public class BookingTest {
             .isEqualTo (404);
     }
 
-    @Test
+    @Test (description = "Test for retrieving booking using GET request")
     public void testGetBooking () {
         final var request = BookingRequest.getBooking (getSession ().getSharedData (BOOKING_ID));
         final var response = ApiActions.withRequest (request)
@@ -86,7 +86,7 @@ public class BookingTest {
             .isEqualTo (this.newBooking.getLastname ());
     }
 
-    @Test (expectedExceptions = FrameworkError.class)
+    @Test (description = "Tests for file not found exception", expectedExceptions = FrameworkError.class)
     public void testJsonSchemaFileException () {
         final var request = BookingRequest.createBooking (this.newBooking);
         final var response = ApiActions.withRequest (request)
@@ -99,7 +99,7 @@ public class BookingTest {
         response.verifySchema ("create-booking-scheme.json");
     }
 
-    @Test
+    @Test (description = "Test for Updating booking using PUT request")
     public void testUpdateBooking () {
         final var updateBookingData = this.newBooking;
 
@@ -114,7 +114,7 @@ public class BookingTest {
             .isEqualTo (updateBookingData.getLastname ());
     }
 
-    @Test
+    @Test (description = "Test for partial updating booking using PATCH request")
     public void testUpdatePartialBooking () {
         final var partialBookingData = BookingRequestData.getPartialBookingData ();
 

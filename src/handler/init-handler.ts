@@ -6,16 +6,16 @@ import { createConfigJson } from './config/init/init.js';
 import { getInitInputs } from './user-inputs.js';
 import { BoykaError } from '../utils/boyka-error.js';
 
-interface ProjectProps {
+type ProjectProps = {
   path: string;
   groupId: string;
   artifactId: string;
-}
+};
 
-interface TemplateProps {
+type TemplateProps = {
   root: string;
   extension: string;
-}
+};
 
 const generateProject = async (
   engine: Liquid,
@@ -34,14 +34,9 @@ const checkProjectFolderCreated = (path: string) => {
   }
 };
 
-const createProjectFolder = async ({ artifactId, path }: ProjectProps) => {
-  fs.mkdir(path, (err) => {
-    if (err) {
-      throw new BoykaError(
-        `Error encountered while creating folder Boyka project '${artifactId}': ${err.message}`,
-      );
-    }
-  });
+const createProjectFolder = (artifactId: string, path: string) => {
+  console.info(`Creating folder path [${path}] for project [${artifactId}]...`);
+  fs.mkdirSync(path, { recursive: true });
 };
 
 const createProjectFiles = async (
@@ -60,11 +55,7 @@ const createProjectFiles = async (
         const content = await engine.renderFile(file, project);
         const filePath = path.join(project.path, fileName);
         if (!fs.existsSync(filePath)) {
-          fs.writeFile(filePath, content, (err) => {
-            if (err) {
-              console.error('Error:', err);
-            }
-          });
+          fs.writeFileSync(filePath, content);
         }
       }
     });
@@ -74,6 +65,8 @@ const createProjectFiles = async (
 export const handleInit = async (argv: ArgumentsCamelCase) => {
   const projectName = argv.name as string;
   const projectPath = path.join(process.cwd(), projectName);
+  const resourcesPath = path.join(projectPath, 'src/test/resources');
+
   checkProjectFolderCreated(projectPath);
   const inputs = await getInitInputs();
 
@@ -90,14 +83,14 @@ export const handleInit = async (argv: ArgumentsCamelCase) => {
     path: projectPath,
   } satisfies ProjectProps;
 
-  await createProjectFolder(project);
+  createProjectFolder(projectName, resourcesPath);
   await createProjectFiles(
     engine,
     { root: templateRoot, extension: templateExt },
     project,
     'pom.xml',
   );
-  createConfigJson(inputs, projectPath);
+  await createConfigJson(inputs, resourcesPath);
   await generateProject(
     engine,
     project,

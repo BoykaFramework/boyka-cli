@@ -85,7 +85,7 @@ export const handleCommand = async (handler: Promise<void>) => {
     console.log(helpMessage);
   } catch (error: any) {
     console.error(errorMessage(error));
-    if (error instanceof BoykaError) {
+    if (error instanceof BoykaError || error instanceof Error) {
       console.error(error.stack);
     }
     process.exit(1);

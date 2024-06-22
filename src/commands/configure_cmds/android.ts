@@ -1,6 +1,7 @@
 import { CommandModule } from 'yargs';
 import { epiLogMessage, failureMessage, handleCommand } from '../../utils/constants.js';
 import { handleAddMobileConfig } from '../../handler/config/init/mobile.js';
+import { BoykaError } from '../../utils/boyka-error.js';
 
 export const androidCommand = {
   command: 'android [name]',
@@ -21,7 +22,7 @@ export const androidCommand = {
       })
       .check((argv) => {
         if (!argv.name) {
-          throw new Error('Android Mobile config name should be provided!');
+          throw new BoykaError('Android Mobile config name should be provided!');
         }
         return true;
       })

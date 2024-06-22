@@ -1,4 +1,3 @@
-import { ArgumentsCamelCase } from 'yargs';
 import fs from 'fs';
 import path from 'path';
 import { createApiSetting } from './api.js';
@@ -10,28 +9,32 @@ import {
   configPathNotFolder,
   configPathNotFound,
   initMessage,
+  executeTask,
+  createConfigMessages,
 } from '../../../utils/constants.js';
-import { getPlatform, getPlatformType } from '../../../questions/inputs.js';
-import { FrameworkSetting } from '../../../types/config-type.js';
+import { FrameworkSetting, UserInput } from '../../../types/types.js';
 import { createConfigFile } from '../../../utils/json.js';
+import { getUserInputs } from '../../user-inputs.js';
+import { BoykaError } from '../../../utils/boyka-error.js';
 
-export const handleConfigInit = async (argv: ArgumentsCamelCase) => {
-  const configPath = argv.path as string;
-  await createConfigJson(configPath);
+export const handleConfigInit = async (configPath: string) => {
+  console.info(initMessage(configPath));
+  const inputs = await getUserInputs();
+  createConfigJson(inputs, configPath);
 };
 
 const checkConfigFile = (configPath: string) => {
   if (fs.existsSync(path.join(configPath, configFileName))) {
-    throw new Error(configFileExists(configPath));
+    throw new BoykaError(configFileExists(configPath));
   }
 };
 
 const checkConfigPath = (configPath: string) => {
   if (!fs.lstatSync(configPath).isDirectory()) {
-    throw new Error(configPathNotFolder(configPath));
+    throw new BoykaError(configPathNotFolder(configPath));
   }
   if (!fs.existsSync(configPath)) {
-    throw new Error(configPathNotFound(configPath));
+    throw new BoykaError(configPathNotFound(configPath));
   }
 };
 
@@ -40,32 +43,25 @@ const validateConfigPath = (configPath: string) => {
   checkConfigFile(configPath);
 };
 
-const createUiSetting = async () => {
-  const platformType = await getPlatformType();
+const createUiSetting = (inputs: UserInput) => {
   let frameworkSetting: FrameworkSetting;
-  if (platformType === 'Web') {
-    frameworkSetting = await createWebSetting();
+  if (inputs.sub_platform === 'Web') {
+    frameworkSetting = createWebSetting(inputs);
   } else {
-    frameworkSetting = await createMobileSetting(platformType);
+    frameworkSetting = createMobileSetting(inputs);
   }
   return frameworkSetting;
 };
 
-const createConfigJson = async (configPath: string) => {
+export const createConfigJson = async (inputs: UserInput, configPath: string) => {
   const path = configPath === '.' ? process.cwd() : configPath;
-  console.info(initMessage(path));
   validateConfigPath(path);
   let setting: FrameworkSetting;
-  switch (await getPlatform()) {
-    case 'ui':
-      setting = await createUiSetting();
-      break;
-
-    case 'api':
-    default:
-      setting = await createApiSetting();
-      break;
+  if (inputs.platform === 'ui') {
+    setting = createUiSetting(inputs);
+  } else {
+    setting = createApiSetting(inputs);
   }
-  createConfigFile(path, setting, 'created');
+  await executeTask(createConfigFile(path, setting), createConfigMessages(path, 'created'));
   return true;
 };

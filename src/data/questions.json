@@ -5,6 +5,10 @@
   "cloudUser": "What is the environment variable for your user name?",
   "cloudKey": "What is the environment variable for your password?",
   "target": "Where do you want to run the tests?",
+  "init": {
+    "groupId": "What Group ID you want to use for your project?",
+    "sampleTest": "Do you want sample tests to be generated?"
+  },
   "api": {
     "basePath": "What is the base path for the API?",
     "baseUrl": "What is the base url for the API?"

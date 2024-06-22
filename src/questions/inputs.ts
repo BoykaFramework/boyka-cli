@@ -1,8 +1,11 @@
-import { input, select } from '@inquirer/prompts';
+import input from '@inquirer/input';
+import select from '@inquirer/select';
 import { userQuestions } from '../utils/constants.js';
+import { TargetProviders } from '../types/enum-types.js';
+import { BoykaError } from '../utils/boyka-error.js';
 
-export const getPlatform = async () => {
-  return await select({
+export const getPlatform = async () =>
+  await select({
     message: userQuestions.platform,
     default: 'ui',
     choices: [
@@ -18,10 +21,9 @@ export const getPlatform = async () => {
       },
     ],
   });
-};
 
-export const getPlatformType = async () => {
-  return await select({
+export const getPlatformType = async () =>
+  await select({
     message: userQuestions.platformType,
     default: 'Web',
     choices: [
@@ -42,7 +44,6 @@ export const getPlatformType = async () => {
       },
     ],
   });
-};
 
 export const getConfigName = async (platform: string) =>
   await input({ message: userQuestions.configName.replace('${platform}', platform) });
@@ -52,7 +53,7 @@ export const getUserName = async () =>
     message: userQuestions.cloudUser,
     validate: (message: string) => {
       if (!message) {
-        throw new Error(
+        throw new BoykaError(
           'User name environment variable is required for running on Cloud platform...',
         );
       }
@@ -65,7 +66,7 @@ export const getPassword = async () =>
     message: userQuestions.cloudKey,
     validate: (message: string) => {
       if (!message) {
-        throw new Error(
+        throw new BoykaError(
           'Password environment variable is required for running on Cloud platform...',
         );
       }
@@ -73,8 +74,8 @@ export const getPassword = async () =>
     },
   });
 
-export const getTarget = async () => {
-  return await select({
+export const getTargetProvider = async () =>
+  (await select({
     message: userQuestions.target,
     default: 'LOCAL',
     choices: [
@@ -89,10 +90,14 @@ export const getTarget = async () => {
         description: 'BrowserStack browsers / devices',
       },
       {
-        name: 'LambdaTest',
-        value: 'LAMBDA_TEST',
-        description: 'LambdaTest browsers / devices',
+        name: 'LambdaTest Browsers',
+        value: 'LAMBDA_TEST_WEB',
+        description: 'LambdaTest Browsers',
+      },
+      {
+        name: 'LambdaTest Devices',
+        value: 'LAMBDA_TEST_MOBILE',
+        description: 'LambdaTest Mobile Devices',
       },
     ],
-  });
-};
+  })) as TargetProviders;

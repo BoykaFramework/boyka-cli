@@ -1,23 +1,19 @@
-import { getPassword, getTarget, getUserName } from '../../questions/inputs.js';
-import { getPort } from '../../questions/mobileInput.js';
-import { ServerSetting } from '../../types/config-type.js';
+import { ServerSetting, UserInput } from '../../types/types.js';
 import { AutomationType, TargetProviders } from '../../types/enum-types.js';
 import { setTarget } from '../../utils/constants.js';
 
-export const updateServer = async (server: ServerSetting, platformType: string) => {
-  let target = await getTarget();
-  if (target === 'LAMBDA_TEST') {
-    target += '_MOBILE';
-  }
-  server.target = target as TargetProviders;
-  setTarget(server.target);
-  const port = Number(await getPort());
+export const updateServer = (settings: ServerSetting, inputs: UserInput) => {
+  const server = inputs.mobile.server;
+  settings.target = server.target;
+  setTarget(settings.target);
+  const port = server.port;
   if (port > 0) {
-    server.port = port;
+    settings.port = port;
   }
-  server.driver = platformType === 'Android' ? AutomationType.UI_AUTOMATOR : AutomationType.XCUI;
-  if (server.target !== TargetProviders.LOCAL) {
-    server.user_name = `\${env:${await getUserName()}}`;
-    server.password = `\${env:${await getPassword()}}`;
+  settings.driver =
+    inputs.sub_platform === 'Android' ? AutomationType.UI_AUTOMATOR : AutomationType.XCUI;
+  if (settings.target !== TargetProviders.LOCAL) {
+    settings.user_name = `\${env:${server.user_name}}`;
+    settings.password = `\${env:${server.password}}`;
   }
 };

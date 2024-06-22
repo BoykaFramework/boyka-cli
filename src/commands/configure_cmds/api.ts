@@ -1,6 +1,7 @@
 import { CommandModule } from 'yargs';
 import { epiLogMessage, failureMessage, handleCommand } from '../../utils/constants.js';
 import { handleAddApiConfig } from '../../handler/config/init/api.js';
+import { BoykaError } from '../../utils/boyka-error.js';
 
 export const apiCommand = {
   command: 'api [name]',
@@ -21,7 +22,7 @@ export const apiCommand = {
       })
       .check((argv) => {
         if (!argv.name) {
-          throw new Error('API config name should be provided!');
+          throw new BoykaError('API config name should be provided!');
         }
         return true;
       })

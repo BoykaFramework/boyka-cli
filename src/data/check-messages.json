@@ -1,5 +1,5 @@
 {
-  "intro": "👋 Boyka Assistant is checking your machine setup for Boyka Framework...",
+  "intro": "👋 Boyka Doctor is checking your machine setup for Boyka Framework...",
   "messages": {
     "pom": {
       "success": "'pom.xml' exists in the current folder [{0}}]",

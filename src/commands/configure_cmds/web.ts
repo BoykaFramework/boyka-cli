@@ -1,6 +1,7 @@
 import { CommandModule } from 'yargs';
 import { epiLogMessage, failureMessage, handleCommand } from '../../utils/constants.js';
 import { handleAddWebConfig } from '../../handler/config/init/web.js';
+import { BoykaError } from '../../utils/boyka-error.js';
 
 export const webCommand = {
   command: 'web [name]',
@@ -21,7 +22,7 @@ export const webCommand = {
       })
       .check((argv) => {
         if (!argv.name) {
-          throw new Error('Web config name should be provided!');
+          throw new BoykaError('Web config name should be provided!');
         }
         return true;
       })

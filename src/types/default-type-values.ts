@@ -19,7 +19,7 @@ import {
   VirtualDeviceSetting,
   WDASetting,
   WebSetting,
-} from './config-type.js';
+} from './types.js';
 import {
   ApplicationType,
   Browser,

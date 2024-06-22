@@ -1,9 +1,8 @@
-import { getBasePath, getBaseUri } from '../../questions/apiInputs.js';
-import { ApiSetting } from '../../types/config-type.js';
+import { ApiSetting, UserInput } from '../../types/types.js';
 
-export const updateApi = async (setting: ApiSetting) => {
+export const updateApi = (inputs: UserInput, setting: ApiSetting) => {
   if (setting) {
-    setting.base_uri = await getBaseUri();
-    setting.base_path = await getBasePath();
+    setting.base_uri = inputs.api.base_uri;
+    setting.base_path = inputs.api.base_path;
   }
 };

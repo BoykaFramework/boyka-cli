@@ -16,7 +16,7 @@ export default [
       parser: tsParser,
     },
     files: ['src/**/*.ts', '*.js'],
-    ignores: ['node_modules/', 'dist/'],
+    ignores: ['node_modules/', 'dist/', 'template/'],
     plugins: {
       '@stylistic/ts': stylisticTs,
       '@stylistic/js': stylisticJs,

@@ -227,3 +227,46 @@ export type DeviceSetting = {
   virtual_device?: VirtualDeviceSetting;
   wda?: WDASetting;
 };
+
+export type Message = {
+  success: string;
+  error: string;
+  loading: string;
+  suggestion?: string;
+};
+
+export type UserInput = {
+  group_id?: string;
+  generate_sample?: boolean;
+  platform: string;
+  sub_platform?: string;
+  config_name?: string;
+  api?: {
+    base_uri: string;
+    base_path: string;
+  };
+  web?: {
+    target: TargetProviders;
+    browser: Browser;
+    user_name?: string;
+    password?: string;
+  };
+  mobile?: {
+    server: {
+      target: TargetProviders;
+      port?: number;
+      user_name?: string;
+      password?: string;
+    };
+    device: {
+      name: string;
+      version: string;
+      avd_name?: string;
+      application?: {
+        type: ApplicationType;
+        path?: string;
+        browser?: Browser;
+      };
+    };
+  };
+};

@@ -1,62 +1,42 @@
-import {
-  getAVDName,
-  getAppPath,
-  getAppType,
-  getAppUrl,
-  getDeviceName,
-  getDeviceVersion,
-} from '../../questions/mobileInput.js';
-import { getBrowser } from '../../questions/webInput.js';
-import { DeviceSetting } from '../../types/config-type.js';
+import { DeviceSetting, UserInput } from '../../types/types.js';
 import {
   defaultAndroidVideoSetting,
   defaultIOSVideoSetting,
   defaultVirtualDeviceSetting,
   defaultWDASetting,
+  defaultVideoSetting,
 } from '../../types/default-type-values.js';
-import {
-  ApplicationType,
-  Browser,
-  DeviceType,
-  OS,
-  TargetProviders,
-} from '../../types/enum-types.js';
-import { defaultVideoSetting } from '../../types/default-type-values.js';
+import { ApplicationType, DeviceType, OS, TargetProviders } from '../../types/enum-types.js';
 
-export const updateDevice = async (
-  device: DeviceSetting,
-  target: TargetProviders,
-  platformType: string,
-) => {
-  device.name = await getDeviceName();
-  device.type = target === TargetProviders.LOCAL ? DeviceType.VIRTUAL : DeviceType.CLOUD;
-  device.os = platformType.toUpperCase() as OS;
-  device.version = await getDeviceVersion();
-  if (device.os === OS.ANDROID) {
-    if (device.type === DeviceType.VIRTUAL) {
-      device.virtual_device = defaultVirtualDeviceSetting;
-      device.virtual_device.name = await getAVDName();
+export const updateDevice = (settings: DeviceSetting, inputs: UserInput) => {
+  const device = inputs.mobile.device;
+  settings.name = device.name;
+  settings.type =
+    inputs.mobile.server.target === TargetProviders.LOCAL ? DeviceType.VIRTUAL : DeviceType.CLOUD;
+  settings.os = inputs.sub_platform.toUpperCase() as OS;
+  settings.version = device.version;
+  if (settings.os === OS.ANDROID) {
+    if (settings.type === DeviceType.VIRTUAL) {
+      settings.virtual_device = defaultVirtualDeviceSetting;
+      settings.virtual_device.name = device.avd_name;
     }
-    device.video = {
+    settings.video = {
       ...defaultVideoSetting,
       android: defaultAndroidVideoSetting,
     };
+  } else if (inputs.mobile.server.target === TargetProviders.LOCAL) {
+    settings.wda = defaultWDASetting;
+    settings.video = {
+      ...defaultVideoSetting,
+      ios: defaultIOSVideoSetting,
+    };
   } else {
-    if (target === TargetProviders.LOCAL) {
-      device.wda = defaultWDASetting;
-      device.video = {
-        ...defaultVideoSetting,
-        ios: defaultIOSVideoSetting,
-      };
-    } else {
-      device.capabilities = {};
-    }
+    settings.capabilities = {};
   }
-  device.application.type = (await getAppType()) as ApplicationType;
-  if (device.application.type === ApplicationType.WEB) {
-    device.application.browser = (await getBrowser()) as Browser;
+  settings.application.type = device.application.type;
+  if (settings.application.type === ApplicationType.WEB) {
+    settings.application.browser = device.application.browser;
   } else {
-    device.application.path =
-      target === TargetProviders.LOCAL ? await getAppPath() : await getAppUrl();
+    settings.application.path = device.application.path;
   }
 };

@@ -5,6 +5,8 @@ import fs from 'fs';
 import { createConfigJson } from './config/init/init.js';
 import { getInitInputs } from './user-inputs.js';
 import { BoykaError } from '../utils/boyka-error.js';
+import { warn } from '../utils/constants.js';
+import { mavenCommandSuggestion, successMavenProject } from '../utils/messages.js';
 
 type ProjectProps = {
   path: string;
@@ -34,8 +36,7 @@ const checkProjectFolderCreated = (path: string) => {
   }
 };
 
-const createProjectFolder = (artifactId: string, path: string) => {
-  console.info(`Creating folder path [${path}] for project [${artifactId}]...`);
+const createProjectFolder = (path: string) => {
   fs.mkdirSync(path, { recursive: true });
 };
 
@@ -83,7 +84,7 @@ export const handleInit = async (argv: ArgumentsCamelCase) => {
     path: projectPath,
   } satisfies ProjectProps;
 
-  createProjectFolder(projectName, resourcesPath);
+  createProjectFolder(resourcesPath);
   await createProjectFiles(
     engine,
     { root: templateRoot, extension: templateExt },
@@ -91,10 +92,8 @@ export const handleInit = async (argv: ArgumentsCamelCase) => {
     'pom.xml',
   );
   await createConfigJson(inputs, resourcesPath);
-  await generateProject(
-    engine,
-    project,
-    { root: templateRoot, extension: templateExt },
-    inputs.generate_sample,
-  );
+  await generateProject(engine, project, { root: templateRoot, extension: templateExt }, true);
+
+  console.log(warn(successMavenProject));
+  console.log(warn(mavenCommandSuggestion(projectName)));
 };

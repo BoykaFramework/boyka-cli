@@ -33,8 +33,6 @@ export const userQuestions = questions;
 
 export const configFileName = 'boyka-config.json';
 
-export const sleep = (ms = 2000) => new Promise((r) => setTimeout(r, ms));
-
 export const epiLogMessage = info(epilog);
 
 export const failureMessage = (command: string = ''): string => {

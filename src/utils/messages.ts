@@ -37,6 +37,17 @@ const suggestions = `
 const errorSavingConfigFile = `
 Error encountered creating Boyka config file...
 `;
+const successMavenProject = `
+A demo Maven project has been created, you can modify the 'pom.xml' file 
+according to your requirement
+`;
+const mavenCommandSuggestion = (name: string) => `Navigate to the project by running,
+
+'cd ${name}'
+
+And resolve the dependencies by running,
+
+'mvn clean install -DskipTests'`;
 
 export {
   suggestions,
@@ -54,4 +65,6 @@ export {
   commandFailure,
   epilog,
   errorSavingConfigFile,
+  successMavenProject,
+  mavenCommandSuggestion,
 };

@@ -49,6 +49,10 @@ And resolve the dependencies by running,
 
 'mvn clean install -DskipTests'`;
 
+const incorrectTemplatePath = (message: string) =>
+  `Error encountered reading template directory: ${message}`;
+const projectFolderExists = (path: string) => `Boyka Project is already created at [${path}]...`;
+
 export {
   suggestions,
   fileNotExists,
@@ -67,4 +71,6 @@ export {
   errorSavingConfigFile,
   successMavenProject,
   mavenCommandSuggestion,
+  incorrectTemplatePath,
+  projectFolderExists,
 };

@@ -6,7 +6,12 @@ import { createConfigJson } from './config/init/init.js';
 import { getInitInputs } from './user-inputs.js';
 import { BoykaError } from '../utils/boyka-error.js';
 import { warn } from '../utils/constants.js';
-import { mavenCommandSuggestion, successMavenProject } from '../utils/messages.js';
+import {
+  incorrectTemplatePath,
+  mavenCommandSuggestion,
+  projectFolderExists,
+  successMavenProject,
+} from '../utils/messages.js';
 
 type ProjectProps = {
   path: string;
@@ -32,7 +37,7 @@ const generateProject = async (
 
 const checkProjectFolderCreated = (path: string) => {
   if (fs.existsSync(path)) {
-    throw new BoykaError(`Boyka Project is already created at [${path}]...`);
+    throw new BoykaError(projectFolderExists(path));
   }
 };
 
@@ -46,11 +51,9 @@ const createProjectFiles = async (
   project: ProjectProps,
   priorityFile?: string,
 ) => {
-  fs.readdir(root, (err, files) => {
-    if (err) {
-      throw new BoykaError(`Error encountered reading template directory: ${err.message}`);
-    }
-    files?.forEach(async (file) => {
+  try {
+    const dirFiles = fs.readdirSync(root, { recursive: true, encoding: 'utf-8' });
+    dirFiles?.forEach(async (file: string) => {
       const fileName = file.substring(0, file.lastIndexOf('.'));
       if (file.endsWith(extension) && (!priorityFile || priorityFile === fileName)) {
         const content = await engine.renderFile(file, project);
@@ -60,7 +63,9 @@ const createProjectFiles = async (
         }
       }
     });
-  });
+  } catch (err) {
+    throw new BoykaError(incorrectTemplatePath(err.message));
+  }
 };
 
 export const handleInit = async (argv: ArgumentsCamelCase) => {

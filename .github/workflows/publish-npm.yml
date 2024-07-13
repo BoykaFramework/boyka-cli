@@ -1,0 +1,37 @@
+name: Publish to NPM
+
+on:
+  release:
+    types:
+      - published
+
+env:
+  PUSH_TOKEN: ${{ secrets.PUSH_TOKEN }}
+  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ env.PUSH_TOKEN }}
+
+      - uses: pnpm/action-setup@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install && pnpm build
+
+      - name: Publish to NPM
+        uses: simenandre/publish-with-pnpm@v1
+        with:
+          npm-auth-token: ${{ env.NPM_TOKEN }}

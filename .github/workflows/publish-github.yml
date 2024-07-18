@@ -25,7 +25,6 @@ env:
   PUSH_TOKEN: ${{ secrets.PUSH_TOKEN }}
   GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
   GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
-  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
 jobs:
   prepare:
@@ -76,7 +75,7 @@ jobs:
       - name: Get the new version
         id: version
         run: |
-          export NEW_VERSION=$(node -pe "require('./website/package.json').version")
+          export NEW_VERSION=$(node -pe "require('./package.json').version")
           echo "version=$NEW_VERSION" >> $GITHUB_OUTPUT
 
       - name: Generate Change log

@@ -5,7 +5,11 @@
       "disableRelease": true
     }
   },
-  "git": false,
+  "git": {
+    "commit": false,
+    "tag": false,
+    "push": false
+  },
   "github": false,
   "npm": false
 }

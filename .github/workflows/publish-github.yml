@@ -66,7 +66,7 @@ jobs:
 
       - name: Update pre-release version
         if: ${{ inputs.pre-release }}
-        run: pnpm prerelease:${{ inputs.release-type }}
+        run: pnpm release:pre${{ inputs.release-type }}
 
       - name: Update release version
         if: ${{ ! inputs.pre-release }}
@@ -75,14 +75,14 @@ jobs:
       - name: Get the new version
         id: version
         run: |
-          export NEW_VERSION=$(node -pe "require('./website/package.json').version")
+          export NEW_VERSION=$(node -pe "require('./package.json').version")
           echo "version=$NEW_VERSION" >> $GITHUB_OUTPUT
 
       - name: Generate Change log
         if: ${{ steps.version.outputs.version != null }}
         id: changelog
         run: |
-          export CHANGELOG=$(pnpm --silent changelog --from v${{ steps.old_version.outputs.previous_version }} --next-version v${{ steps.version.outputs.version }})
+          export CHANGELOG=$(pnpm --silent changelog --from ${{ steps.old_version.outputs.previous_version }} --next-version ${{ steps.version.outputs.version }})
           delimiter="$(openssl rand -hex 8)"
           echo "changes<<${delimiter}" >> "${GITHUB_OUTPUT}"
           echo "$CHANGELOG" >> "${GITHUB_OUTPUT}"

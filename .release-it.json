@@ -12,7 +12,5 @@
   "github": {
     "release": false
   },
-  "npm": {
-    "publish": false
-  }
+  "npm": false
 }

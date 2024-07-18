@@ -50,7 +50,7 @@ jobs:
           cache: 'pnpm'
 
       - name: Install dependencies
-        run: pnpm i
+        run: pnpm install && pnpm build
 
       - name: Get the previous version
         id: old_version

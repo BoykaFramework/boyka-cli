@@ -15,8 +15,8 @@ importers:
         specifier: ^2.2.2
         version: 2.2.2
       '@inquirer/select':
-        specifier: ^2.3.11
-        version: 2.3.11
+        specifier: ^2.4.0
+        version: 2.4.0
       chalk:
         specifier: ^5.3.0
         version: 5.3.0
@@ -79,8 +79,8 @@ importers:
         specifier: ^5.2.1
         version: 5.2.1(@types/eslint@8.56.10)(eslint-config-prettier@9.1.0(eslint@9.7.0))(eslint@9.7.0)(prettier@3.3.3)
       husky:
-        specifier: ^9.0.11
-        version: 9.0.11
+        specifier: ^9.1.0
+        version: 9.1.0
       lerna-changelog:
         specifier: ^2.2.0
         version: 2.2.0
@@ -191,8 +191,8 @@ packages:
     resolution: {integrity: sha512-VjkzYSVH0606nLi9HHiSb4QYs2idwRgneiMoFoTAIwQ1Qwx6OIDugOYLtLta3gP8AWZx7qUvgDtj+/SJuiiKuQ==}
     engines: {node: '>=18'}
 
-  '@inquirer/select@2.3.11':
-    resolution: {integrity: sha512-DebGErUSCyzwIP2zx3hs1X4TAzxSl/yNHzuYGE6KFkHq3ubg+5dJZacFxN1C1eBkJvQ0XBWGpY6MTzHsJbxkpw==}
+  '@inquirer/select@2.4.0':
+    resolution: {integrity: sha512-iU1eRkHirVNs43zWk6anMIMKc7tCXlJ+I5DcpIV7JzMe+45TuPPOGGCgeGIkZ4xYJ3cXdFoh7GJpm84PNC8veg==}
     engines: {node: '>=18'}
 
   '@inquirer/type@1.5.0':
@@ -1415,8 +1415,8 @@ packages:
   humanize-ms@1.2.1:
     resolution: {integrity: sha512-Fl70vYtsAFb/C06PTS9dZBo7ihau+Tu/DNCk/OyHhea07S+aeMWpFFkUaXRa8fI+ScZbEI8dfSxwY7gxZ9SAVQ==}
 
-  husky@9.0.11:
-    resolution: {integrity: sha512-AB6lFlbwwyIqMdHYhwPe+kjOC3Oc5P3nThEoW/AaO2BX3vJDjWPFxYLxokUZOo6RNX20He3AaT8sESs9NJcmEw==}
+  husky@9.1.0:
+    resolution: {integrity: sha512-8XCjbomYTGdNF2h50dio3T3zghmZ9f/ZNzr99YwSkvDdhEjJGs5qzy8tbFx+SG8yCx2wn9nMVfZxVrr/yT8gNQ==}
     engines: {node: '>=18'}
     hasBin: true
 
@@ -2948,7 +2948,7 @@ snapshots:
       '@inquirer/core': 9.0.3
       '@inquirer/type': 1.5.0
 
-  '@inquirer/select@2.3.11':
+  '@inquirer/select@2.4.0':
     dependencies:
       '@inquirer/core': 9.0.3
       '@inquirer/figures': 1.0.4
@@ -4430,7 +4430,7 @@ snapshots:
     dependencies:
       ms: 2.1.3
 
-  husky@9.0.11: {}
+  husky@9.1.0: {}
 
   iconv-lite@0.4.24:
     dependencies:

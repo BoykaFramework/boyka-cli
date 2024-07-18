@@ -4,6 +4,9 @@ on:
   pull_request:
     branches:
       - main
+    types:
+      - closed
+      - opened
 
 concurrency:
   group: boyka-cli-labeler-${{ github.ref }}

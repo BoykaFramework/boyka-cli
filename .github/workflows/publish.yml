@@ -12,20 +12,13 @@ on:
           - minor
           - patch
         default: minor
-      pre-release:
-        description: Is this a pre-release?
-        type: boolean
-        default: false
-      draft:
-        description: Is this a draft release?
-        type: boolean
-        default: false
 
 env:
   GITHUB_AUTH: ${{ secrets.PUSH_TOKEN }}
   PUSH_TOKEN: ${{ secrets.PUSH_TOKEN }}
   GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
   GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
 jobs:
   prepare:
@@ -49,6 +42,7 @@ jobs:
         with:
           node-version: 18
           cache: 'pnpm'
+          registry-url: 'https://registry.npmjs.org'
 
       - name: Install dependencies
         run: pnpm install && pnpm build
@@ -56,21 +50,10 @@ jobs:
       - name: Get the previous version
         id: old_version
         run: |
-          export PRE_RELEASE=${{ inputs.pre-release }}
-          if $PRE_RELEASE ; then
-            export OLD_VERSION=$(git describe --tags $(git rev-list --tags --max-count=1))
-            echo "previous_version=${OLD_VERSION:1}" >> $GITHUB_OUTPUT
-          else
-            export OLD_VERSION=$(node -pe "require('./package.json').version")
-            echo "previous_version=${OLD_VERSION}" >> $GITHUB_OUTPUT
-          fi
+          export OLD_VERSION=$(node -pe "require('./package.json').version")
+          echo "previous_version=${OLD_VERSION}" >> $GITHUB_OUTPUT
 
-      - name: Update pre-release version
-        if: ${{ inputs.pre-release }}
-        run: pnpm release:pre${{ inputs.release-type }}
-
-      - name: Update release version
-        if: ${{ ! inputs.pre-release }}
+      - name: Update the release version and publish to NPM
         run: pnpm release:${{ inputs.release-type }}
 
       - name: Get the new version
@@ -163,8 +146,8 @@ jobs:
         with:
           tag_name: ${{ needs.prepare.outputs.new-version }}
           name: Version ${{ needs.prepare.outputs.new-version }}
-          prerelease: ${{ inputs.pre-release }}
-          draft: ${{ inputs.draft }}
+          prerelease: false
+          draft: false
           body: ${{ needs.prepare.outputs.changelog }}
           discussion_category_name: Announcements
           generate_release_notes: false

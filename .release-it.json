@@ -11,5 +11,7 @@
     "push": false
   },
   "github": false,
-  "npm": false
+  "npm": {
+    "publish": true
+  }
 }

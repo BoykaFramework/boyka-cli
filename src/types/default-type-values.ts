@@ -6,6 +6,7 @@ import {
   DelaySetting,
   DeviceSetting,
   Dimension,
+  FrameworkSetting,
   IOSVideoSetting,
   MobileSetting,
   ScreenshotSetting,
@@ -198,4 +199,8 @@ export const defaultNewApiSetting = (configName: string): { [key: string]: ApiSe
       ...defaultApiSetting,
     },
   };
+};
+
+export const defaultFrameworkSetting: FrameworkSetting = {
+  $schema: 'https://json.schemastore.org/boyka-config.json',
 };

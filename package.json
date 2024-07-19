@@ -17,7 +17,7 @@
     "format": "prettier --check src/**/*.ts",
     "format:fix": "prettier --write src/**/*.ts",
     "dev": "tsc -w",
-    "build": "tsc && husky",
+    "build": "tsc",
     "changelog": "lerna-changelog",
     "beta": "pnpm stable --preRelease=beta",
     "stable": "release-it --ci",
@@ -26,7 +26,8 @@
     "release:patch": "pnpm stable patch",
     "release:premajor": "pnpm beta premajor",
     "release:preminor": "pnpm beta preminor",
-    "release:prepatch": "pnpm beta prepatch"
+    "release:prepatch": "pnpm beta prepatch",
+    "prepare": "husky"
   },
   "keywords": [
     "typescript",

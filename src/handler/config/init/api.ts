@@ -1,6 +1,9 @@
 import { FrameworkSetting, UserInput } from '../../../types/types.js';
 import { updateApi } from '../../update/api.js';
-import { defaultNewApiSetting } from '../../../types/default-type-values.js';
+import {
+  defaultFrameworkSetting,
+  defaultNewApiSetting,
+} from '../../../types/default-type-values.js';
 import { ArgumentsCamelCase } from 'yargs';
 import { createConfigFile, loadJSON } from '../../../utils/json.js';
 import { configBlockExists, createConfigMessages, executeTask } from '../../../utils/constants.js';
@@ -9,6 +12,7 @@ import { BoykaError } from '../../../utils/boyka-error.js';
 
 export const createApiSetting = (inputs: UserInput) => {
   const frameworkSetting: FrameworkSetting = {
+    ...defaultFrameworkSetting,
     api: {
       ...defaultNewApiSetting(inputs.config_name),
     },

@@ -49,7 +49,6 @@ const createProjectFile = async (
 ) => {
   try {
     const parsedContent = await engine.parseAndRender(content, project);
-    console.log({ project, folder, fileName, parsedContent });
     const filePath = path.resolve(project.path, folder, fileName);
     if (!fs.existsSync(filePath)) {
       fs.writeFileSync(filePath, parsedContent);

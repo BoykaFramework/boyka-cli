@@ -65,7 +65,6 @@
     "husky": "^9.1.1",
     "lerna-changelog": "^2.2.0",
     "lint-staged": "^15.2.7",
-    "liquidjs": "^10.15.0",
     "prettier": "^3.3.3",
     "release-it": "^17.6.0",
     "release-it-pnpm": "^4.6.3",
@@ -80,6 +79,7 @@
     "figlet": "^1.7.0",
     "gradient-string": "^2.0.2",
     "nanospinner": "^1.1.0",
+    "liquidjs": "^10.15.0",
     "yargs": "^17.7.2"
   },
   "lint-staged": {

@@ -12,6 +12,8 @@
   },
   "github": false,
   "npm": {
-    "publish": true
+    "publish": true,
+    "skipChecks": true,
+    "publishPath": "dist"
   }
 }

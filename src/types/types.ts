@@ -271,3 +271,9 @@ export type UserInput = {
     };
   };
 };
+
+export type TemplateFile = {
+  fileName: string;
+  folder?: string;
+  content: string;
+};

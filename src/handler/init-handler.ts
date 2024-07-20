@@ -12,6 +12,8 @@ import {
   projectFolderExists,
   successMavenProject,
 } from '../utils/messages.js';
+import { TemplateFile } from '../types/types.js';
+import { templates } from '../templates/template-list.js';
 
 type ProjectProps = {
   path: string;
@@ -19,19 +21,14 @@ type ProjectProps = {
   artifactId: string;
 };
 
-type TemplateProps = {
-  root: string;
-  extension: string;
-};
-
 const generateProject = async (
   engine: Liquid,
   project: ProjectProps,
-  { root, extension }: TemplateProps,
   isSampleTest: boolean,
+  templates: TemplateFile[],
 ) => {
   if (isSampleTest) {
-    await createProjectFiles(engine, { root, extension }, project);
+    templates.forEach(async (template) => await createProjectFile(engine, project, template));
   }
 };
 
@@ -45,24 +42,18 @@ const createProjectFolder = (path: string) => {
   fs.mkdirSync(path, { recursive: true });
 };
 
-const createProjectFiles = async (
+const createProjectFile = async (
   engine: Liquid,
-  { root, extension }: TemplateProps,
   project: ProjectProps,
-  priorityFile?: string,
+  { folder = '', content, fileName }: TemplateFile,
 ) => {
   try {
-    const dirFiles = fs.readdirSync(root, { recursive: true, encoding: 'utf-8' });
-    dirFiles?.forEach(async (file: string) => {
-      const fileName = file.substring(0, file.lastIndexOf('.'));
-      if (file.endsWith(extension) && (!priorityFile || priorityFile === fileName)) {
-        const content = await engine.renderFile(file, project);
-        const filePath = path.join(project.path, fileName);
-        if (!fs.existsSync(filePath)) {
-          fs.writeFileSync(filePath, content);
-        }
-      }
-    });
+    const parsedContent = await engine.parseAndRender(content, project);
+    console.log({ project, folder, fileName, parsedContent });
+    const filePath = path.resolve(project.path, folder, fileName);
+    if (!fs.existsSync(filePath)) {
+      fs.writeFileSync(filePath, parsedContent);
+    }
   } catch (err) {
     throw new BoykaError(incorrectTemplatePath(err.message));
   }
@@ -90,14 +81,8 @@ export const handleInit = async (argv: ArgumentsCamelCase) => {
   } satisfies ProjectProps;
 
   createProjectFolder(resourcesPath);
-  await createProjectFiles(
-    engine,
-    { root: templateRoot, extension: templateExt },
-    project,
-    'pom.xml',
-  );
   await createConfigJson(inputs, resourcesPath);
-  await generateProject(engine, project, { root: templateRoot, extension: templateExt }, true);
+  await generateProject(engine, project, inputs.generate_sample, templates);
 
   console.log(warn(successMavenProject));
   console.log(warn(mavenCommandSuggestion(projectName)));

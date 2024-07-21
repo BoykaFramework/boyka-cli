@@ -2,7 +2,7 @@
   "version": "0.8.0",
   "npmClient": "pnpm",
   "changelog": {
-    "repo": "BoykaFramework/boyka-framework",
+    "repo": "BoykaFramework/boyka-cli",
     "labels": {
       ":boom: pr: breaking change": ":boom: Breaking Change",
       ":rocket: pr: new feature": ":rocket: New Feature",

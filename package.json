@@ -18,15 +18,10 @@
     "format:fix": "prettier --write src/**/*.ts",
     "dev": "tsc -w",
     "build": "tsc",
-    "changelog": "lerna-changelog",
-    "beta": "pnpm stable --preRelease=beta",
     "stable": "release-it --ci",
-    "release:major": "pnpm stable major",
-    "release:minor": "pnpm stable minor",
-    "release:patch": "pnpm stable patch",
-    "release:premajor": "pnpm beta premajor",
-    "release:preminor": "pnpm beta preminor",
-    "release:prepatch": "pnpm beta prepatch",
+    "release.patch": "pnpm release.ci patch",
+    "release.minor": "pnpm release.ci minor",
+    "release.major": "pnpm release.ci major",
     "prepare": "husky"
   },
   "keywords": [

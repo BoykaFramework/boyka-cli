@@ -18,10 +18,10 @@
     "format:fix": "prettier --write src/**/*.ts",
     "dev": "tsc -w",
     "build": "tsc",
-    "stable": "release-it --ci",
-    "release.patch": "pnpm release.ci patch",
-    "release.minor": "pnpm release.ci minor",
-    "release.major": "pnpm release.ci major",
+    "release": "release-it --ci",
+    "release.patch": "pnpm release patch",
+    "release.minor": "pnpm release minor",
+    "release.major": "pnpm release major",
     "prepare": "husky"
   },
   "keywords": [

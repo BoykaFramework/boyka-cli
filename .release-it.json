@@ -23,8 +23,6 @@
     }
   },
   "npm": {
-    "publish": true,
-    "skipChecks": true,
-    "publishPath": "dist"
+    "publish": true
   }
 }

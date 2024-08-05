@@ -1,6 +1,10 @@
 import { FrameworkSetting, UserInput, WebSetting } from '../../../types/types.js';
 import { updateWeb } from '../../update/web.js';
-import { defaultNewWebSetting, defaultUiSetting } from '../../../types/default-type-values.js';
+import {
+  defaultFrameworkSetting,
+  defaultNewWebSetting,
+  defaultUiSetting,
+} from '../../../types/default-type-values.js';
 import { ArgumentsCamelCase } from 'yargs';
 import { createConfigFile, loadJSON } from '../../../utils/json.js';
 import { configBlockExists, createConfigMessages, executeTask } from '../../../utils/constants.js';
@@ -9,6 +13,7 @@ import { getWebInputs } from '../../user-inputs.js';
 
 export const createWebSetting = (inputs: UserInput) => {
   const frameworkSetting: FrameworkSetting = {
+    ...defaultFrameworkSetting,
     ui: {
       ...defaultUiSetting,
       web: {

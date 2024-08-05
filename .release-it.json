@@ -1,28 +1,17 @@
 {
+  "$schema": "https://unpkg.com/release-it@17/schema/release-it.json",
   "plugins": {
-    "@release-it/conventional-changelog": {
-      "preset": {
-        "name": "conventionalcommits",
-        "types": [
-          { "type": "feat", "section": ":rocket: New Feature" },
-          { "type": "fix", "section": ":bug: Bug Fix" },
-          { "type": "chore", "section": ":nail_care: Polish" },
-          { "type": "docs", "section": ":memo: Documentation" },
-          { "type": "style", "section": ":nail_care: Polish" },
-          { "type": "refactor", "section": ":nail_care: Polish" },
-          { "type": "perf", "section": ":running_woman: Performance" },
-          { "type": "test", "section": ":running_woman: Performance" },
-          { "type": "ci", "section": ":house: Internal" },
-          { "type": "build", "section": ":house: Internal" },
-          { "type": "revert", "section": ":nail_care: Polish" }
-        ]
-      },
-      "infile": "CHANGELOG.md",
-      "header": "# Changelog",
-      "writerOpts": {
-        "groupBy": "scope"
-      }
+    "@release-it-plugins/lerna-changelog": {
+      "infile": "CHANGELOG.md"
     }
+  },
+  "git": {
+    "requireBranch": "main",
+    "commitMessage": "chore: release v${version}",
+    "commit": true,
+    "tag": true,
+    "push": true,
+    "requireCleanWorkingDir": true
   },
   "github": {
     "release": true,
@@ -32,14 +21,6 @@
       "issue": ":rocket: _This issue has been resolved in v${version}. See [${releaseName}](${releaseUrl}) for release notes._",
       "pr": ":rocket: _This pull request is included in v${version}. See [${releaseName}](${releaseUrl}) for release notes._"
     }
-  },
-  "git": {
-    "commit": true,
-    "tag": true,
-    "push": true,
-    "commitMessage": "chore: release v${version}",
-    "requireCleanWorkingDir": true,
-    "requireBranch": "main"
   },
   "npm": {
     "publish": true

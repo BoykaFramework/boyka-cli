@@ -4,6 +4,7 @@ import {
   defaultUiSetting,
   defaultNewMobileSetting,
   defaultDelaySetting,
+  defaultFrameworkSetting,
 } from '../../../types/default-type-values.js';
 import { ArgumentsCamelCase } from 'yargs';
 import { createConfigFile, loadJSON } from '../../../utils/json.js';
@@ -13,6 +14,7 @@ import { getMobileInputs } from '../../user-inputs.js';
 
 export const createMobileSetting = (inputs: UserInput) => {
   const frameworkSetting: FrameworkSetting = {
+    ...defaultFrameworkSetting,
     ui: {
       delay: {
         ...defaultDelaySetting,

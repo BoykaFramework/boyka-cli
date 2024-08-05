@@ -14,6 +14,7 @@ import {
 } from './enum-types.js';
 
 export type FrameworkSetting = {
+  $schema: string;
   listeners_package?: string;
   ui?: UiSetting;
   api?: { [key: string]: ApiSetting };
@@ -269,4 +270,10 @@ export type UserInput = {
       };
     };
   };
+};
+
+export type TemplateFile = {
+  fileName: string;
+  folder?: string;
+  content: string;
 };

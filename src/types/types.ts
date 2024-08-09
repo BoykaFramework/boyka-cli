@@ -276,4 +276,7 @@ export type TemplateFile = {
   fileName: string;
   folder?: string;
   content: string;
+  resource?: boolean;
+  main?: boolean;
+  test?: boolean;
 };

@@ -1,6 +1,6 @@
 import { TemplateFile } from '../types/types.js';
 
-export const gitignore = {
+export const GitIgnore = {
   fileName: '.gitignore',
   content: `target/
 .idea/

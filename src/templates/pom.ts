@@ -1,6 +1,6 @@
 import { TemplateFile } from '../types/types.js';
 
-export const pomFile = {
+export const PomFile = {
   fileName: 'pom.xml',
   content: `<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"

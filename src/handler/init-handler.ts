@@ -21,14 +21,22 @@ type ProjectProps = {
   artifactId: string;
 };
 
+const generateFiles = async (engine: Liquid, project: ProjectProps, templates: TemplateFile[]) => {
+  templates.forEach(async (template) => await createProjectFile(engine, project, template));
+};
+
 const generateProject = async (
   engine: Liquid,
   project: ProjectProps,
   isSampleTest: boolean,
   templates: TemplateFile[],
 ) => {
+  const requiredFiles = templates.filter((template) => !template.test && !template.main);
+  await generateFiles(engine, project, requiredFiles);
+
   if (isSampleTest) {
-    templates.forEach(async (template) => await createProjectFile(engine, project, template));
+    const sampleFiles = templates.filter((template) => template.main || template.test);
+    await generateFiles(engine, project, sampleFiles);
   }
 };
 
@@ -38,18 +46,34 @@ const checkProjectFolderCreated = (path: string) => {
   }
 };
 
-const createProjectFolder = (path: string) => {
+const createFolder = (path: string) => {
   fs.mkdirSync(path, { recursive: true });
+};
+
+const getParentFolder = (
+  { path: projectPath, groupId }: ProjectProps,
+  { main, test, resource, folder }: Omit<TemplateFile, 'fileName' | 'content'>,
+) => {
+  const parentFolder = path.join(
+    projectPath,
+    main && !test ? '/src/main/' : !main && test ? '/src/test/' : '',
+    resource ? '/resources/' : main || test ? '/java/' : '',
+    groupId.replaceAll('.', '/'),
+    folder,
+  );
+  createFolder(parentFolder);
+  return parentFolder;
 };
 
 const createProjectFile = async (
   engine: Liquid,
   project: ProjectProps,
-  { folder = '', content, fileName }: TemplateFile,
+  { folder = '', content, fileName, main, resource, test }: TemplateFile,
 ) => {
   try {
     const parsedContent = await engine.parseAndRender(content, project);
-    const filePath = path.resolve(project.path, folder, fileName);
+    const parentFolder = getParentFolder(project, { folder, main, resource, test });
+    const filePath = path.resolve(parentFolder, fileName);
     if (!fs.existsSync(filePath)) {
       fs.writeFileSync(filePath, parsedContent);
     }
@@ -66,20 +90,14 @@ export const handleInit = async (argv: ArgumentsCamelCase) => {
   checkProjectFolderCreated(projectPath);
   const inputs = await getInitInputs();
 
-  const templateRoot = path.join(process.cwd(), '/template');
-  const templateExt = '.liquid';
-
-  const engine = new Liquid({
-    root: templateRoot,
-    extname: templateExt,
-  });
+  const engine = new Liquid();
   const project = {
     groupId: inputs.group_id,
     artifactId: projectName,
     path: projectPath,
   } satisfies ProjectProps;
 
-  createProjectFolder(resourcesPath);
+  createFolder(resourcesPath);
   await createConfigJson(inputs, resourcesPath);
   await generateProject(engine, project, inputs.generate_sample, templates);
 

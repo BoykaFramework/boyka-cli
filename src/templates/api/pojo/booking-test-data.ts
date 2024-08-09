@@ -1,4 +1,10 @@
-package {{ groupId }}.api.pojo;
+import { TemplateFile } from '../../../types/types.js';
+
+export const BookingTestDataPojo = {
+  fileName: 'BookingTestData.java',
+  folder: '/api/pojo/',
+  main: true,
+  content: `package {{ groupId }}.api.pojo;
 
 import lombok.Data;
 import lombok.ToString;
@@ -15,3 +21,5 @@ public class BookingTestData {
     private Double srNo;
     private Double totalPrice;
 }
+`,
+} satisfies TemplateFile;

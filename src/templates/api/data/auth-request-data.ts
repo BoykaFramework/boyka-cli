@@ -1,4 +1,10 @@
-package {{ groupId }}.api.data;
+import { TemplateFile } from '../../../types/types.js';
+
+export const AuthRequestData = {
+  fileName: 'AuthRequestData.java',
+  main: true,
+  folder: '/api/data',
+  content: `package {{ groupId }}.api.data;
 
 import {{ groupId }}.api.pojo.AuthToken;
 import lombok.experimental.UtilityClass;
@@ -12,3 +18,5 @@ public final class AuthRequestData {
             .build ();
     }
 }
+`,
+} satisfies TemplateFile;

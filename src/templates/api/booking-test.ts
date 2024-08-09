@@ -1,4 +1,10 @@
-package {{ groupId }}.api;
+import { TemplateFile } from '../../types/types.js';
+
+export const BookingTest = {
+  fileName: 'BookingTest.java',
+  test: true,
+  folder: 'api',
+  content: `package {{ groupId }}.api;
 
 import static io.github.boykaframework.enums.PlatformType.API;
 import static io.github.boykaframework.manager.ParallelSession.clearSession;
@@ -86,7 +92,8 @@ public class BookingTest {
             .isEqualTo (this.newBooking.getLastname ());
     }
 
-    @Test (description = "Tests for file not found exception", expectedExceptions = FrameworkError.class)
+    @Test (description = "Tests for file not found exception",
+    expectedExceptions = FrameworkError.class)
     public void testJsonSchemaFileException () {
         final var request = BookingRequest.createBooking (this.newBooking);
         final var response = ApiActions.withRequest (request)
@@ -103,7 +110,8 @@ public class BookingTest {
     public void testUpdateBooking () {
         final var updateBookingData = this.newBooking;
 
-        final var request = BookingRequest.updateBooking (getSession ().getSharedData (BOOKING_ID), updateBookingData);
+        final var request = BookingRequest.updateBooking (getSession ()
+        .getSharedData (BOOKING_ID), updateBookingData);
         final var response = ApiActions.withRequest (request)
             .execute ();
         response.verifyStatusCode ()
@@ -118,7 +126,8 @@ public class BookingTest {
     public void testUpdatePartialBooking () {
         final var partialBookingData = BookingRequestData.getPartialBookingData ();
 
-        final var request = BookingRequest.updatePartialBooking (getSession ().getSharedData (BOOKING_ID),
+        final var request = BookingRequest.updatePartialBooking (getSession ()
+        .getSharedData (BOOKING_ID),
             partialBookingData);
         final var response = ApiActions.withRequest (request)
             .execute ();
@@ -130,3 +139,5 @@ public class BookingTest {
             .isEqualTo (partialBookingData.getTotalprice ());
     }
 }
+`,
+} satisfies TemplateFile;

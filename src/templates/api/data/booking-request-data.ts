@@ -1,4 +1,10 @@
-package {{ groupId }}.api.data;
+import { TemplateFile } from '../../../types/types.js';
+
+export const BookingRequestData = {
+  fileName: 'BookingRequestData.java',
+  main: true,
+  folder: '/api/data',
+  content: `package {{ groupId }}.api.data;
 
 import java.text.SimpleDateFormat;
 import java.util.concurrent.TimeUnit;
@@ -43,3 +49,5 @@ public final class BookingRequestData {
         // Utility Class.
     }
 }
+`,
+} satisfies TemplateFile;

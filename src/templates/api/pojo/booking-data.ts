@@ -1,4 +1,10 @@
-package {{ groupId }}.api.pojo;
+import { TemplateFile } from '../../../types/types.js';
+
+export const BookingDataPojo = {
+  fileName: 'BookingData.java',
+  folder: '/api/data/',
+  main: true,
+  content: `package {{ groupId }}.api.pojo;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -15,3 +21,5 @@ public class BookingData {
     private String       lastname;
     private int          totalprice;
 }
+`,
+} satisfies TemplateFile;

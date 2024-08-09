@@ -1,4 +1,10 @@
-package {{ groupId }}.api.requests;
+import { TemplateFile } from '../../../types/types.js';
+
+export const BookingRequest = {
+  fileName: 'BookingRequest.java',
+  folder: '/api/request/',
+  main: true,
+  content: `package {{ groupId }}.api.requests;
 
 import static {{ groupId }}.api.data.AuthRequestData.getTokenData;
 import static io.github.boykaframework.actions.api.ApiActions.withRequest;
@@ -31,7 +37,7 @@ public final class BookingRequest {
         return createRequest ().method (DELETE)
             .header ("Content-Type", "application/json")
             .header ("Cookie", format ("token={0}", generateToken ()))
-            .path ("/booking/${id}")
+            .path ("/booking/$\{id}")
             .pathParam ("id", id)
             .create ();
     }
@@ -39,7 +45,7 @@ public final class BookingRequest {
     public static ApiRequest getBooking (final String id) {
         return createRequest ().method (GET)
             .header ("Accept", "application/json")
-            .path ("/booking/${id}")
+            .path ("/booking/$\{id}")
             .pathParam ("id", id)
             .create ();
     }
@@ -48,7 +54,7 @@ public final class BookingRequest {
         return createRequest ().method (PUT)
             .header ("Accept", "application/json")
             .header ("Cookie", format ("token={0}", generateToken ()))
-            .path ("/booking/${id}")
+            .path ("/booking/$\{id}")
             .bodyObject (requestBody)
             .pathParam ("id", id)
             .create ();
@@ -58,7 +64,7 @@ public final class BookingRequest {
         return createRequest ().method (PATCH)
             .header ("Accept", "application/json")
             .header ("Cookie", format ("token={0}", generateToken ()))
-            .path ("/booking/${id}")
+            .path ("/booking/$\{id}")
             .bodyObject (requestBody)
             .pathParam ("id", id)
             .create ();
@@ -76,3 +82,5 @@ public final class BookingRequest {
         return response.getResponseData ("token");
     }
 }
+`,
+} satisfies TemplateFile;

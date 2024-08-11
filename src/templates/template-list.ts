@@ -8,10 +8,12 @@ import { BookingTestDataPojo } from './api/pojo/booking-test-data.js';
 import { BookingRequest } from './api/requests/booking-request.js';
 import { GitIgnore } from './gitignore.js';
 import { PomFile } from './pom.js';
+import { ApiTestSuite } from './test-suite/testng-api.js';
 
 export const templates = [
   PomFile,
   GitIgnore,
+  ApiTestSuite,
   BookingTest,
   AuthRequestData,
   BookingRequestData,

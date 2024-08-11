@@ -19,6 +19,7 @@ type ProjectProps = {
   path: string;
   groupId: string;
   artifactId: string;
+  configName: string;
 };
 
 const generateFiles = async (engine: Liquid, project: ProjectProps, templates: TemplateFile[]) => {
@@ -54,11 +55,13 @@ const getParentFolder = (
   { path: projectPath, groupId }: ProjectProps,
   { main, test, resource, folder }: Omit<TemplateFile, 'fileName' | 'content'>,
 ) => {
+  const sourcePath = main && !test ? '/src/main/' : !main && test ? '/src/test/' : '';
+  const resourcePath = resource ? '/resources/' : main || test ? '/java/' : '';
   const parentFolder = path.join(
     projectPath,
-    main && !test ? '/src/main/' : !main && test ? '/src/test/' : '',
-    resource ? '/resources/' : main || test ? '/java/' : '',
-    groupId.replaceAll('.', '/'),
+    sourcePath,
+    resourcePath,
+    sourcePath === '' ? '' : groupId.replaceAll('.', '/'),
     folder,
   );
   createFolder(parentFolder);
@@ -95,6 +98,7 @@ export const handleInit = async (argv: ArgumentsCamelCase) => {
     groupId: inputs.group_id,
     artifactId: projectName,
     path: projectPath,
+    configName: inputs.config_name,
   } satisfies ProjectProps;
 
   createFolder(resourcesPath);

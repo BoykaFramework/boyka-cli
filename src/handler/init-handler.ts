@@ -30,13 +30,14 @@ const generateProject = async (
   engine: Liquid,
   project: ProjectProps,
   isSampleTest: boolean,
-  templates: TemplateFile[],
+  platform: string,
+  subPlatform: string,
 ) => {
-  const requiredFiles = templates.filter((template) => !template.test && !template.main);
+  const requiredFiles = templates.required;
   await generateFiles(engine, project, requiredFiles);
 
   if (isSampleTest) {
-    const sampleFiles = templates.filter((template) => template.main || template.test);
+    const sampleFiles = templates.platform[platform] || templates.platform[subPlatform];
     await generateFiles(engine, project, sampleFiles);
   }
 };
@@ -103,7 +104,13 @@ export const handleInit = async (argv: ArgumentsCamelCase) => {
 
   createFolder(resourcesPath);
   await createConfigJson(inputs, resourcesPath);
-  await generateProject(engine, project, inputs.generate_sample, templates);
+  await generateProject(
+    engine,
+    project,
+    inputs.generate_sample,
+    inputs.platform.toLowerCase(),
+    inputs.sub_platform?.toLowerCase(),
+  );
 
   console.log(warn(successMavenProject));
   console.log(warn(mavenCommandSuggestion(projectName)));

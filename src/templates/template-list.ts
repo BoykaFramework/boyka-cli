@@ -9,17 +9,25 @@ import { BookingRequest } from './api/requests/booking-request.js';
 import { GitIgnore } from './gitignore.js';
 import { PomFile } from './pom.js';
 import { ApiTestSuite } from './test-suite/testng-api.js';
+import { WebTestSuite } from './test-suite/testng-web.js';
+import { LoginActions } from './web/actions/login-actions.js';
+import { LoginTest } from './web/login-test.js';
+import { LoginPage } from './web/pages/login-page.js';
 
-export const templates = [
-  PomFile,
-  GitIgnore,
-  ApiTestSuite,
-  BookingTest,
-  AuthRequestData,
-  BookingRequestData,
-  AuthTokenPojo,
-  BookingDataPojo,
-  BookingDatesPojo,
-  BookingTestDataPojo,
-  BookingRequest,
-];
+export const templates = {
+  required: [PomFile, GitIgnore],
+  platform: {
+    web: [WebTestSuite, LoginPage, LoginActions, LoginTest],
+    api: [
+      ApiTestSuite,
+      BookingTest,
+      AuthRequestData,
+      BookingRequestData,
+      AuthTokenPojo,
+      BookingDataPojo,
+      BookingDatesPojo,
+      BookingTestDataPojo,
+      BookingRequest,
+    ],
+  },
+};

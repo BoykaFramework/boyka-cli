@@ -1,6 +1,6 @@
 import { TemplateFile } from '../types/types.js';
 
-export const pomFile = {
+export const PomFile = {
   fileName: 'pom.xml',
   content: `<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
@@ -17,10 +17,10 @@ export const pomFile = {
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <boyka.version>1.2.0</boyka.version>
-        <lombok.version>1.18.32</lombok.version>
+        <boyka.version>2.0.0</boyka.version>
+        <lombok.version>1.18.34</lombok.version>
         <testng.version>7.10.2</testng.version>
-        <faker.version>2.2.2</faker.version>
+        <faker.version>2.3.0</faker.version>
     </properties>
 
     <dependencies>

@@ -20,6 +20,7 @@ type ProjectProps = {
   groupId: string;
   artifactId: string;
   configName: string;
+  platform: string;
 };
 
 const generateFiles = async (engine: Liquid, project: ProjectProps, templates: TemplateFile[]) => {
@@ -37,7 +38,9 @@ const generateProject = async (
   await generateFiles(engine, project, requiredFiles);
 
   if (isSampleTest) {
-    const sampleFiles = templates.platform[platform] || templates.platform[subPlatform];
+    const sampleFiles =
+      templates.platform[platform] ||
+      templates.platform[subPlatform === 'web' ? subPlatform : 'mobile'];
     await generateFiles(engine, project, sampleFiles);
   }
 };
@@ -74,15 +77,15 @@ const createProjectFile = async (
   project: ProjectProps,
   { folder = '', content, fileName, main, resource, test }: TemplateFile,
 ) => {
+  const parsedContent = await engine.parseAndRender(content, project);
+  const parentFolder = getParentFolder(project, { folder, main, resource, test });
+  const filePath = path.resolve(parentFolder, fileName);
   try {
-    const parsedContent = await engine.parseAndRender(content, project);
-    const parentFolder = getParentFolder(project, { folder, main, resource, test });
-    const filePath = path.resolve(parentFolder, fileName);
     if (!fs.existsSync(filePath)) {
       fs.writeFileSync(filePath, parsedContent);
     }
   } catch (err) {
-    throw new BoykaError(incorrectTemplatePath(err.message));
+    throw new BoykaError(incorrectTemplatePath(err.message, filePath));
   }
 };
 
@@ -100,6 +103,7 @@ export const handleInit = async (argv: ArgumentsCamelCase) => {
     artifactId: projectName,
     path: projectPath,
     configName: inputs.config_name,
+    platform: inputs.sub_platform,
   } satisfies ProjectProps;
 
   createFolder(resourcesPath);

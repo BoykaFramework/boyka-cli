@@ -2,7 +2,7 @@ import { TemplateFile } from '../../../types/types.js';
 
 export const AuthRequestData = {
   fileName: 'AuthRequestData.java',
-  main: true,
+  test: true,
   folder: '/api/data',
   content: `package {{ groupId }}.api.data;
 

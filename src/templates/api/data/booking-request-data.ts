@@ -2,7 +2,7 @@ import { TemplateFile } from '../../../types/types.js';
 
 export const BookingRequestData = {
   fileName: 'BookingRequestData.java',
-  main: true,
+  test: true,
   folder: '/api/data',
   content: `package {{ groupId }}.api.data;
 

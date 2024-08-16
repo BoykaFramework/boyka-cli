@@ -3,7 +3,7 @@ import { TemplateFile } from '../../../types/types.js';
 export const BookingRequest = {
   fileName: 'BookingRequest.java',
   folder: '/api/request/',
-  main: true,
+  test: true,
   content: `package {{ groupId }}.api.requests;
 
 import static {{ groupId }}.api.data.AuthRequestData.getTokenData;

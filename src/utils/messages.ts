@@ -49,8 +49,10 @@ And resolve the dependencies by running,
 
 'mvn clean install -DskipTests'`;
 
-const incorrectTemplatePath = (message: string) =>
-  `Error encountered reading template directory: ${message}`;
+const incorrectTemplatePath = (message: string, path: string) =>
+  `Error encountered creating file: ${path}
+
+Message: ${message}`;
 const projectFolderExists = (path: string) => `Boyka Project is already created at [${path}]...`;
 
 export {

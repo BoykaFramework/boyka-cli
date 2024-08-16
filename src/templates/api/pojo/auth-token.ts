@@ -3,7 +3,7 @@ import { TemplateFile } from '../../../types/types.js';
 export const AuthTokenPojo = {
   fileName: 'AuthToken.java',
   folder: '/api/pojo',
-  main: true,
+  test: true,
   content: `package {{ groupId }}.api.pojo;
 
 import lombok.Builder;

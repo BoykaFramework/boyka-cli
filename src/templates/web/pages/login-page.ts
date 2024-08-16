@@ -3,7 +3,7 @@ import { TemplateFile } from '../../../types/types.js';
 export const LoginPage = {
   fileName: 'LoginPage.java',
   folder: '/web/pages/',
-  main: true,
+  test: true,
   content: `package {{ groupId }}.web.pages;
 
 import static org.openqa.selenium.By.id;

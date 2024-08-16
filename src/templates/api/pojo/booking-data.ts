@@ -3,7 +3,7 @@ import { TemplateFile } from '../../../types/types.js';
 export const BookingDataPojo = {
   fileName: 'BookingData.java',
   folder: '/api/data/',
-  main: true,
+  test: true,
   content: `package {{ groupId }}.api.pojo;
 
 import lombok.Builder;

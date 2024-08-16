@@ -3,7 +3,7 @@ import { TemplateFile } from '../../../types/types.js';
 export const LoginActions = {
   fileName: 'LoginActions.java',
   folder: '/web/actions/',
-  main: true,
+  test: true,
   content: `package {{ groupId }}.web.actions;
 
 import static {{ groupId }}.web.pages.LoginPage.loginPage;

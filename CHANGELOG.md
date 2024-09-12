@@ -1,4 +1,13 @@
 
+
+## 0.11.0 (2024-09-12)
+
+#### :rocket: New Feature
+* [#136](https://github.com/BoykaFramework/boyka-cli/pull/136) feat: :sparkles: auto update dependency versions in pom template ([@WasiqB](https://github.com/WasiqB))
+
+#### Committers: 1
+- Wasiq Bhamla ([@WasiqB](https://github.com/WasiqB))
+
 ## 0.10.0 (2024-09-11)
 
 #### :rocket: New Feature

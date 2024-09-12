@@ -1,6 +1,8 @@
 import { TemplateFile } from '../types/types.js';
 
-export const PomFile = {
+const scopeCondition = 'dependency.scope And dependency.scope != "" And dependency.scope != nil';
+
+export const PomFile: TemplateFile = {
   fileName: 'pom.xml',
   content: `<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
@@ -17,36 +19,16 @@ export const PomFile = {
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <boyka.version>2.0.0</boyka.version>
-        <lombok.version>1.18.34</lombok.version>
-        <testng.version>7.10.2</testng.version>
-        <faker.version>2.3.0</faker.version>
     </properties>
 
-    <dependencies>
+    <dependencies>{% for dependency in dependencies %}
         <dependency>
-            <groupId>io.github.boykaframework</groupId>
-            <artifactId>boyka-framework</artifactId>
-            <version>\${boyka.version}</version>
+            <groupId>{{ dependency.groupId }}</groupId>
+            <artifactId>{{ dependency.artifactId }}</artifactId>
+            <version>{{ dependency.version }}</version>{% if ${scopeCondition} %}
+            <scope>{{ dependency.scope }}</scope>{% endif %}
         </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>\${lombok.version}</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
-            <version>\${testng.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>net.datafaker</groupId>
-            <artifactId>datafaker</artifactId>
-            <version>\${faker.version}</version>
-        </dependency>
-    </dependencies>
+    {% endfor %}</dependencies>
 </project>
 `,
-} satisfies TemplateFile;
+};

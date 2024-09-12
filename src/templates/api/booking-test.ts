@@ -19,7 +19,7 @@ import static io.github.boykaframework.manager.ParallelSession.clearSession;
 import static io.github.boykaframework.manager.ParallelSession.createSession;
 import static io.github.boykaframework.manager.ParallelSession.getSession;
 
-import com.github.wasiqb.api.pojo.BookingData;
+import {{ groupId }}.api.pojo.BookingData;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;

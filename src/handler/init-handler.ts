@@ -14,6 +14,14 @@ import {
 } from '../utils/messages.js';
 import { TemplateFile } from '../types/types.js';
 import { templates } from '../templates/template-list.js';
+import { getLatestMavenVersion } from '../utils/api.js';
+
+type Dependency = {
+  groupId: string;
+  artifactId: string;
+  scope?: 'test' | 'provided';
+  version?: string;
+};
 
 type ProjectProps = {
   path: string;
@@ -21,6 +29,7 @@ type ProjectProps = {
   artifactId: string;
   configName: string;
   platform: string;
+  dependencies?: Dependency[];
 };
 
 const generateFiles = async (engine: Liquid, project: ProjectProps, templates: TemplateFile[]) => {
@@ -95,16 +104,17 @@ export const handleInit = async (argv: ArgumentsCamelCase) => {
   const resourcesPath = path.join(projectPath, 'src/test/resources');
 
   checkProjectFolderCreated(projectPath);
-  const inputs = await getInitInputs();
 
+  const inputs = await getInitInputs();
   const engine = new Liquid();
-  const project = {
+  const project: ProjectProps = {
     groupId: inputs.group_id,
     artifactId: projectName,
     path: projectPath,
     configName: inputs.config_name,
     platform: inputs.sub_platform,
-  } satisfies ProjectProps;
+    dependencies: await getDependencies(),
+  };
 
   createFolder(resourcesPath);
   await createConfigJson(inputs, resourcesPath);
@@ -118,4 +128,17 @@ export const handleInit = async (argv: ArgumentsCamelCase) => {
 
   console.log(warn(successMavenProject));
   console.log(warn(mavenCommandSuggestion(projectName)));
+};
+
+const getDependencies = async () => {
+  const dependencies: Dependency[] = [
+    { groupId: 'io.github.boykaframework', artifactId: 'boyka-framework' },
+    { groupId: 'org.projectlombok', artifactId: 'lombok', scope: 'provided' },
+    { groupId: 'org.testng', artifactId: 'testng', scope: 'test' },
+    { groupId: 'net.datafaker', artifactId: 'datafaker', scope: 'test' },
+  ];
+  for (const dependency of dependencies) {
+    dependency.version = await getLatestMavenVersion(dependency.groupId, dependency.artifactId);
+  }
+  return dependencies;
 };

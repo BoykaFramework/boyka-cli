@@ -7,7 +7,8 @@ export const DragDropPage = {
   content: `package {{ groupId }}.mobile.pages;
 
 import static io.appium.java_client.AppiumBy.accessibilityId;
-import static io.appium.java_client.AppiumBy.androidUIAutomator;
+import static {% if platform == "Android" %}io.appium.java_client.AppiumBy.androidUIAutomator;
+{% else %}io.appium.java_client.AppiumBy.iOSNsPredicateString;{% endif %}
 import static java.text.MessageFormat.format;
 
 import io.github.boykaframework.builders.Locator;
@@ -45,7 +46,7 @@ public class DragDropPage {
         .{{ platform | downcase }} (
         {% if platform == "Android" %}androidUIAutomator (
         "new UiSelector().textStartsWith(\\"You made it\\")"{% else %}iOSNsPredicateString (
-        "label BEGINSWITH \\"You made it\\""){% endif %}))
+        "label BEGINSWITH \\"You made it\\""{% endif %}))
         .parent (this.screen)
         .name ("Description")
         .build ();
@@ -53,7 +54,7 @@ public class DragDropPage {
         .{{ platform | downcase }} (
         {% if platform == "Android" %}androidUIAutomator (
         "new UiSelector().text(\\"Congratulations\\")"{% else %}iOSNsPredicateString (
-        "label == \\"Congratulations\\""){% endif %}))
+        "label == \\"Congratulations\\""{% endif %}))
         .parent (this.screen)
         .name ("Title")
         .build ();
@@ -72,6 +73,10 @@ public class DragDropPage {
             .{{ platform | downcase }} (
                 accessibilityId (format ("drop-{0}{1}", direction.getInitial (), index)))
             .build ();
+    }
+
+    private DragDropPage () {
+        // Utility class.
     }
 }
 `,

@@ -2,7 +2,7 @@ import { TemplateFile } from '../../../types/types.js';
 
 export const BookingRequest = {
   fileName: 'BookingRequest.java',
-  folder: '/api/request/',
+  folder: '/api/requests/',
   test: true,
   content: `package {{ groupId }}.api.requests;
 
@@ -16,11 +16,8 @@ import static io.github.boykaframework.enums.RequestMethod.POST;
 import static io.github.boykaframework.enums.RequestMethod.PUT;
 import static java.text.MessageFormat.format;
 
-import {{ groupId }}.api.data.AuthRequestData;
 import {{ groupId }}.api.pojo.BookingData;
-import io.github.boykaframework.actions.api.ApiActions;
 import io.github.boykaframework.builders.ApiRequest;
-import io.github.boykaframework.enums.RequestMethod;
 import lombok.experimental.UtilityClass;
 
 @UtilityClass

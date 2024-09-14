@@ -4,7 +4,6 @@ import { BookingRequestData } from './api/data/booking-request-data.js';
 import { AuthTokenPojo } from './api/pojo/auth-token.js';
 import { BookingDataPojo } from './api/pojo/booking-data.js';
 import { BookingDatesPojo } from './api/pojo/booking-dates.js';
-import { BookingTestDataPojo } from './api/pojo/booking-test-data.js';
 import { BookingRequest } from './api/requests/booking-request.js';
 import { GitIgnore } from './gitignore.js';
 import { DragDropAction } from './mobile/actions/drag-drop-action.js';
@@ -31,7 +30,6 @@ export const templates = {
       AuthTokenPojo,
       BookingDataPojo,
       BookingDatesPojo,
-      BookingTestDataPojo,
       BookingRequest,
     ],
     mobile: [DragDropPage, DragDropAction, WdioHomePage, WdioTest, MobileTestSuite],

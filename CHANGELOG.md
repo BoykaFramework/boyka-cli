@@ -1,5 +1,14 @@
 
 
+
+## 0.11.1 (2024-09-14)
+
+#### :bug: Bug Fix
+* [#138](https://github.com/BoykaFramework/boyka-cli/pull/138) fix: :bug: fixed issues in test generation ([@WasiqB](https://github.com/WasiqB))
+
+#### Committers: 1
+- Wasiq Bhamla ([@WasiqB](https://github.com/WasiqB))
+
 ## 0.11.0 (2024-09-12)
 
 #### :rocket: New Feature

@@ -6,8 +6,9 @@ export const BookingRequestData = {
   folder: '/api/data',
   content: `package {{ groupId }}.api.data;
 
-import java.text.SimpleDateFormat;
-import java.util.concurrent.TimeUnit;
+import static java.time.ZoneId.systemDefault;
+import static java.time.format.DateTimeFormatter.ISO_LOCAL_DATE;
+import static java.util.concurrent.TimeUnit.DAYS;
 
 import {{ groupId }}.api.pojo.BookingData;
 import {{ groupId }}.api.pojo.BookingDates;
@@ -17,7 +18,7 @@ public final class BookingRequestData {
     private static final Faker FAKER = new Faker ();
 
     public static BookingData getBookingData () {
-        final var formatter = new SimpleDateFormat ("yyyy-MM-dd");
+        final var formatter = ISO_LOCAL_DATE.withZone (systemDefault ());
         return BookingData.builder ()
             .firstname (FAKER.name ()
                 .firstName ())
@@ -27,10 +28,10 @@ public final class BookingRequestData {
                 .numberBetween (1, 2000))
             .depositpaid (true)
             .bookingdates (BookingDates.builder ()
-                .checkin (formatter.format (FAKER.date ()
-                    .past (20, TimeUnit.DAYS)))
-                .checkout (formatter.format (FAKER.date ()
-                    .future (5, TimeUnit.DAYS)))
+                .checkin (formatter.format (FAKER.timeAndDate ()
+                    .past (20, DAYS)))
+                .checkout (formatter.format (FAKER.timeAndDate ()
+                    .future (5, DAYS)))
                 .build ())
             .additionalneeds ("Breakfast")
             .build ();

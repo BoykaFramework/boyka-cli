@@ -50,7 +50,7 @@
     "@tsconfig/node18": "^18.2.4",
     "@types/figlet": "^1.5.8",
     "@types/gradient-string": "^1.1.6",
-    "@types/node": "^22.5.4",
+    "@types/node": "^22.5.5",
     "@types/yargs": "^17.0.33",
     "@typescript-eslint/eslint-plugin": "^8.5.0",
     "@typescript-eslint/parser": "^8.5.0",

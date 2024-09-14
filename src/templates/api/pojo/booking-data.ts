@@ -2,7 +2,7 @@ import { TemplateFile } from '../../../types/types.js';
 
 export const BookingDataPojo = {
   fileName: 'BookingData.java',
-  folder: '/api/data/',
+  folder: '/api/pojo/',
   test: true,
   content: `package {{ groupId }}.api.pojo;
 

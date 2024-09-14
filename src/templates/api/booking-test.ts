@@ -8,11 +8,11 @@ export const BookingTest = {
 
 import static {{ groupId }}.api.data.BookingRequestData.getBookingData;
 import static {{ groupId }}.api.data.BookingRequestData.getPartialBookingData;
-import static {{ groupId }}.api.requests.BookingRequest.createBooking;
-import static {{ groupId }}.api.requests.BookingRequest.deleteBooking;
-import static {{ groupId }}.api.requests.BookingRequest.getBooking;
-import static {{ groupId }}.api.requests.BookingRequest.updateBooking;
-import static {{ groupId }}.api.requests.BookingRequest.updatePartialBooking;
+import static {{ groupId }}.api.request.BookingRequest.createBooking;
+import static {{ groupId }}.api.request.BookingRequest.deleteBooking;
+import static {{ groupId }}.api.request.BookingRequest.getBooking;
+import static {{ groupId }}.api.request.BookingRequest.updateBooking;
+import static {{ groupId }}.api.request.BookingRequest.updatePartialBooking;
 import static io.github.boykaframework.actions.api.ApiActions.withRequest;
 import static io.github.boykaframework.enums.PlatformType.API;
 import static io.github.boykaframework.manager.ParallelSession.clearSession;

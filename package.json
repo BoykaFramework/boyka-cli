@@ -43,7 +43,7 @@
     "url": "https://github.com/BoykaFramework/boyka-cli"
   },
   "devDependencies": {
-    "@eslint/js": "^9.11.0",
+    "@eslint/js": "^9.11.1",
     "@release-it-plugins/lerna-changelog": "^7.0.0",
     "@stylistic/eslint-plugin-js": "^2.8.0",
     "@stylistic/eslint-plugin-ts": "^2.8.0",
@@ -54,7 +54,7 @@
     "@types/yargs": "^17.0.33",
     "@typescript-eslint/eslint-plugin": "^8.7.0",
     "@typescript-eslint/parser": "^8.7.0",
-    "eslint": "^9.11.0",
+    "eslint": "^9.11.1",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-import": "^2.30.0",
     "eslint-plugin-prettier": "^5.2.1",

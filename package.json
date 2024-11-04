@@ -43,18 +43,18 @@
     "url": "https://github.com/BoykaFramework/boyka-cli"
   },
   "devDependencies": {
-    "@eslint/js": "^9.13.0",
+    "@eslint/js": "^9.14.0",
     "@release-it-plugins/lerna-changelog": "^7.0.0",
-    "@stylistic/eslint-plugin-js": "^2.9.0",
-    "@stylistic/eslint-plugin-ts": "^2.9.0",
+    "@stylistic/eslint-plugin-js": "^2.10.1",
+    "@stylistic/eslint-plugin-ts": "^2.10.1",
     "@tsconfig/node18": "^18.2.4",
     "@types/figlet": "^1.7.0",
     "@types/gradient-string": "^1.1.6",
     "@types/node": "^22.8.1",
     "@types/yargs": "^17.0.33",
-    "@typescript-eslint/eslint-plugin": "^8.11.0",
-    "@typescript-eslint/parser": "^8.11.0",
-    "eslint": "^9.13.0",
+    "@typescript-eslint/eslint-plugin": "^8.12.2",
+    "@typescript-eslint/parser": "^8.12.2",
+    "eslint": "^9.14.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-prettier": "^5.2.1",
@@ -65,7 +65,7 @@
     "release-it": "^17.10.0",
     "release-it-pnpm": "^4.6.3",
     "typescript": "^5.6.3",
-    "typescript-eslint": "^8.11.0"
+    "typescript-eslint": "^8.12.2"
   },
   "dependencies": {
     "@inquirer/confirm": "^5.0.1",
@@ -75,7 +75,7 @@
     "figlet": "^1.8.0",
     "gradient-string": "^3.0.0",
     "liquidjs": "^10.18.0",
-    "nanospinner": "^1.1.0",
+    "nanospinner": "^1.2.0",
     "yargs": "^17.7.2"
   },
   "lint-staged": {

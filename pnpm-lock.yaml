@@ -10,13 +10,13 @@ importers:
     dependencies:
       '@inquirer/confirm':
         specifier: ^5.0.1
-        version: 5.0.1(@types/node@22.8.1)
+        version: 5.0.1(@types/node@22.8.7)
       '@inquirer/input':
         specifier: ^4.0.1
-        version: 4.0.1(@types/node@22.8.1)
+        version: 4.0.1(@types/node@22.8.7)
       '@inquirer/select':
         specifier: ^4.0.1
-        version: 4.0.1(@types/node@22.8.1)
+        version: 4.0.1(@types/node@22.8.7)
       chalk:
         specifier: ^5.3.0
         version: 5.3.0
@@ -58,8 +58,8 @@ importers:
         specifier: ^1.1.6
         version: 1.1.6
       '@types/node':
-        specifier: ^22.8.1
-        version: 22.8.1
+        specifier: ^22.8.7
+        version: 22.8.7
       '@types/yargs':
         specifier: ^17.0.33
         version: 17.0.33
@@ -387,8 +387,8 @@ packages:
   '@types/ms@0.7.34':
     resolution: {integrity: sha512-nG96G3Wp6acyAgJqGasjODb+acrI7KltPiRxzHPXnP3NgI28bpQDRv53olbqGXbfcgF5aiiHmO3xpwEpS5Ld9g==}
 
-  '@types/node@22.8.1':
-    resolution: {integrity: sha512-k6Gi8Yyo8EtrNtkHXutUu2corfDf9su95VYVP10aGYMMROM6SAItZi0w1XszA6RtWTHSVp5OeFof37w0IEqCQg==}
+  '@types/node@22.8.7':
+    resolution: {integrity: sha512-LidcG+2UeYIWcMuMUpBKOnryBWG/rnmOHQR5apjn8myTQcx3rinFRn7DcIFhMnS0PPFSC6OafdIKEad0lj6U0Q==}
 
   '@types/semver@7.5.8':
     resolution: {integrity: sha512-I8EUhyrgfLrcTkzV3TSsGyl1tSuPrEDzr0yd5m90UgNxQkyDXULk3b6MlQqTCpZpNtWe1K0hzclnZkTcLBe2UQ==}
@@ -2846,16 +2846,16 @@ snapshots:
 
   '@iarna/toml@2.2.5': {}
 
-  '@inquirer/confirm@5.0.1(@types/node@22.8.1)':
+  '@inquirer/confirm@5.0.1(@types/node@22.8.7)':
     dependencies:
-      '@inquirer/core': 10.0.1(@types/node@22.8.1)
-      '@inquirer/type': 3.0.0(@types/node@22.8.1)
-      '@types/node': 22.8.1
+      '@inquirer/core': 10.0.1(@types/node@22.8.7)
+      '@inquirer/type': 3.0.0(@types/node@22.8.7)
+      '@types/node': 22.8.7
 
-  '@inquirer/core@10.0.1(@types/node@22.8.1)':
+  '@inquirer/core@10.0.1(@types/node@22.8.7)':
     dependencies:
       '@inquirer/figures': 1.0.7
-      '@inquirer/type': 3.0.0(@types/node@22.8.1)
+      '@inquirer/type': 3.0.0(@types/node@22.8.7)
       ansi-escapes: 4.3.2
       cli-width: 4.1.0
       mute-stream: 2.0.0
@@ -2868,24 +2868,24 @@ snapshots:
 
   '@inquirer/figures@1.0.7': {}
 
-  '@inquirer/input@4.0.1(@types/node@22.8.1)':
+  '@inquirer/input@4.0.1(@types/node@22.8.7)':
     dependencies:
-      '@inquirer/core': 10.0.1(@types/node@22.8.1)
-      '@inquirer/type': 3.0.0(@types/node@22.8.1)
-      '@types/node': 22.8.1
+      '@inquirer/core': 10.0.1(@types/node@22.8.7)
+      '@inquirer/type': 3.0.0(@types/node@22.8.7)
+      '@types/node': 22.8.7
 
-  '@inquirer/select@4.0.1(@types/node@22.8.1)':
+  '@inquirer/select@4.0.1(@types/node@22.8.7)':
     dependencies:
-      '@inquirer/core': 10.0.1(@types/node@22.8.1)
+      '@inquirer/core': 10.0.1(@types/node@22.8.7)
       '@inquirer/figures': 1.0.7
-      '@inquirer/type': 3.0.0(@types/node@22.8.1)
-      '@types/node': 22.8.1
+      '@inquirer/type': 3.0.0(@types/node@22.8.7)
+      '@types/node': 22.8.7
       ansi-escapes: 4.3.2
       yoctocolors-cjs: 2.1.2
 
-  '@inquirer/type@3.0.0(@types/node@22.8.1)':
+  '@inquirer/type@3.0.0(@types/node@22.8.7)':
     dependencies:
-      '@types/node': 22.8.1
+      '@types/node': 22.8.7
 
   '@jsdevtools/ez-spawn@3.0.4':
     dependencies:
@@ -3061,7 +3061,7 @@ snapshots:
 
   '@types/ms@0.7.34': {}
 
-  '@types/node@22.8.1':
+  '@types/node@22.8.7':
     dependencies:
       undici-types: 6.19.8
 

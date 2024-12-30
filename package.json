@@ -60,9 +60,9 @@
     "eslint-plugin-prettier": "^5.2.1",
     "husky": "^9.1.7",
     "lerna-changelog": "^2.2.0",
-    "lint-staged": "^15.2.10",
+    "lint-staged": "^15.3.0",
     "prettier": "^3.4.2",
-    "release-it": "^17.10.0",
+    "release-it": "^17.11.0",
     "release-it-pnpm": "^4.6.3",
     "typescript": "^5.7.2",
     "typescript-eslint": "^8.18.1"
@@ -74,7 +74,7 @@
     "chalk": "^5.4.1",
     "figlet": "^1.8.0",
     "gradient-string": "^3.0.0",
-    "liquidjs": "^10.19.0",
+    "liquidjs": "^10.20.0",
     "nanospinner": "^1.2.0",
     "yargs": "^17.7.2"
   },

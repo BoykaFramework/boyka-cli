@@ -50,7 +50,18 @@ export const getPlatformType = async () =>
   });
 
 export const getConfigName = async (platform: string) =>
-  await input({ message: userQuestions.configName.replace('${platform}', platform) });
+  await input({
+    message: userQuestions.configName.replace('${platform}', platform),
+    validate: (message: string) => {
+      if (!message) {
+        return 'Configuration name cannot be empty';
+      }
+      if (/\s/.test(message)) {
+        return 'Configuration name cannot contain spaces';
+      }
+      return true;
+    },
+  });
 
 export const getUserName = async () =>
   await input({

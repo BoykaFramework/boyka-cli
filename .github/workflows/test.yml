@@ -16,6 +16,9 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18, 20, 22]
 
     steps:
       - name: Check out Git repository
@@ -26,14 +29,17 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: ${{ matrix.node-version }}
           cache: 'pnpm'
 
       - name: Install dependencies
-        run: pnpm install && pnpm build
+        run: pnpm install
 
       - name: Check Format
         run: pnpm format
 
       - name: Check lint
         run: pnpm lint
+
+      - name: Build CLI
+        run: pnpm build

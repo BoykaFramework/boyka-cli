@@ -42,6 +42,11 @@ export const getPlatformType = async () =>
         value: 'iOS',
         description: 'iOS application',
       },
+      {
+        name: 'Mac OS',
+        value: 'Mac',
+        description: 'Mac OS Desktop application',
+      },
     ],
   });
 
@@ -101,3 +106,26 @@ export const getTargetProvider = async () =>
       },
     ],
   })) as TargetProviders;
+
+export const getLanguage = async () =>
+  await select({
+    message: userQuestions.language,
+    default: 'English',
+    choices: [
+      {
+        name: 'English',
+        value: 'EN',
+        description: 'English language',
+      },
+      {
+        name: 'Arabic',
+        value: 'AR',
+        description: 'Arabic language',
+      },
+      {
+        name: 'German',
+        value: 'GR',
+        description: 'German language',
+      },
+    ],
+  });

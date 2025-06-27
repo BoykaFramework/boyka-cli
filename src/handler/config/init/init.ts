@@ -16,6 +16,7 @@ import { FrameworkSetting, UserInput } from '../../../types/types.js';
 import { createConfigFile } from '../../../utils/json.js';
 import { getUserInputs } from '../../user-inputs.js';
 import { BoykaError } from '../../../utils/boyka-error.js';
+import { createMacSetting } from './mac.js';
 
 export const handleConfigInit = async (configPath: string) => {
   console.info(initMessage(configPath));
@@ -47,6 +48,8 @@ const createUiSetting = (inputs: UserInput) => {
   let frameworkSetting: FrameworkSetting;
   if (inputs.sub_platform === 'Web') {
     frameworkSetting = createWebSetting(inputs);
+  } else if (inputs.sub_platform === 'Mac') {
+    frameworkSetting = createMacSetting(inputs);
   } else {
     frameworkSetting = createMobileSetting(inputs);
   }

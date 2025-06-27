@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { configFileName, danger, executeTask, info, success, warn } from '../utils/constants.js';
-import check from '../data/check-messages.json' assert { type: 'json' };
+import check from '../data/check-messages.json' with { type: 'json' };
 import { Message } from '../types/types.js';
 
 const printIntroMessage = () => {

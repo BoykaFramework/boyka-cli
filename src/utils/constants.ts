@@ -1,5 +1,5 @@
 import chalk from 'chalk';
-import questions from '../data/questions.json' assert { type: 'json' };
+import questions from '../data/questions.json' with { type: 'json' };
 import { TargetProviders } from '../types/enum-types.js';
 import { createSpinner } from 'nanospinner';
 import { Message } from '../types/types.js';

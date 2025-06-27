@@ -17,10 +17,12 @@ import { templates } from '../templates/template-list.js';
 import { getLatestMavenVersion } from '../utils/api.js';
 
 type Dependency = {
+  propertyName: string;
   groupId: string;
   artifactId: string;
   scope?: 'test' | 'provided';
   version?: string;
+  isPlugin?: boolean;
 };
 
 type ProjectProps = {
@@ -49,7 +51,7 @@ const generateProject = async (
   if (isSampleTest) {
     const sampleFiles =
       templates.platform[platform] ||
-      templates.platform[subPlatform === 'web' ? subPlatform : 'mobile'];
+      templates.platform[subPlatform === 'web' || subPlatform === 'mac' ? subPlatform : 'mobile'];
     await generateFiles(engine, project, sampleFiles);
   }
 };
@@ -132,10 +134,15 @@ export const handleInit = async (argv: ArgumentsCamelCase) => {
 
 const getDependencies = async () => {
   const dependencies: Dependency[] = [
-    { groupId: 'io.github.boykaframework', artifactId: 'boyka-framework' },
-    { groupId: 'org.projectlombok', artifactId: 'lombok', scope: 'provided' },
-    { groupId: 'org.testng', artifactId: 'testng', scope: 'test' },
-    { groupId: 'net.datafaker', artifactId: 'datafaker', scope: 'test' },
+    { propertyName: 'boyka', groupId: 'io.github.boykaframework', artifactId: 'boyka-framework' },
+    {
+      propertyName: 'lombok',
+      groupId: 'org.projectlombok',
+      artifactId: 'lombok',
+      scope: 'provided',
+    },
+    { propertyName: 'testng', groupId: 'org.testng', artifactId: 'testng', scope: 'test' },
+    { propertyName: 'faker', groupId: 'net.datafaker', artifactId: 'datafaker', scope: 'test' },
   ];
   for (const dependency of dependencies) {
     dependency.version = await getLatestMavenVersion(dependency.groupId, dependency.artifactId);

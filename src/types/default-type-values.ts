@@ -4,10 +4,12 @@ import {
   ApiSetting,
   ApplicationSetting,
   DelaySetting,
+  DesktopSetting,
   DeviceSetting,
   Dimension,
   FrameworkSetting,
   IOSVideoSetting,
+  MachineSetting,
   MobileSetting,
   ScreenshotSetting,
   ServerLogSetting,
@@ -25,12 +27,14 @@ import {
   ApplicationType,
   Browser,
   DeviceType,
+  Language,
   LogLevel,
   OS,
   PageLoadStrategy,
   Protocol,
   Speed,
   TargetProviders,
+  VideoPreset,
   VideoQuality,
   WindowResizeType,
 } from './enum-types.js';
@@ -140,6 +144,9 @@ export const defaultApiSetting: ApiSetting = {
   schema_path: './schema',
   validate_ssl: true,
   verify_host_name: true,
+  language: {
+    language: Language.EN,
+  },
 };
 
 export const defaultWebSetting: WebSetting = {
@@ -152,6 +159,9 @@ export const defaultWebSetting: WebSetting = {
   target: TargetProviders.LOCAL,
   protocol: Protocol.HTTP,
   version: 'stable',
+  language: {
+    language: Language.EN,
+  },
 };
 
 export const defaultServerSetting: ServerSetting = {
@@ -170,11 +180,51 @@ export const defaultDeviceSetting: DeviceSetting = {
   type: DeviceType.VIRTUAL,
   application: defaultApplicationSetting,
   name: '',
+  language: {
+    language: Language.EN,
+  },
 };
 
 export const defaultMobileSetting: MobileSetting = {
   server: defaultServerSetting,
   device: defaultDeviceSetting,
+};
+
+export const defaultDesktopServerSetting: ServerSetting = {
+  target: TargetProviders.LOCAL,
+  session_override: true,
+};
+
+export const defaultMacVideoSetting: VideoSetting = {
+  enabled: false,
+  path: './videos',
+  time_limit: 300,
+  mac: {
+    preset: VideoPreset.VERY_FAST,
+    capture_clicks: true,
+    capture_cursor: true,
+    fps: 10,
+  },
+};
+
+export const defaultDesktopSetting: MachineSetting = {
+  os: OS.MAC,
+  type: DeviceType.REAL,
+  show_server_logs: true,
+  event_timings: true,
+  full_reset: true,
+  no_reset: false,
+  command_timeout: 60,
+  server_startup_timeout: 60,
+  video: defaultMacVideoSetting,
+  language: {
+    language: Language.EN,
+  },
+};
+
+export const defaultMacSetting: DesktopSetting = {
+  server: defaultDesktopServerSetting,
+  machine: defaultDesktopSetting,
 };
 
 export const defaultNewWebSetting = (configName: string): { [key: string]: WebSetting } => {
@@ -197,6 +247,14 @@ export const defaultNewApiSetting = (configName: string): { [key: string]: ApiSe
   return {
     [configName]: {
       ...defaultApiSetting,
+    },
+  };
+};
+
+export const defaultNewMacSetting = (configName: string): { [key: string]: DesktopSetting } => {
+  return {
+    [configName]: {
+      ...defaultMacSetting,
     },
   };
 };

@@ -20,6 +20,7 @@ import {
 import { getBrowser } from '../questions/webInput.js';
 import { ApplicationType, TargetProviders } from '../types/enum-types.js';
 import { UserInput } from '../types/types.js';
+import { getAppBundleId, getMachineVersion, getMacPort } from '../questions/macInputs.js';
 
 const getUserInputs = async () => {
   const platform = await getPlatform();
@@ -37,6 +38,8 @@ const getUiInputs = async (inputs: UserInput) => {
   inputs.config_name = await getConfigName(inputs.sub_platform);
   if (inputs.sub_platform === 'Web') {
     await getWebInputs(inputs);
+  } else if (inputs.sub_platform === 'Mac') {
+    await getMacInputs(inputs);
   } else {
     await getMobileInputs(inputs);
   }
@@ -66,6 +69,30 @@ const getWebInputs = async (inputs: UserInput) => {
 const getMobileInputs = async (inputs: UserInput) => {
   await getServerInputs(inputs);
   await getDeviceInputs(inputs);
+};
+
+const getMachineInputs = async (inputs: UserInput) => {
+  inputs.desktop.machine = {
+    version: await getMachineVersion(),
+    application: {
+      bundle_id: await getAppBundleId(),
+    },
+  };
+};
+
+const getDesktopServerInputs = async (inputs: UserInput) => {
+  inputs.desktop = {
+    server: {
+      target: TargetProviders.LOCAL,
+      port: Number(await getMacPort()),
+    },
+    machine: {},
+  };
+};
+
+const getMacInputs = async (inputs: UserInput) => {
+  await getDesktopServerInputs(inputs);
+  await getMachineInputs(inputs);
 };
 
 const getServerInputs = async (inputs: UserInput) => {
@@ -109,4 +136,4 @@ const getInitInputs = async () => {
   return inputs;
 };
 
-export { getUserInputs, getApiInputs, getWebInputs, getMobileInputs, getInitInputs };
+export { getUserInputs, getApiInputs, getWebInputs, getMobileInputs, getInitInputs, getMacInputs };

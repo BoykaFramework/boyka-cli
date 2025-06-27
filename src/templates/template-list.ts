@@ -6,6 +6,7 @@ import { BookingDataPojo } from './api/pojo/booking-data.js';
 import { BookingDatesPojo } from './api/pojo/booking-dates.js';
 import { BookingRequest } from './api/requests/booking-request.js';
 import { GitIgnore } from './gitignore.js';
+import { CalculatorTest } from './mac/calculator-test.js';
 import { DragDropAction } from './mobile/actions/drag-drop-action.js';
 import { DragDropPage } from './mobile/pages/drag-drop-page.js';
 import { WdioHomePage } from './mobile/pages/wdio-home-page.js';
@@ -17,6 +18,9 @@ import { WebTestSuite } from './test-suite/testng-web.js';
 import { LoginActions } from './web/actions/login-actions.js';
 import { LoginTest } from './web/login-test.js';
 import { LoginPage } from './web/pages/login-page.js';
+import { CalculatorPage } from './mac/pages/calculator-page.js';
+import { CalculatorActions } from './mac/actions/calculator-actions.js';
+import { MacTestSuite } from './test-suite/testng-mac.js';
 
 export const templates = {
   required: [PomFile, GitIgnore],
@@ -33,5 +37,6 @@ export const templates = {
       BookingRequest,
     ],
     mobile: [DragDropPage, DragDropAction, WdioHomePage, WdioTest, MobileTestSuite],
+    mac: [CalculatorPage, CalculatorActions, CalculatorTest, MacTestSuite],
   },
 };

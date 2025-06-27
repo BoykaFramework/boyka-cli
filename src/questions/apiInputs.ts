@@ -1,6 +1,5 @@
 import input from '@inquirer/input';
 import { userQuestions } from '../utils/constants.js';
-import { BoykaError } from '../utils/boyka-error.js';
 
 const apiQuestions = userQuestions.api;
 
@@ -15,8 +14,14 @@ export const getBaseUri = async () =>
     message: apiQuestions.baseUrl,
     validate: (message: string) => {
       if (!message) {
-        throw new BoykaError('Base URL cannot be empty.');
+        return 'Base URL cannot be empty';
       }
-      return true;
+      try {
+        new URL(message);
+        return true;
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      } catch (error) {
+        return 'Invalid URL format';
+      }
     },
   });

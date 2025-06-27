@@ -3,12 +3,14 @@ import {
   AutomationType,
   Browser,
   DeviceType,
+  Language,
   LogLevel,
   OS,
   PageLoadStrategy,
   Protocol,
   Speed,
   TargetProviders,
+  VideoPreset,
   VideoQuality,
   WindowResizeType,
 } from './enum-types.js';
@@ -16,8 +18,30 @@ import {
 export type FrameworkSetting = {
   $schema: string;
   listeners_package?: string;
+  logging?: LoggingSetting;
+  data?: TestDataSetting;
   ui?: UiSetting;
   api?: { [key: string]: ApiSetting };
+};
+
+export type LoggingSetting = {
+  console_logs: boolean;
+  logs_folder: string;
+  archive: ArchiveSetting;
+};
+
+export type TestDataSetting = {
+  extension: string;
+  external: boolean;
+  path: string;
+  type: 'EXCEL';
+};
+
+export type ArchiveSetting = {
+  max_days: number;
+  max_size: number;
+  on_every_run: boolean;
+  size_unit: 'KB' | 'MB' | 'GB' | 'TB';
 };
 
 export type ApiSetting = {
@@ -31,6 +55,7 @@ export type ApiSetting = {
   logging?: ApiLogSetting;
   validate_ssl?: boolean;
   verify_host_name?: boolean;
+  language?: LanguageSetting;
 };
 
 export type ApiLogSetting = {
@@ -65,6 +90,7 @@ export type DelaySetting = {
 export type UiSetting = {
   timeout: TimeoutSetting;
   delay?: DelaySetting;
+  desktop?: { [key: string]: DesktopSetting };
   logging: UiLogSetting;
   screenshot: ScreenshotSetting;
   web?: { [key: string]: WebSetting };
@@ -90,6 +116,7 @@ export type WebSetting = {
   user_name?: string;
   password?: string;
   resize?: WindowResizeType;
+  language?: LanguageSetting;
   custom_size?: Dimension;
   host?: string;
   headless?: boolean;
@@ -144,6 +171,37 @@ export type MobileSetting = {
   device: DeviceSetting;
 };
 
+export type DesktopSetting = {
+  server: ServerSetting;
+  machine: MachineSetting;
+};
+
+export type MachineSetting = {
+  application?: MacApplicationSetting;
+  os: OS;
+  version?: string;
+  type: DeviceType;
+  show_server_logs?: boolean;
+  server_startup_timeout?: number;
+  command_timeout?: number;
+  event_timings?: boolean;
+  full_reset?: boolean;
+  no_reset?: boolean;
+  language?: LanguageSetting;
+  video?: VideoSetting;
+};
+
+export type MacApplicationSetting = {
+  bundle_id?: string;
+  skip_app_kill?: boolean;
+};
+
+export type LanguageSetting = {
+  external?: boolean;
+  language: Language;
+  path?: string;
+};
+
 export type SwipeSetting = {
   distance: number;
   max_swipe_until_found: number;
@@ -164,10 +222,19 @@ export type VideoSetting = {
   android?: AndroidVideoSetting;
   enabled?: boolean;
   ios?: IOSVideoSetting;
+  mac?: MacVideoSetting;
   path: string;
   prefix?: string;
   size?: string;
   time_limit?: number;
+};
+
+export type MacVideoSetting = {
+  capture_clicks?: boolean;
+  capture_cursor?: boolean;
+  device_id?: number;
+  fps?: number;
+  preset: VideoPreset;
 };
 
 export type VirtualDeviceSetting = {
@@ -218,6 +285,7 @@ export type DeviceSetting = {
   os?: OS;
   server_install_timeout?: number;
   server_launch_timeout?: number;
+  language?: LanguageSetting;
   swipe: SwipeSetting;
   system_port?: number;
   type: DeviceType;
@@ -242,6 +310,7 @@ export type UserInput = {
   platform: string;
   sub_platform?: string;
   config_name?: string;
+  language?: Language;
   api?: {
     base_uri: string;
     base_path: string;
@@ -251,6 +320,18 @@ export type UserInput = {
     browser: Browser;
     user_name?: string;
     password?: string;
+  };
+  desktop?: {
+    server: {
+      target: TargetProviders;
+      port?: number;
+    };
+    machine: {
+      version?: string;
+      application?: {
+        bundle_id: string;
+      };
+    };
   };
   mobile?: {
     server: {

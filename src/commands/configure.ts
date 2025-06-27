@@ -5,6 +5,7 @@ import { initCommand } from './configure_cmds/init.js';
 import { androidCommand } from './configure_cmds/android.js';
 import { webCommand } from './configure_cmds/web.js';
 import { iosCommand } from './configure_cmds/ios.js';
+import { macCommand } from './configure_cmds/mac.js';
 
 export const configureCommand = {
   command: 'configure',
@@ -17,6 +18,7 @@ export const configureCommand = {
       .command(androidCommand)
       .command(iosCommand)
       .command(webCommand)
+      .command(macCommand)
       .demandCommand()
       .strict()
       .help('help')

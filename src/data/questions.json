@@ -5,6 +5,7 @@
   "cloudUser": "What is the environment variable for your user name?",
   "cloudKey": "What is the environment variable for your password?",
   "target": "Where do you want to run the tests?",
+  "language": "What language does your application uses?",
   "init": {
     "groupId": "What Group ID you want to use for your project?",
     "sampleTest": "Do you want sample tests to be generated?"
@@ -24,5 +25,10 @@
     "appPath": "What is the path of your app?",
     "appUrl": "What is the cloud URL or custom ID of your app?",
     "appType": "What is the type of your application?"
+  },
+  "desktop": {
+    "port": "On which port number you want to connect?",
+    "machineVersion": "What is OS version of your machine?",
+    "appBundleId": "What is the bundle ID of your application?"
   }
 }

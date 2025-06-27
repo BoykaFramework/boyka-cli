@@ -1,8 +1,7 @@
 import input from '@inquirer/input';
 import select from '@inquirer/select';
 import { userQuestions } from '../utils/constants.js';
-import { TargetProviders } from '../types/enum-types.js';
-import { BoykaError } from '../utils/boyka-error.js';
+import { Language, TargetProviders } from '../types/enum-types.js';
 
 export const getPlatform = async () =>
   await select({
@@ -42,20 +41,34 @@ export const getPlatformType = async () =>
         value: 'iOS',
         description: 'iOS application',
       },
+      {
+        name: 'Mac OS',
+        value: 'Mac',
+        description: 'Mac OS Desktop application',
+      },
     ],
   });
 
 export const getConfigName = async (platform: string) =>
-  await input({ message: userQuestions.configName.replace('${platform}', platform) });
+  await input({
+    message: userQuestions.configName.replace('${platform}', platform),
+    validate: (message: string) => {
+      if (!message) {
+        return 'Configuration name cannot be empty';
+      }
+      if (/\s/.test(message)) {
+        return 'Configuration name cannot contain spaces';
+      }
+      return true;
+    },
+  });
 
 export const getUserName = async () =>
   await input({
     message: userQuestions.cloudUser,
     validate: (message: string) => {
       if (!message) {
-        throw new BoykaError(
-          'User name environment variable is required for running on Cloud platform...',
-        );
+        return 'User name environment variable is required for running on Cloud platform...';
       }
       return true;
     },
@@ -66,9 +79,7 @@ export const getPassword = async () =>
     message: userQuestions.cloudKey,
     validate: (message: string) => {
       if (!message) {
-        throw new BoykaError(
-          'Password environment variable is required for running on Cloud platform...',
-        );
+        return 'Password environment variable is required for running on Cloud platform...';
       }
       return true;
     },
@@ -101,3 +112,26 @@ export const getTargetProvider = async () =>
       },
     ],
   })) as TargetProviders;
+
+export const getLanguage = async () =>
+  (await select({
+    message: userQuestions.language,
+    default: 'English',
+    choices: [
+      {
+        name: 'English',
+        value: 'EN',
+        description: 'English language',
+      },
+      {
+        name: 'Arabic',
+        value: 'AR',
+        description: 'Arabic language',
+      },
+      {
+        name: 'German',
+        value: 'GR',
+        description: 'German language',
+      },
+    ],
+  })) as Language;

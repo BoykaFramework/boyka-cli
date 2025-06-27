@@ -30,6 +30,7 @@ export enum Protocol {
 export enum AutomationType {
   UI_AUTOMATOR = 'UI_AUTOMATOR',
   XCUI = 'XCUI',
+  MAC = 'MAC',
 }
 
 export enum LogLevel {
@@ -58,11 +59,13 @@ export enum LogLevel {
 export enum OS {
   ANDROID = 'ANDROID',
   IOS = 'IOS',
+  MAC = 'MAC',
 }
 
 export enum DeviceType {
   CLOUD = 'CLOUD',
   VIRTUAL = 'VIRTUAL',
+  REAL = 'REAL',
 }
 
 export enum VideoQuality {
@@ -92,4 +95,22 @@ export enum Speed {
   FAST = 'FAST',
   NORMAL = 'NORMAL',
   SLOW = 'SLOW',
+}
+
+export enum Language {
+  AR = 'AR',
+  EN = 'EN',
+  GR = 'GR',
+}
+
+export enum VideoPreset {
+  FAST = 'FAST',
+  FASTER = 'FASTER',
+  MEDIUM = 'MEDIUM',
+  SLOW = 'SLOW',
+  SLOWER = 'SLOWER',
+  SUPER_FAST = 'SUPER_FAST',
+  ULTRA_FAST = 'ULTRA_FAST',
+  VERY_FAST = 'VERY_FAST',
+  VERY_SLOW = 'VERY_SLOW',
 }

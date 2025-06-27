@@ -1,8 +1,7 @@
 import input from '@inquirer/input';
 import select from '@inquirer/select';
 import { userQuestions } from '../utils/constants.js';
-import { TargetProviders } from '../types/enum-types.js';
-import { BoykaError } from '../utils/boyka-error.js';
+import { Language, TargetProviders } from '../types/enum-types.js';
 
 export const getPlatform = async () =>
   await select({
@@ -58,9 +57,7 @@ export const getUserName = async () =>
     message: userQuestions.cloudUser,
     validate: (message: string) => {
       if (!message) {
-        throw new BoykaError(
-          'User name environment variable is required for running on Cloud platform...',
-        );
+        return 'User name environment variable is required for running on Cloud platform...';
       }
       return true;
     },
@@ -71,9 +68,7 @@ export const getPassword = async () =>
     message: userQuestions.cloudKey,
     validate: (message: string) => {
       if (!message) {
-        throw new BoykaError(
-          'Password environment variable is required for running on Cloud platform...',
-        );
+        return 'Password environment variable is required for running on Cloud platform...';
       }
       return true;
     },
@@ -108,7 +103,7 @@ export const getTargetProvider = async () =>
   })) as TargetProviders;
 
 export const getLanguage = async () =>
-  await select({
+  (await select({
     message: userQuestions.language,
     default: 'English',
     choices: [
@@ -128,4 +123,4 @@ export const getLanguage = async () =>
         description: 'German language',
       },
     ],
-  });
+  })) as Language;

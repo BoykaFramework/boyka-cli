@@ -1,6 +1,5 @@
 import input from '@inquirer/input';
 import { userQuestions } from '../utils/constants.js';
-import os from 'node:os';
 
 const macQuestions = userQuestions.desktop;
 
@@ -9,7 +8,7 @@ export const getMacPort = async () => await input({ message: macQuestions.port, 
 export const getMachineVersion = async () => {
   const version = await input({
     message: macQuestions.machineVersion,
-    default: os.version(),
+    default: '15.0',
   });
 
   return version;

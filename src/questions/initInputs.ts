@@ -1,16 +1,16 @@
 import input from '@inquirer/input';
 import confirm from '@inquirer/confirm';
 import { userQuestions } from '../utils/constants.js';
-import { BoykaError } from '../utils/boyka-error.js';
 
 export const getGroupId = async () =>
   await input({
     message: userQuestions.init.groupId,
     validate: (message: string) => {
       if (!message) {
-        throw new BoykaError('Group ID cannot be empty.');
+        return 'Group ID cannot be empty';
       }
-      return true;
+      const groupIdRegex = /^[a-zA-Z0-9]+(\.[a-zA-Z0-9]+)*$/;
+      return groupIdRegex.test(message) || 'Please enter a valid Group identifier.';
     },
   });
 

@@ -63,7 +63,7 @@
     "eslint-plugin-prettier": "^5.5.3",
     "husky": "^9.1.7",
     "lerna-changelog": "^2.2.0",
-    "lint-staged": "^16.1.2",
+    "lint-staged": "^16.1.4",
     "prettier": "^3.6.2",
     "release-it": "^19.0.4",
     "release-it-pnpm": "^4.6.6",
@@ -73,7 +73,7 @@
   "dependencies": {
     "@inquirer/confirm": "^5.1.14",
     "@inquirer/input": "^4.2.1",
-    "@inquirer/select": "^4.3.0",
+    "@inquirer/select": "^4.3.1",
     "chalk": "^5.4.1",
     "figlet": "^1.8.2",
     "gradient-string": "^3.0.0",

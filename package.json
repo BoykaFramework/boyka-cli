@@ -63,7 +63,7 @@
     "eslint-plugin-prettier": "^5.5.4",
     "husky": "^9.1.7",
     "lerna-changelog": "^2.2.0",
-    "lint-staged": "^16.2.3",
+    "lint-staged": "^16.2.4",
     "prettier": "^3.6.2",
     "release-it": "^19.0.5",
     "release-it-pnpm": "^4.6.6",
@@ -71,8 +71,8 @@
     "typescript-eslint": "^8.44.1"
   },
   "dependencies": {
-    "@inquirer/confirm": "^5.1.18",
-    "@inquirer/input": "^4.2.4",
+    "@inquirer/confirm": "^5.1.19",
+    "@inquirer/input": "^4.2.5",
     "@inquirer/select": "^4.3.4",
     "chalk": "^5.6.2",
     "figlet": "^1.9.3",

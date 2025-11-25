@@ -55,8 +55,8 @@
     "@types/gradient-string": "^1.1.6",
     "@types/node": "^24.10.1",
     "@types/yargs": "^17.0.35",
-    "@typescript-eslint/eslint-plugin": "^8.46.4",
-    "@typescript-eslint/parser": "^8.46.4",
+    "@typescript-eslint/eslint-plugin": "^8.47.0",
+    "@typescript-eslint/parser": "^8.47.0",
     "eslint": "^9.39.1",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-import": "^2.32.0",
@@ -68,7 +68,7 @@
     "release-it": "^19.0.6",
     "release-it-pnpm": "^4.6.6",
     "typescript": "^5.9.3",
-    "typescript-eslint": "^8.46.4"
+    "typescript-eslint": "^8.47.0"
   },
   "dependencies": {
     "@inquirer/confirm": "^6.0.1",

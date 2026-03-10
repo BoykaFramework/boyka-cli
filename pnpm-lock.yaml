@@ -28,7 +28,7 @@ importers:
         version: 3.0.0
       liquidjs:
         specifier: ^10.24.0
-        version: 10.24.0
+        version: 10.25.0
       nanospinner:
         specifier: ^1.2.2
         version: 1.2.2
@@ -1827,8 +1827,8 @@ packages:
     engines: {node: '>=20.17'}
     hasBin: true
 
-  liquidjs@10.24.0:
-    resolution: {integrity: sha512-TAUNAdgwaAXjjcUFuYVJm9kOVH7zc0mTKxsG9t9Lu4qdWjB2BEblyVIYpjWcmJLMGgiYqnGNJjpNMHx0gp/46A==}
+  liquidjs@10.25.0:
+    resolution: {integrity: sha512-XpO7AiGULTG4xcTlwkcTI5JreFG7b6esLCLp+aUSh7YuQErJZEoUXre9u9rbdb0057pfWG4l0VursvLd5Q/eAw==}
     engines: {node: '>=16'}
     hasBin: true
 
@@ -4819,7 +4819,7 @@ snapshots:
       string-argv: 0.3.2
       yaml: 2.8.1
 
-  liquidjs@10.24.0:
+  liquidjs@10.25.0:
     dependencies:
       commander: 10.0.1
 
